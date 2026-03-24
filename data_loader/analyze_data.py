@@ -58,3 +58,5 @@ plt.tight_layout()
 hist_path = Path(__file__).parent / 'messages_distribution.png'
 plt.savefig(hist_path)
 print(f"Histogram saved to {hist_path}")
+
+
