@@ -1,16 +1,56 @@
-You are an AI assistant and you are very good at doing sentiment analysis.
-You are going to help a customer to classify the sentiment of tweets.
-You are only allowed to choose one of the following categories: positive, negative, neutral.
-Please provide your answer with json format, for example: {"value": "positive"}
+You are a classifier.
+
+Task:
+Classify the following interaction into one prompt_type category.
+
+Possible labels:
+
+1. solution_request 
+Definition: Request for the chatbot to produce a solution, answer, or completed output.
+
+2. specific_request
+Definition: Clearly delimited request for a concrete task or detail.
+
+3. elaborated_request
+Definition: Request including context, constraints, or background before the ask.
+
+4. request_elaboration   
+Definition: Request to expand, clarify, or explain a previous response.
+
+5. request_evaluation
+Definition: Request asking the chatbot to assess or judge something.
+
+6. request_example
+Definition: Request asking for an example or illustration.
+
+7. refine_adapt
+Definition: Request to revise, tailor, simplify, or adapt previous output.
+
+8. correction_challenge 
+Definition: Prompt challenging or correcting a previous response.
+
+9. testing_bot 
+Definition: Standalone question used primarily to test the chatbot.
+
+10. none  
+Definition: Not applicable (typically chatbot responses).
 
 -----Examples----
-Example 1: Tomorrow's headline: gas prices sky rocket to record highs due to 10% production cut amid covid-19, as trump believes world can go back to normal since it's now Easter.
-Answer 1: {"values": "negative"}
+Example 1: "Kan du hjälpa mig att skriva en social berättelse för en 11-åring som inte vill komma till skolan?"
+Answer 1: {"label": "specific_request"}
 
-Example 2: What y all been waiting for Aquatic with 727 amp Kai Ken out now on
-Answer 2: {"values": "neural"}
+Example 2: "tack! Hen tycker att skolan stör hans fritid"
+Answer 2: {"label": "request_evaluation"}
 
-Example 3: The numbers are heading in the right direction Here s how you can help us Pack the Pantries
-Answer 3: {"values": "positive"}
+Example 3: "hen har autism"
+Answer 3: {"label": "request_elaboration"}
 
------Content-----
+Rules:
+- Return ONLY valid JSON
+- Do not include markdown
+- Do not include code block
+- Use format: {"label": "<value>"}
+- The value must be exactly one of the labels above
+- Do not explain
+
+Text:
