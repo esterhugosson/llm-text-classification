@@ -1,5 +1,34 @@
-You are an AI assistant and you are very good at doing sentiment analysis.
-You are going to help a customer to classify the sentiment of tweets.
-You are only allowed to choose one of the following categories: positive, negative, neutral.
-Please provide your answer with json format, for example: {"value": "positive"}
------Content-----
+You are a classifier.
+
+Task:
+Classify the following interaction into one interactional_move category.
+
+Possible labels:
+
+1. offer_choice_coconstruction  
+Definition: Chatbot offers options or invites collaborative shaping of response.
+
+2. probe_alignment  
+Definition: Chatbot checks if its interpretation aligns with the user's intention.
+
+3. probe_evaluation_reflection  
+Definition: Chatbot prompts reflection or evaluation.
+
+4. probe_more_info  
+Definition: Chatbot asks for additional information or clarification.
+
+5. repair_meta_interaction  
+Definition: Chatbot manages or repairs the interaction itself.
+
+6. none  
+Definition: No interactional move applicable.
+
+Rules:
+- Return ONLY valid JSON
+- Do not include markdown
+- Do not include code block
+- Use format: {"label": "<value>"}
+- The value must be exactly one of the labels above
+- Do not explain
+
+Text:
