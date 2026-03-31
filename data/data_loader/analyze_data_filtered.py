@@ -83,7 +83,7 @@ for cat in categories:
     
     plt.tight_layout()
     
-    out_path = Path(__file__).parent.parent / 'process_data' / f'ground_truth_{cat}_distribution_filtered.png'
+    out_path = Path(__file__).parent.parent / 'process_data' / f'NEW_ground_truth_{cat}_distribution_filtered.png'
     fig.savefig(out_path, dpi=100, bbox_inches='tight')
     plt.close(fig)
     print(f'Saved: {out_path}')

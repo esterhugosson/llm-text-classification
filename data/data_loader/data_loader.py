@@ -26,10 +26,10 @@ def loadInteractions() -> Dict[str, List[Dict]]:
     
     return data
 
-truth_data_path = Path(__file__).parent / 'ground_truth' / 'ground_truth.csv'
 
 # user_id;thread_id;Title;assistant_name;message_id;Text;Created;Created_dt;turn_index_in_thread;speaker;cps_behavior;response_substance;response_stance;interactional_move;prompt_type;is_followup
 
+truth_data_path = Path(__file__).parent.parent / 'ground_truth' / 'ground_truth_2.csv'
 
 def loadTruths() -> Dict[str, List[Dict]]:
     data = {}
@@ -79,7 +79,7 @@ if __name__ == "__main__":
     print(f"Data saved to {output_path}") """
 
     truths = loadTruths()
-    output_truth_path = Path(__file__).parent / 'processed_ground_truths.json'
+    output_truth_path = Path(__file__).parent / 'processed_ground_truths_2.json'
     with open(output_truth_path, 'w', encoding='utf-8') as f:
         json.dump(truths, f, indent=2, ensure_ascii=False)
     print(f"Truth data saved to {output_truth_path}")
