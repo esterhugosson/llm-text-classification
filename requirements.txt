@@ -1,3 +1,5 @@
 openai
 matplotlib
 openai 
+
+pip install anthropic
