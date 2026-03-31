@@ -1,5 +1,5 @@
 openai
 matplotlib
 openai 
-
-pip install anthropic
+anthropic
+ollama

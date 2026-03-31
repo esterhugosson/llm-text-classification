@@ -4,6 +4,7 @@ from datetime import datetime
 from  src.llm.prompt_loader import PromptLoader
 from src.llm.gpt_4o import LLMClassifierGpt4o
 from src.llm.claude_sonnet import LLMClassifierClaudeSonnet
+from src.llm.llama_3 import LLMClassifierLlama3
 
 from src.experiments.config import MODELS, CATEGORIES, STRATEGIES
 
@@ -13,6 +14,8 @@ def get_model(model_name):
         return LLMClassifierGpt4o()
     elif model_name == "claude":
         return LLMClassifierClaudeSonnet()
+    elif model_name == "llama3":
+        return LLMClassifierLlama3    
     else:
         raise ValueError(f"Unknown model: {model_name}")
 
