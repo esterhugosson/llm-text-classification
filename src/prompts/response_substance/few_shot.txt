@@ -1,16 +1,35 @@
-You are an AI assistant and you are very good at doing sentiment analysis.
-You are going to help a customer to classify the sentiment of tweets.
-You are only allowed to choose one of the following categories: positive, negative, neutral.
-Please provide your answer with json format, for example: {"value": "positive"}
+You are a classifier.
+
+Task:
+Classify the following interaction into one response_substance category.
+
+Possible labels:
+
+1. elaborate
+Definition: Chatbot adds explanation, detail, or additional information.
+
+2. refines_previous
+Definition: Chatbot revises or improves a previous response.
+
+3. none
+Definition: No substantive response of this type.
 
 -----Examples----
-Example 1: Tomorrow's headline: gas prices sky rocket to record highs due to 10% production cut amid covid-19, as trump believes world can go back to normal since it's now Easter.
-Answer 1: {"values": "negative"}
+Example 1: "Hjärtat och blodomloppet är centrala komponenter i det kardiovaskulära systemet, vilket ansvarar för att transportera blod genom kroppen. Här är en översikt över hur detta system fungerar:\n\n### Hjärtat\nHjärtat är en muskulär pump som består av fyra kammare:\n1. **Höger förmak** - Tar emot syrefattigt blod från kroppen genom de övre och nedre hålvenerna.\n2. **Höger kammare** - Pumpas syrefattigt blod till lungorna genom lungartärerna för att syresättas.\n3. **Vänster förmak** - Tar emot syrerikt blod från lungorna genom lungvenerna.\n4. **Vänster kammare** - Pumpas syrerikt blod ut till kroppens organ och vävnader genom aortan.\n\n### Blodomloppet\nBlodomloppet kan delas in i två huvuddelar:\n\n1. **Lilla kretsloppet (lungcirkulationen)**:\n   - Syrefattigt blod pumpas från höger kammare till lungorna via lungartärerna.\n   - I lungorna sker gasutbytet där koldioxid lämnas av och syre upptas.\n   - Syrerikt blod återvänder till vänster förmak via lungvenerna.\n\n2. **Stora kretsloppet (systemcirkulationen)**:\n   - Syrerikt blod pumpas från vänster kammare ut i kroppen via aortan.\n   - Blodet levererar syre och näringsämnen till kroppens celler och tar upp koldioxid och avfallsprodukter.\n   - Syrefattigt blod returneras till höger förmak via vener som övergår i de övre och nedre hålvenerna.\n\n### Viktiga funktioner:\n- **Transport**: Blodet transporterar syre, koldioxid, näringsämnen, hormoner och avfallsprodukter.\n- **Reglering**: Hjälper till med regleringen av kroppens temperatur, pH och vätskevolym.\n- **Skydd**: Innehåller vita blodkroppar och antikroppar som skyddar mot infektioner.\n\n### Blodkärl\n- **Artärer**: Leder blod bort från hjärtat (ofta syrerikt blod).\n- **Vener**: Leder blod tillbaka till hjärtat (ofta syrefattigt blod).\n- **Kapillärer**: Små, tunna kärl där utbyte av gaser, näringsämnen och avfallsprodukter sker mellan blod och celler.\n\nDet kardiovaskulära systemet är avgörande för kroppens överlevnad och funktion, och det förser alla kroppens delar med syre och näringsämnen samtidigt som det avlägsnar avfallsprodukter."
+Answer 1: {"label": "elaborate"}
 
-Example 2: What y all been waiting for Aquatic with 727 amp Kai Ken out now on
-Answer 2: {"values": "neural"}
+Example 2: 
+Answer 2: {"label": "refines_previous"}
 
-Example 3: The numbers are heading in the right direction Here s how you can help us Pack the Pantries
-Answer 3: {"values": "positive"}
+Example 3: "läsförståelse om hjärtat för årskurs 2"
+Answer 3: {"label": "none"}
 
------Content-----
+Rules:
+- Return ONLY valid JSON
+- Do not include markdown
+- Do not include code block
+- Use format: {"label": "<value>"}
+- The value must be exactly one of the labels above
+- Do not explain
+
+Text:

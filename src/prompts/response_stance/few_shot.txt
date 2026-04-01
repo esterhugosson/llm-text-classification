@@ -1,16 +1,35 @@
-You are an AI assistant and you are very good at doing sentiment analysis.
-You are going to help a customer to classify the sentiment of tweets.
-You are only allowed to choose one of the following categories: positive, negative, neutral.
-Please provide your answer with json format, for example: {"value": "positive"}
+You are a classifier.
+
+Task:
+Classify the following interaction into one response_stance category.
+
+Possible labels:
+
+1. confident
+Definition: Response presented in a definite or authoritative tone.
+
+2. neutral
+Definition: Informational tone without strong confidence cues.
+
+3. none
+Definition: Not applicable.
 
 -----Examples----
-Example 1: Tomorrow's headline: gas prices sky rocket to record highs due to 10% production cut amid covid-19, as trump believes world can go back to normal since it's now Easter.
-Answer 1: {"values": "negative"}
+Example 1: "Här är en enkel och barnvänlig faktatext om hjärtat:\n\n---\n\n### Lär Känna Hjärtat\n\n**Vad är hjärtat?**\n\nHjärtat är en stark muskel i din kropp. Den är ungefär lika stor som din knutna hand och finns inne i bröstet. Hjärtat är väldigt viktigt för att du ska må bra.\n\n**Hur arbetar hjärtat?**\n\nHjärtat pumpar blod. Det är som en vattenpump som ser till att blodet rör sig i din kropp. Varje gång hjärtat slår, skickar det blod till alla delar av kroppen.\n\n**Varför behöver vi blod?**\n\nBlodet är viktigt eftersom det tar med sig syre och mat till dina celler. Cellerna är som pyttesmå byggstenar som bygger upp hela din kropp. Utan syre och mat kan inte cellerna arbeta ordentligt.\n\n**Hur fungerar hjärtat?**\n\n1. Blodet kommer in i hjärtat.\n2. Hjärtat pumpar blodet till lungorna för att hämta syre.\n3. Sen skickar hjärtat det syrerika blodet ut till kroppen.\n4. Blodet kommer tillbaka till hjärtat och börjar om på nytt.\n\n**Roliga fakta om hjärtat:**\n\n- Hjärtat slår omkring 100 000 gånger varje dag!\n- Hjärtat är vår kroppens \"superhjälte\" som aldrig vilar.\n\n**Hur kan vi ta hand om vårt hjärta?**\n\nDu kan ta hand om ditt hjärta genom att röra på dig varje dag, som att springa och leka. Ät även massor av frukt och grönsaker för att hålla hjärtat glatt och starkt.\n\n---\n\nGenom denna text kan barn förstå grunderna om hjärtat och varför det är så viktigt för vår kropp!"
+Answer 1: {"label": "confident"}
 
-Example 2: What y all been waiting for Aquatic with 727 amp Kai Ken out now on
-Answer 2: {"values": "neural"}
+Example 2: "Oh, verkligen? Drar du mig vid näsan? Olika regioner i Sverige har betydande skillnader i klimat, så att definiera årstider baserat på lokala förhållanden kan absolut ge mening. Hur skulle du tänka dig att det skulle fungera i praktiken, och vilka faktorer skulle man behöva ta hänsyn till?"
+Answer 2: {"label": "neutral"}
 
-Example 3: The numbers are heading in the right direction Here s how you can help us Pack the Pantries
-Answer 3: {"values": "positive"}
+Example 3: "gör en enkel faktatext om magen och tarmarna för elever i årskurs 2"
+Answer 3: {"label": "none"}
 
------Content-----
+Rules:
+- Return ONLY valid JSON
+- Do not include markdown
+- Do not include code block
+- Use format: {"label": "<value>"}
+- The value must be exactly one of the labels above
+- Do not explain
+
+Text:

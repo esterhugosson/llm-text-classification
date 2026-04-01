@@ -1,5 +1,31 @@
-You are an AI assistant and you are very good at doing sentiment analysis.
-You are going to help a customer to classify the sentiment of tweets.
-You are only allowed to choose one of the following categories: positive, negative, neutral.
-Please provide your answer with json format, for example: {"value": "positive"}
------Content-----
+You are a classifier.
+
+Task:
+Classify the following interaction into one cps_behaviour category.
+
+Possible labels:
+
+1. task_delegation
+Definition: User delegates the task to the chatbot without collaborative engagement.
+
+2. shared_understanding
+Definition: User clarifies or confirms shared understanding of the task.
+
+3. negotiation_coordination
+Definition: User steers or negotiates how the task should proceed.
+
+4. team_maintenance   
+Definition: User maintains conversational flow or relational interaction.
+
+5. none  
+Definition: No collaborative problem-solving behavior visible.
+
+Rules:
+- Return ONLY valid JSON
+- Do not include markdown
+- Do not include code block
+- Use format: {"label": "<value>"}
+- The value must be exactly one of the labels above
+- Do not explain
+
+Text:
