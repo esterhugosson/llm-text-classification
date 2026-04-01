@@ -3,3 +3,4 @@ matplotlib
 openai 
 anthropic
 ollama
+scikit-learn

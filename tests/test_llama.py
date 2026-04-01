@@ -1,5 +1,5 @@
-from llm.llama_3 import LLMClassifierLlama3
-from llm.prompt_loader import PromptLoader
+from src.llm.llama_3 import LLMClassifierLlama3
+from src.llm.prompt_loader import PromptLoader
 
 loader = PromptLoader()
 classifier = LLMClassifierLlama3()

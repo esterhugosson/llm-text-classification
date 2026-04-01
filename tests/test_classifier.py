@@ -1,5 +1,5 @@
-from llm.prompt_loader import PromptLoader
-from llm.gpt_4o import LLMClassifierGpt4o
+from src.llm.prompt_loader import PromptLoader
+from src.llm.gpt_4o import LLMClassifierGpt4o
 
 loader = PromptLoader()
 classifier = LLMClassifierGpt4o()
