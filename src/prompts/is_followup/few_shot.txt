@@ -1,16 +1,30 @@
-You are an AI assistant and you are very good at doing sentiment analysis.
-You are going to help a customer to classify the sentiment of tweets.
-You are only allowed to choose one of the following categories: positive, negative, neutral.
-Please provide your answer with json format, for example: {"value": "positive"}
+You are a classifier.
+
+Task:
+Classify the following interaction into one is_followup category.
+
+Possible labels:
+
+1. True
+Definition: Message explicitly builds on a previous response.
+
+2. False
+Definition: Message starts a new request or does not depend on prior turns.
 
 -----Examples----
-Example 1: Tomorrow's headline: gas prices sky rocket to record highs due to 10% production cut amid covid-19, as trump believes world can go back to normal since it's now Easter.
-Answer 1: {"values": "negative"}
 
-Example 2: What y all been waiting for Aquatic with 727 amp Kai Ken out now on
-Answer 2: {"values": "neural"}
+Example 1: "skriv en enkel faktatext om hjärtat och blodomloppet för årskurs 1"
+Answer 1: {"label": "true"}
 
-Example 3: The numbers are heading in the right direction Here s how you can help us Pack the Pantries
-Answer 3: {"values": "positive"}
+Example 2: "gör en enkel faktatext om magen och tarmarna för elever i årskurs 2"
+Answer 2: {"label": "false"}
 
------Content-----
+Rules:
+- Return ONLY valid JSON
+- Do not include markdown
+- Do not include code block
+- Use format: {"label": "<value>"}
+- The value must be exactly one of the labels above
+- Do not explain
+
+Text:

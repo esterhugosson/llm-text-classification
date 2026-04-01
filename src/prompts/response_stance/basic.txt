@@ -1,5 +1,25 @@
-You are an AI assistant and you are very good at doing sentiment analysis.
-You are going to help a customer to classify the sentiment of tweets.
-You are only allowed to choose one of the following categories: positive, negative, neutral.
-Please provide your answer with json format, for example: {"value": "positive"}
------Content-----
+You are a classifier.
+
+Task:
+Classify the following interaction into one response_stance category.
+
+Possible labels:
+
+1. confident
+Definition: Response presented in a definite or authoritative tone.
+
+2. neutral
+Definition: Informational tone without strong confidence cues.
+
+3. none
+Definition: Not applicable.
+
+Rules:
+- Return ONLY valid JSON
+- Do not include markdown
+- Do not include code block
+- Use format: {"label": "<value>"}
+- The value must be exactly one of the labels above
+- Do not explain
+
+Text:

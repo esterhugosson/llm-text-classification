@@ -1,16 +1,48 @@
-You are an AI assistant and you are very good at doing sentiment analysis.
-You are going to help a customer to classify the sentiment of tweets.
-You are only allowed to choose one of the following categories: positive, negative, neutral.
-Please provide your answer with json format, for example: {"value": "positive"}
+You are a classifier.
+
+Task:
+Classify the following interaction into one cps_behaviour category.
+
+Possible labels:
+
+1. task_delegation
+Definition: User delegates the task to the chatbot without collaborative engagement.
+
+2. shared_understanding
+Definition: User clarifies or confirms shared understanding of the task.
+
+3. negotiation_coordination
+Definition: User steers or negotiates how the task should proceed.
+
+4. team_maintenance
+Definition: User maintains conversational flow or relational interaction.
+
+5. none
+Definition: No collaborative problem-solving behavior visible.
 
 -----Examples----
-Example 1: Tomorrow's headline: gas prices sky rocket to record highs due to 10% production cut amid covid-19, as trump believes world can go back to normal since it's now Easter.
-Answer 1: {"values": "negative"}
 
-Example 2: What y all been waiting for Aquatic with 727 amp Kai Ken out now on
-Answer 2: {"values": "neural"}
+Example 1: ""Jag undervisar i teknik. hur kan du hjälpa mig för en effektiv undervisning som är bra för eleverna och minskar min arbetsbelastning. Skapa en terminsupplägg, med allt från planering till bedömningsmatris.  Jag vill helst att allt ska skötas av AI. Gör mig inte besviken.""
+Answer 1: {"label": "task_delegationt"}
 
-Example 3: The numbers are heading in the right direction Here s how you can help us Pack the Pantries
-Answer 3: {"values": "positive"}
+Example 2: "hjärtat blodomlopp"
+Answer 2: {"label": "shared_understanding"}
 
------Content-----
+Example 3: "Jag tror jag vill ha ett upplägg som ser ut såhär ungefär:"
+Answer 3: {"label": "negotiation_coordination"}
+
+Example 4: "läsförståelse om hjärtat för årskurs 2"
+Answer 4: {"label": "team_maintenance"}
+
+Example 5: ""Självklart! Om du har en specifik idé i åtanke för upplägget, tveka inte att dela den så kan vi arbeta utifrån det. Annars kan jag ge ett förslag som är flexibelt och kan anpassas beroende på dina undervisningsmål och resurser. Här är ett alternativt upplägg med en mer detaljorienterad strategi:\n\n### Terminsupplägg för Teknikundervisning\n\n#### Block 1: Introduktion och Grundläggande Koncept\n- **Vecka 1:** Vad är teknik?\n  - **Aktiviteter:**\n    - Introduktionsföreläsning och diskussion om teknikens roll i samhället.\n    - Grundläggande begrepp, använd AI-visualiseringar och filmer.\n  - "
+Answer 5: {"label": "none"}
+
+Rules:
+- Return ONLY valid JSON
+- Do not include markdown
+- Do not include code block
+- Use format: {"label": "<value>"}
+- The value must be exactly one of the labels above
+- Do not explain
+
+Text:

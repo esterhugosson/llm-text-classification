@@ -5,10 +5,10 @@ Classify the following interaction into one prompt_type category.
 
 Possible labels:
 
-1. solution_request 
+1. True
 Definition: Request for the chatbot to produce a solution, answer, or completed output.
 
-2. specific_request
+2. False
 Definition: Clearly delimited request for a concrete task or detail.
 
 3. elaborated_request
@@ -39,8 +39,8 @@ Rules:
 - Return ONLY valid JSON
 - Do not include markdown
 - Do not include code block
-- Add a short explanation why, if there was between 1 or more labels
-- Use format: {"label": "<value>", "explanation": "<why>"}
+- Use format: {"label": "<value>"}
 - The value must be exactly one of the labels above
+- Do not explain
 
 Text:
