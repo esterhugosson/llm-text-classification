@@ -1,0 +1,102 @@
+[
+  {
+    "thread_id": "thread_utJ1F4Ta8Ft9fIANC1fmHDx8",
+    "message_id": 2702,
+    "text": "Självklart! En social berättelse är ett bra sätt att hjälpa barn att förstå och hantera olika situat",
+    "category": "response_stance",
+    "strategy": "basic",
+    "true_label": "confident",
+    "predicted_label": "confident",
+    "role": 1
+  },
+  {
+    "thread_id": "thread_utJ1F4Ta8Ft9fIANC1fmHDx8",
+    "message_id": 2702,
+    "text": "Självklart! En social berättelse är ett bra sätt att hjälpa barn att förstå och hantera olika situat",
+    "category": "response_stance",
+    "strategy": "few_shot",
+    "true_label": "confident",
+    "predicted_label": "confident",
+    "role": 1
+  },
+  {
+    "thread_id": "thread_utJ1F4Ta8Ft9fIANC1fmHDx8",
+    "message_id": 2701,
+    "text": "Kan du hjälpa mig att skriva en social berättelse för en 11-åring som inte vill komma till skolan?",
+    "category": "prompt_type",
+    "strategy": "basic",
+    "true_label": "specific_request",
+    "predicted_label": "elaborated_request",
+    "role": 0
+  },
+  {
+    "thread_id": "thread_utJ1F4Ta8Ft9fIANC1fmHDx8",
+    "message_id": 2701,
+    "text": "Kan du hjälpa mig att skriva en social berättelse för en 11-åring som inte vill komma till skolan?",
+    "category": "prompt_type",
+    "strategy": "few_shot",
+    "true_label": "specific_request",
+    "predicted_label": "specific_request",
+    "role": 0
+  },
+  {
+    "thread_id": "thread_utJ1F4Ta8Ft9fIANC1fmHDx8",
+    "message_id": 2702,
+    "text": "Självklart! En social berättelse är ett bra sätt att hjälpa barn att förstå och hantera olika situat",
+    "category": "interactional_move",
+    "strategy": "basic",
+    "true_label": "none",
+    "predicted_label": "none",
+    "role": 1
+  },
+  {
+    "thread_id": "thread_utJ1F4Ta8Ft9fIANC1fmHDx8",
+    "message_id": 2702,
+    "text": "Självklart! En social berättelse är ett bra sätt att hjälpa barn att förstå och hantera olika situat",
+    "category": "interactional_move",
+    "strategy": "few_shot",
+    "true_label": "none",
+    "predicted_label": "probe_more_info",
+    "role": 1
+  },
+  {
+    "thread_id": "thread_utJ1F4Ta8Ft9fIANC1fmHDx8",
+    "message_id": 2702,
+    "text": "Självklart! En social berättelse är ett bra sätt att hjälpa barn att förstå och hantera olika situat",
+    "category": "response_substance",
+    "strategy": "basic",
+    "true_label": "elaborate",
+    "predicted_label": "elaborate",
+    "role": 1
+  },
+  {
+    "thread_id": "thread_utJ1F4Ta8Ft9fIANC1fmHDx8",
+    "message_id": 2702,
+    "text": "Självklart! En social berättelse är ett bra sätt att hjälpa barn att förstå och hantera olika situat",
+    "category": "response_substance",
+    "strategy": "few_shot",
+    "true_label": "elaborate",
+    "predicted_label": "elaborate",
+    "role": 1
+  },
+  {
+    "thread_id": "thread_utJ1F4Ta8Ft9fIANC1fmHDx8",
+    "message_id": 2701,
+    "text": "Kan du hjälpa mig att skriva en social berättelse för en 11-åring som inte vill komma till skolan?",
+    "category": "is_followup",
+    "strategy": "basic",
+    "true_label": false,
+    "predicted_label": "False",
+    "role": 0
+  },
+  {
+    "thread_id": "thread_utJ1F4Ta8Ft9fIANC1fmHDx8",
+    "message_id": 2701,
+    "text": "Kan du hjälpa mig att skriva en social berättelse för en 11-åring som inte vill komma till skolan?",
+    "category": "is_followup",
+    "strategy": "few_shot",
+    "true_label": false,
+    "predicted_label": "false",
+    "role": 0
+  }
+]
