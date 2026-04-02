@@ -33,8 +33,8 @@ def run():
         print(f"\nRunning model: {model_name}")
         classifier = get_model(model_name)
 
-        for category in CATEGORIES:
-            print(f"  Category: {category}")
+        for category, role_filter in CATEGORIES.items():
+            print(f"  Category: {category} (role_filter={role_filter})")
 
             for strategy in STRATEGIES:
                 print(f"    Strategy: {strategy}")
@@ -45,9 +45,11 @@ def run():
 
                     for msg in messages:
 
-                        # endast chatbot svar
-                        if msg.get("speaker") != "chatbot":
-                            continue
+                        # Apply role filter for this category
+                        if role_filter is not None:
+                            msg_role = msg.get("role")
+                            if msg_role != role_filter:
+                                continue
 
                         text = msg.get("text", "")
                         true_label = msg.get(category)

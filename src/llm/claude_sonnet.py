@@ -7,7 +7,7 @@ load_dotenv()
 
 
 class LLMClassifierClaudeSonnet:
-    def __init__(self, model: str = "claude-opus-4-6"):
+    def __init__(self, model: str = "claude-sonnet-4-6"):
         self.client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
         self.model = model
 
