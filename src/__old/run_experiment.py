@@ -8,7 +8,7 @@ from src.llm.gpt_4o import LLMClassifierGpt4o
 from src.llm.claude_sonnet import LLMClassifierClaudeSonnet
 from src.llm.llama_3 import LLMClassifierLlama3
 
-from src.experiments.config import MODELS, CATEGORIES, STRATEGIES
+from experiments.config import MODELS, CATEGORIES, STRATEGIES
 
 
 def get_model(model_name):

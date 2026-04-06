@@ -16,3 +16,6 @@ CATEGORIES = {
 STRATEGIES = ["basic", "few_shot"]
 
 TEMPERATURE = 0
+
+
+GROUND_TRUTH_PATH="data/process_data/processed_ground_truths.json"
