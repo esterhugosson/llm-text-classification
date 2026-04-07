@@ -2,7 +2,7 @@
 Bachelor thesis for exploring how to classify educational chatbot interactions using LLMs, with set labels using multi-class classifications.
 
 ## Start
-    `` python -m src ``
+    ` python -m src `
 
 ## Dependencies
 
