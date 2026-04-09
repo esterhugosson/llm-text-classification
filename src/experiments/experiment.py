@@ -31,10 +31,12 @@ class Experiment:
         self,
         interactions_path: str = "data/dataset/interactions.json",
         ground_truth_path: str = "data/process_data/processed_ground_truths.json",
+        message_limit: Optional[int] = None,
     ):
         """Initialize experiment with data paths"""
         self.interactions_path = interactions_path
         self.ground_truth_path = ground_truth_path
+        self.message_limit = message_limit
         
         self.stats = ExperimentStats()
         self.result_builder = ResultBuilder()
@@ -191,6 +193,10 @@ class Experiment:
                                     self.stats.increment_failure()
                                 
                                 category_count += 1
+                                
+                                # Check limit per category
+                                if self.message_limit and category_count >= self.message_limit:
+                                    break
                                 
                                 # Print progress
                                 match_sym = "✓" if result.match else "✗"
