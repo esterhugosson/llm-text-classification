@@ -1,6 +1,6 @@
 openai
 matplotlib
-openai 
 anthropic
 ollama
 scikit-learn
+pandas

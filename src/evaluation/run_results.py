@@ -7,7 +7,7 @@ from sklearn.metrics import accuracy_score, f1_score, classification_report
 
 from src.llm.gpt_4o import LLMClassifierGpt4o
 from src.llm.prompt_loader import PromptLoader
-from experiments.config import CATEGORIES, STRATEGIES
+from src.experiments.config import CATEGORIES, STRATEGIES
 
 def run_evaluation():
     loader = PromptLoader()

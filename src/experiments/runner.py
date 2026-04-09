@@ -1,29 +1,109 @@
-from src.experiments.config import GROUND_TRUTH_PATH
+# Entry point for the experiment
 
-from src.data.loaders.ground_truth_loader import load_ground_truths
-from src.pipeline.matcher import GroundTruthMatcher
+import sys
+import argparse
+from typing import Optional, List
 
-
-exInteraction = {
-    "thread_id": "thread_utJ1F4Ta8Ft9fIANC1fmHDx8",
-    "message_id": 2701,
-    "text": "Kan du hjälpa mig att skriva en social berättelse för en 11-åring som inte vill komma till skolan?",
-    "category": "prompt_type",
-    "strategy": "basic",
-    "true_label": "specific_request",
-    "predicted_label": "elaborated_request",
-    "role": 0
-  }
+from src.experiments.experiment import Experiment
+from src.experiments.config import MODELS, CATEGORIES
 
 
 def main():
+    """Main entry point"""
+    
+    parser = argparse.ArgumentParser(
+        description="Run LLM classification experiment",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  # Run all models and categories
+  python -m src.experiments.runner
+  
+  # Quick test with just 2 messages per category
+  python -m src.experiments.runner --test --limit 2
+  
+  # Run only GPT-4 on interactional_move
+  python -m src.experiments.runner --models gpt4o --categories interactional_move
+  
+  # Run Claude and LLaMA on multiple categories
+  python -m src.experiments.runner --models claude llama3 --categories prompt_type is_followup
+        """
+    )
+    
+    parser.add_argument(
+        "--test",
+        action="store_true",
+        help="Run in test mode (only GPT-4, limited messages)"
+    )
+    
+    parser.add_argument(
+        "--limit",
+        type=int,
+        default=None,
+        help="Limit messages per category (e.g., --limit 2 for quick test)"
+    )
+    
+    parser.add_argument(
+        "--models",
+        nargs="+",
+        choices=list(MODELS.keys()),
+        help=f"Models to test (default: all). Options: {', '.join(MODELS.keys())}"
+    )
+    
+    parser.add_argument(
+        "--categories",
+        nargs="+",
+        choices=list(CATEGORIES.keys()),
+        help=f"Categories to test (default: all). Options: {', '.join(CATEGORIES.keys())}"
+    )
+    
+    parser.add_argument(
+        "--interactions",
+        default="data/dataset/interactions.json",
+        help="Path to interactions file"
+    )
+    
+    parser.add_argument(
+        "--ground-truth",
+        default="data/process_data/processed_ground_truths.json",
+        help="Path to ground truth file"
+    )
+    
+    args = parser.parse_args()
+    
+    # Handle test mode
+    if args.test:
+        args.models = ["gpt4o"]  # Only GPT-4
+        args.limit = args.limit or 2  # Default 2 messages
+        print("Running in TEST MODE: GPT-4 only, limited messages\n")
+    
+    # Create and run experiment
+    try:
+        experiment = Experiment(
+            interactions_path=args.interactions,
+            ground_truth_path=args.ground_truth,
+            message_limit=args.limit,  # Pass the limit
+        )
+        
+        output_path = experiment.run(
+            models=args.models,
+            categories=args.categories,
+        )
+        
+        print(f"\nExperiment completed successfully!")
+        print(f"   Results: {output_path}")
+        
+        return 0
+    
+    except FileNotFoundError as e:
+        print(f"File not found: {e}")
+        return 1
+    except Exception as e:
+        print(f"Error: {e}")
+        import traceback
+        traceback.print_exc()
+        return 1
 
-    truths = load_ground_truths(GROUND_TRUTH_PATH)
-    matcher = GroundTruthMatcher(truths)
 
-    true_label = matcher.get_label('thread_iyHh5IENSXUZYUCjcWYU3Efr', 2285, 'cps_behavior') # Ger labeln för kategorin
-
-    get_truth = matcher.get_truth('thread_iyHh5IENSXUZYUCjcWYU3Efr', 2285) # Ger hela objektet
-
-    print(get_truth)
-
+if __name__ == "__main__":
+    sys.exit(main())

@@ -1,72 +1,97 @@
-# Predicts a interaction in a choosen category
+# Classification pipeline - the core logic
 
-from src.llm.prompt_loader import PromptLoader
-from src.llm.gpt_4o import LLMClassifierGpt4o
-from src.llm.claude_sonnet import LLMClassifierClaudeSonnet
-from src.llm.llama_3 import LLMClassifierLlama3
-
-class Classifier:
-
-    def __init__(self, model) :
-        self.model = model
+import json
+from typing import Dict, Any, Optional
+from src.data.models.data_models import Message, PredictionResult
 
 
-    def predict(self, promt, text):
-
+class ClassificationPipeline:
+    """Handles the classification of messages"""
+    
+    def __init__(self, classifier, matcher, prompt_loader):
+        """
+        Args:
+            classifier: LLM classifier (gpt_4o, claude, etc)
+            matcher: GroundTruthMatcher instance
+            prompt_loader: PromptLoader instance
+        """
+        self.classifier = classifier
+        self.matcher = matcher
+        self.prompt_loader = prompt_loader
+    
+    def classify_message(
+        self,
+        msg: Message,
+        category: str,
+        strategy: str,
+        model_name: str
+    ) -> Optional[PredictionResult]:
+        """
+        Classify a single message
+        
+        Args:
+            msg: Message to classify
+            category: Classification category
+            strategy: Strategy (basic or few_shot)
+            model_name: Name of the model
+            
+        Returns:
+            PredictionResult or None if classification failed
+        """
         try:
-            prediction = self.model.classify(promt, text) 
+            # Get prompt
+            prompt = self.prompt_loader.load_prompt(category, strategy)
+            
+            # Get true label from ground truth
+            true_label = self.matcher.get_label(msg.thread_id, msg.message_id, category)
+            if true_label is None:
+                return None  # No ground truth for this category
+            
+            # Classify
+            prediction = self.classifier.classify(prompt, msg.text)
             predicted_label = prediction.get("label")
-
-            if predicted_label.isValid() :
-
-
-
-
-    def isValid(self, label) -> bool:
+            
+            # Check if valid
+            if predicted_label is None or predicted_label == "ERROR":
+                predicted_label = None
+            
+            # Build result
+            result = PredictionResult(
+                thread_id=msg.thread_id,
+                message_id=msg.message_id,
+                text=msg.text[:150],
+                category=category,
+                strategy=strategy,
+                model=model_name,
+                role=msg.role,
+                true_label=true_label,
+                predicted_label=predicted_label,
+                match=predicted_label == true_label if predicted_label else False,
+            )
+            
+            return result
         
-        if label is None or label == "ERROR":
-            return False
+        except Exception as e:
+            print(f"Error classifying msg {msg.message_id}: {e}")
+            return None
+    
+    def classify_batch(
+        self,
+        messages: list[Message],
+        category: str,
+        strategy: str,
+        model_name: str
+    ) -> list[PredictionResult]:
+        """
+        Classify a batch of messages
         
-        return True
-
-
-
- try:
-                            prediction = classifier.classify(prompt, text)
-                            predicted_label = prediction.get("label")
-
-                            # Check if label is valid
-                            if predicted_label is None or predicted_label == "ERROR":
-                                status = "✗"
-                                stats["failed_predictions"] += 1
-                            else:
-                                status = "✓"
-                                stats["successful_predictions"] += 1
-
-
-                            result_row = {
-                                "thread_id": threadxe_id,
-                                "message_id": message_id,
-                                "text": text[:200],  # Truncate long texts
-                                "category": category,
-                                "true_label": true_label,
-                                "predicted_label": predicted_label,
-                                "model": model_name,
-                                "strategy": strategy,
-                                "role": msg_role,
-                            }
-
-                            results.append(result_row)
-                            category_strategy_count += 1
-
-                            # Show match status
-                            match = "✓" if predicted_label == true_label else "✗"
-                            print(
-                                f"      {status} msg {message_id}: {predicted_label} {match}"
-                            )
-
-                        except Exception as e:
-                            print(f"      ✗ Error on msg {message_id}: {e}")
-                            stats["failed_predictions"] += 1
-                            stats["total_predictions"] += 1
-       
+        Returns:
+            List of PredictionResult objects
+        """
+        results = []
+        for msg in messages:
+            result = self.classify_message(msg, category, strategy, model_name)
+            if result is not None:
+                results.append(result)
+        
+        return results
