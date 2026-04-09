@@ -28,7 +28,7 @@ class MetricsEvaluator:
     def evaluate_overall(self):
         """Overall accuracy and F1"""
         print(f"\n{'='*70}")
-        print(f"  📊 OVERALL METRICS")
+        print(f"  OVERALL METRICS")
         print(f"{'='*70}\n")
         
         y_true = [r["true_label"] for r in self.results]
@@ -52,7 +52,7 @@ class MetricsEvaluator:
     def evaluate_per_category(self):
         """Metrics per category"""
         print(f"\n{'='*70}")
-        print(f"  📁 PER CATEGORY METRICS")
+        print(f"  PER CATEGORY METRICS")
         print(f"{'='*70}\n")
         
         grouped = defaultdict(list)
@@ -81,7 +81,7 @@ class MetricsEvaluator:
     def evaluate_per_model(self):
         """Metrics per model"""
         print(f"\n{'='*70}")
-        print(f"  🤖 PER MODEL METRICS")
+        print(f"  PER MODEL METRICS")
         print(f"{'='*70}\n")
         
         grouped = defaultdict(list)
@@ -110,7 +110,7 @@ class MetricsEvaluator:
     def evaluate_per_model_category(self):
         """Metrics per model+category combination"""
         print(f"\n{'='*70}")
-        print(f"  🤖📁 PER MODEL+CATEGORY METRICS")
+        print(f"  PER MODEL+CATEGORY METRICS")
         print(f"{'='*70}\n")
         
         grouped = defaultdict(list)
@@ -177,10 +177,10 @@ def main():
         return 0
     
     except FileNotFoundError as e:
-        print(f"❌ {e}")
+        print(f"{e}")
         return 1
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f"Error: {e}")
         import traceback
         traceback.print_exc()
         return 1

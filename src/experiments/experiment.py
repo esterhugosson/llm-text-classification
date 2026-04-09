@@ -150,7 +150,7 @@ class Experiment:
                         # Loop through all messages
                         for thread_id, messages_data in self.interactions.items():
                             for msg_data in messages_data:
-                                msg_id = msg_data.get("message_id")
+                                msg_id = msg_data.get("id")
                                 text = msg_data.get("text", "").strip()
                                 msg_role = msg_data.get("role")
                                 
