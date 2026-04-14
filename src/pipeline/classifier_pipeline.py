@@ -1,8 +1,9 @@
 # Classification pipeline - the core logic
 
 import json
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, Tuple, List
 from src.data.models.data_models import Message, PredictionResult
+from src.pipeline.filter import InteractionFilter
 
 
 class ClassificationPipeline:
@@ -95,3 +96,64 @@ class ClassificationPipeline:
                 results.append(result)
         
         return results
+    
+    def classify_category(
+        self,
+        interactions: Dict[str, List[Dict]],
+        category: str,
+        strategy: str,
+        model_name: str,
+        role_filter: Optional[int] = None,
+        message_limit: Optional[int] = None
+    ) -> Tuple[List[PredictionResult], int]:
+        """
+        Classify all messages in a category with given strategy
+        
+        Args:
+            interactions: Dict of thread_id -> messages
+            category: Classification category
+            strategy: Strategy (basic or few_shot)
+            model_name: Name of the model
+            role_filter: Role to filter by (0=teacher, 1=chatbot, None=all)
+            message_limit: Max messages to classify
+            
+        Returns:
+            (list of PredictionResult, count of classified messages)
+        """
+        msg_filter = InteractionFilter(required_role=role_filter, min_text_length=10)
+        results = []
+        category_count = 0
+        
+        # Loop through all messages
+        for thread_id, messages_data in interactions.items():
+            for msg_data in messages_data:
+                msg_id = msg_data.get("id")
+                text = msg_data.get("text", "").strip()
+                msg_role = msg_data.get("role")
+                
+                # Create Message object
+                msg = Message(
+                    thread_id=thread_id,
+                    message_id=msg_id,
+                    text=text,
+                    role=msg_role,
+                )
+                
+                # Use filter to check if message passes
+                if not msg_filter.allow(msg):
+                    continue
+                
+                # Classify
+                result = self.classify_message(msg, category, strategy, model_name)
+                
+                if result is None:
+                    continue
+                
+                results.append(result)
+                category_count += 1
+                
+                # Check limit per category
+                if message_limit and category_count >= message_limit:
+                    break
+        
+        return results, category_count

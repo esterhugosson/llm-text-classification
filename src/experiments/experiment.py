@@ -14,10 +14,8 @@ from src.experiments.stats import ExperimentStats
 
 from src.data.loaders.ground_truth_loader import load_ground_truths
 from src.data.loaders.interaction_loader import load_interactions
-from src.data.models.data_models import Message
 
 from src.pipeline.matcher import GroundTruthMatcher
-from src.pipeline.filter import InteractionFilter
 from src.pipeline.classifier_pipeline import ClassificationPipeline
 from src.pipeline.result_builder import ResultBuilder
 
@@ -139,71 +137,7 @@ class Experiment:
                     print(f"    [{strat_idx}/{len(STRATEGIES)}] {strategy}")
                     
                     try:
-                        # Create filter for this category
-                        msg_filter = InteractionFilter(
-                            required_role=role_filter,
-                            min_text_length=10
-                        )
-                        
-                        category_count = 0
-                        
-                        # Loop through all messages
-                        for thread_id, messages_data in self.interactions.items():
-                            for msg_data in messages_data:
-                                msg_id = msg_data.get("id")
-                                text = msg_data.get("text", "").strip()
-                                msg_role = msg_data.get("role")
-                                
-                                # Create Message object
-                                msg = Message(
-                                    thread_id=thread_id,
-                                    message_id=msg_id,
-                                    text=text,
-                                    role=msg_role,
-                                )
-                                
-                                # Use filter to check if message passes
-                                if not msg_filter.allow(msg):
-                                    self.stats.increment_skip()
-                                    continue
-                                
-                                # Classify
-                                result = pipeline.classify_message(
-                                    msg=msg,
-                                    category=category,
-                                    strategy=strategy,
-                                    model_name=model_name,
-                                )
-                                
-                                if result is None:
-                                    self.stats.increment_skip()
-                                    continue
-                                
-                                # Track result
-                                self.result_builder.add_result(result)
-                                self.stats.add_model_result(
-                                    model=model_name,
-                                    category=category,
-                                    match=result.match,
-                                )
-                                
-                                if result.match:
-                                    self.stats.increment_success()
-                                else:
-                                    self.stats.increment_failure()
-                                
-                                category_count += 1
-                                
-                                # Check limit per category
-                                if self.message_limit and category_count >= self.message_limit:
-                                    break
-                                
-                                # Print progress
-                                match_sym = "✓" if result.match else "✗"
-                                print(f"      ✓ msg {msg_id}: {result.predicted_label} {match_sym}")
-                        
-                        print(f"      → {category_count} predictions")
-                    
+                        self._classify_category(model_name, category, role_filter, strategy, pipeline)
                     except Exception as e:
                         print(f"      Error: {e}")
                         traceback.print_exc()
@@ -212,6 +146,37 @@ class Experiment:
         # Save and summarize
         output_path = self._finalize()
         return output_path
+    
+    def _classify_category(self, model_name, category, role_filter, strategy, pipeline):
+        """Classify all messages for a category+strategy using pipeline"""
+        results, category_count = pipeline.classify_category(
+            interactions=self.interactions,
+            category=category,
+            strategy=strategy,
+            model_name=model_name,
+            role_filter=role_filter,
+            message_limit=self.message_limit
+        )
+        
+        # Track results
+        for result in results:
+            self.result_builder.add_result(result)
+            self.stats.add_model_result(
+                model=model_name,
+                category=category,
+                match=result.match,
+            )
+            
+            if result.match:
+                self.stats.increment_success()
+            else:
+                self.stats.increment_failure()
+            
+            # Print progress
+            match_sym = "✓" if result.match else "✗"
+            print(f"      ✓ msg {result.message_id}: {result.predicted_label} {match_sym}")
+        
+        print(f"      → {category_count} predictions")
     
     def _finalize(self) -> str:
         """Save results and print summary"""
