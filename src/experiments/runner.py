@@ -5,7 +5,11 @@ import argparse
 from typing import Optional, List
 
 from src.experiments.experiment import Experiment
-from src.experiments.config import MODELS, CATEGORIES
+from src.experiments.config import MODELS, CATEGORIES, validate_config
+from src.utils.logger import setup_logger, get_logger
+from src.utils.error_handler import handle_errors, log_exception
+
+logger = setup_logger(__name__)
 
 
 def main():
@@ -71,18 +75,28 @@ Examples:
     
     args = parser.parse_args()
     
+    # Validate config
+    try:
+        validate_config()
+        logger.info("Configuration validated successfully")
+    except Exception as e:
+        logger.error(f"Configuration validation failed: {e}")
+        return 1
+    
     # Handle test mode
     if args.test:
         args.models = ["gpt4o"]  # Only GPT-4
         args.limit = args.limit or 2  # Default 2 messages
-        print("Running in TEST MODE: GPT-4 only, limited messages\n")
+        logger.info("Running in TEST MODE: GPT-4 only, limited messages")
     
     # Create and run experiment
     try:
+        logger.info(f"Starting experiment with models={args.models}, categories={args.categories}")
+        
         experiment = Experiment(
             interactions_path=args.interactions,
             ground_truth_path=args.ground_truth,
-            message_limit=args.limit,  # Pass the limit
+            message_limit=args.limit,
         )
         
         output_path = experiment.run(
@@ -90,18 +104,20 @@ Examples:
             categories=args.categories,
         )
         
+        logger.info(f"Experiment completed successfully!")
+        logger.info(f"Results saved to: {output_path}")
         print(f"\nExperiment completed successfully!")
         print(f"   Results: {output_path}")
         
         return 0
     
     except FileNotFoundError as e:
+        logger.error(f"File not found: {e}")
         print(f"File not found: {e}")
         return 1
     except Exception as e:
+        log_exception(e, "in experiment execution")
         print(f"Error: {e}")
-        import traceback
-        traceback.print_exc()
         return 1
 
 
