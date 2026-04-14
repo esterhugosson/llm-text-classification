@@ -63,7 +63,7 @@ Examples:
     
     parser.add_argument(
         "--interactions",
-        default="data/process_data/processed_interactions.json",
+        default="data/process_data/test_interactions.json",
         help="Path to interactions file"
     )
     

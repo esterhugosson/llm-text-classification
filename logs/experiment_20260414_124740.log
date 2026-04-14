@@ -1,0 +1,3 @@
+2026-04-14 12:47:40 - __main__ - INFO - [runner.py:81] - Configuration validated successfully
+2026-04-14 12:47:40 - __main__ - INFO - [runner.py:90] - Running in TEST MODE: GPT-4 only, limited messages
+2026-04-14 12:47:40 - __main__ - INFO - [runner.py:94] - Starting experiment with models=['gpt4o'], categories=['response_substance']

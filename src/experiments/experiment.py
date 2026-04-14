@@ -20,6 +20,10 @@ from src.pipeline.classifier_pipeline import ClassificationPipeline
 from src.pipeline.result_builder import ResultBuilder
 
 from src.llm.prompt_loader import PromptLoader
+from src.views.builder import ExperimentViewBuilder
+from src.utils.logger import get_logger
+
+logger = get_logger(__name__)
 
 
 class Experiment:
@@ -38,6 +42,7 @@ class Experiment:
         
         self.stats = ExperimentStats()
         self.result_builder = ResultBuilder()
+        self.view = ExperimentViewBuilder()
         
         # Will be loaded when running
         self.interactions = None
@@ -96,24 +101,17 @@ class Experiment:
         # Load data
         self._load_data()
         
-        # Print header
-        print(f"\n{'='*70}")
-        print(f"  STARTING EXPERIMENT")
-        print(f"  {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-        print(f"  Models: {', '.join(models)}")
-        print(f"  Categories: {', '.join(categories)}")
-        print(f"{'='*70}\n")
+        # Print header using view
+        self.view.print_experiment_header(models, categories, datetime.now())
         
         # Loop: model → category → strategy → messages
         for model_idx, model_name in enumerate(models, 1):
-            print(f"\n{'─'*70}")
-            print(f"  [{model_idx}/{len(models)}] Model: {model_name}")
-            print(f"{'─'*70}")
+            self.view.print_model_header(model_name, model_idx, len(models))
             
             try:
                 classifier = self._get_classifier(model_name)
             except ValueError as e:
-                print(f"  {e}")
+                logger.error(f"Failed to get classifier for {model_name}: {e}")
                 continue
             
             # Create pipeline for this model
@@ -131,16 +129,15 @@ class Experiment:
                 role_label = {0: "teacher", 1: "chatbot", None: "all"}.get(
                     role_filter, role_filter
                 )
-                print(f"\n  [{cat_idx}/{len(CATEGORIES)}] {category} (role={role_label})")
+                self.view.print_category_header(category, cat_idx, len(CATEGORIES), role_label)
                 
                 for strat_idx, strategy in enumerate(STRATEGIES, 1):
-                    print(f"    [{strat_idx}/{len(STRATEGIES)}] {strategy}")
+                    self.view.print_strategy_header(strategy, strat_idx, len(STRATEGIES))
                     
                     try:
                         self._classify_category(model_name, category, role_filter, strategy, pipeline)
                     except Exception as e:
-                        print(f"      Error: {e}")
-                        traceback.print_exc()
+                        logger.error(f"Error in classification: {e}", exc_info=True)
                         continue
         
         # Save and summarize
@@ -172,43 +169,25 @@ class Experiment:
             else:
                 self.stats.increment_failure()
             
-            # Print progress
-            match_sym = "✓" if result.match else "✗"
-            print(f"      ✓ msg {result.message_id}: {result.predicted_label} {match_sym}")
+            # Display progress using view
+            self.view.print_classification_progress(result.message_id, result.predicted_label, result.match)
         
-        print(f"      → {category_count} predictions")
+        self.view.print_category_summary(category_count)
     
     def _finalize(self) -> str:
         """Save results and print summary"""
         
-        # Save
-        print(f"\n{'='*70}")
-        print(f"  SAVING RESULTS")
-        print(f"{'='*70}\n")
-        
+        # Save results
+        self.view.print_saving_header()
         output_path = self.result_builder.save()
-        print(f"  Saved {len(self.result_builder.results)} results")
-        print(f"      {output_path}\n")
+        self.view.print_save_complete(len(self.result_builder.results), output_path)
         
-        # Print stats
-        self.stats.print_summary()
+        # Print statistics
+        self.view.print_statistics(self.stats)
+        self.view.print_per_model_accuracy(self.stats)
+        self.view.print_per_category_accuracy(self.stats)
         
-        # Per-model accuracy
-        print(f"{'─'*70}")
-        print(f"  PER-MODEL ACCURACY")
-        print(f"{'─'*70}\n")
-        for model, stats in self.stats.per_model.items():
-            accuracy = stats["correct"] / stats["total"] if stats["total"] > 0 else 0
-            print(f"  {model:15} {accuracy:6.2%} ({stats['correct']}/{stats['total']})")
-        
-        # Per-category accuracy
-        print(f"\n{'─'*70}")
-        print(f"  PER-CATEGORY ACCURACY")
-        print(f"{'─'*70}\n")
-        for category, stats in self.stats.per_category.items():
-            accuracy = stats["correct"] / stats["total"] if stats["total"] > 0 else 0
-            print(f"  {category:20} {accuracy:6.2%} ({stats['correct']}/{stats['total']})")
-        
-        print(f"\n{'='*70}\n")
+        logger.info(f"Experiment finalized with {len(self.result_builder.results)} results")
+        logger.info(f"Results saved to: {output_path}")
         
         return output_path
