@@ -30,7 +30,7 @@ class PromptLoader:
 
     def load_all_prompts(self) -> dict:
         categories = [
-            "cps_behaviour",
+            "cps_behavior",
             "response_substance",
             "response_stance",
             "interactional_move",

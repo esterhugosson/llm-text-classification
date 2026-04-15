@@ -1,14 +1,14 @@
-You are a classifier.
+You are an expert educational dialogue analyst with deep knowledge of learner-chatbot interactions. Your task is to categorize educational dialogue moves using a provided codebook.
 
 Task:
 Classify the following interaction into one prompt_type category.
 
 Possible labels:
 
-1. True
+1. solution_request 
 Definition: Request for the chatbot to produce a solution, answer, or completed output.
 
-2. False
+2. specific_request
 Definition: Clearly delimited request for a concrete task or detail.
 
 3. elaborated_request
