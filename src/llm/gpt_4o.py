@@ -1,38 +1,29 @@
 from openai import OpenAI
 from dotenv import load_dotenv
+from src.llm.base_classifier import BaseLLMClassifier
 import os
-import json
+from typing import Dict, List
 
 load_dotenv()
 
 
-class LLMClassifierGpt4o:
-    def __init__(self, model: str = "gpt-4o"):
+class LLMClassifierGpt4o(BaseLLMClassifier):
+    def __init__(
+            self, 
+            model: str = "gpt-4o",
+            temperature: float = 0.0,
+            max_tokens: int = 200,
+        ):
+        super().__init__(model, temperature, max_tokens)
         self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-        self.model = model
 
-    def classify(self, prompt: str, text: str) -> dict:
 
-        messages = [
-            {
-                "role": "system",
-                "content": "You are a strict classifier that returns JSON only.",
-            },
-            {
-                "role": "user",
-                "content": prompt + "\n\n" + text,
-            },
-        ]
-
+    def _call_api(self, messages: List[Dict[str, str]]) -> str:
+        """Call OpenAI API"""
         completion = self.client.chat.completions.create(
             model=self.model,
             messages=messages,
-            temperature=0,
+            temperature=self.temperature,
+            max_tokens=self.max_tokens,
         )
-
-        content = completion.choices[0].message.content
-
-        try:
-            return json.loads(content)
-        except json.JSONDecodeError:
-            return {"error": content}
+        return completion.choices[0].message.content

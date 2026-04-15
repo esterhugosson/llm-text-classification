@@ -6,7 +6,7 @@ This project compares three LLMs (GPT-4o, Claude Sonnet, LLaMA 3) in classifying
 
 ---
 
-## 📚 Quick Start
+## Quick Start
 
 ### Installation & Setup
 
@@ -15,10 +15,10 @@ This project compares three LLMs (GPT-4o, Claude Sonnet, LLaMA 3) in classifying
 conda activate algorithms
 
 # Run a quick test (GPT-4 only, 2 messages per category)
-python -m src.experiments.runner --test
+python -m src --test
 
 # Run with custom options
-python -m src.experiments.runner --limit 5 --categories response_substance --models gpt4o
+python -m src --limit 5 --categories response_substance --models gpt4o
 ```
 
 ### Output
@@ -33,7 +33,7 @@ Logs are saved to `logs/experiment_TIMESTAMP.log`
 
 ---
 
-## 🏗️ Architecture Overview
+## Architecture Overview
 
 The pipeline follows a modular, layered architecture:
 
@@ -65,7 +65,7 @@ STATISTICS & VIEWS (Reporting)
 
 ---
 
-## 🔧 Recent Improvements (April 2026)
+##  Recent Improvements (April 2026)
 
 ### 1. **Logging System** (`src/utils/logger.py`)
 - Dual output: console + file logging
@@ -99,7 +99,7 @@ STATISTICS & VIEWS (Reporting)
 
 ---
 
-## 📋 Complete Project Structure
+##  Complete Project Structure
 
 ```
 src/
@@ -156,7 +156,7 @@ src/
 
 ---
 
-## 🚀 Usage Examples
+## Usage Examples
 
 ### Quick Test (2 messages, GPT-4 only)
 ```bash
@@ -191,7 +191,7 @@ python -m src.evaluation.metrics --results src/results/raw/results_TIMESTAMP.jso
 
 ---
 
-## 📊 Categories & Strategies
+## Categories & Strategies
 
 ### Dialogue Act Categories (6 total)
 
@@ -211,7 +211,7 @@ python -m src.evaluation.metrics --results src/results/raw/results_TIMESTAMP.jso
 
 ---
 
-## 🔍 Configuration
+##  Configuration
 
 Environment variables (optional):
 ```bash
@@ -226,7 +226,7 @@ Default paths (in `config.py`):
 
 ---
 
-## 📝 Data Format
+## Data Format
 
 ### Input: Interactions
 ```json
@@ -271,7 +271,7 @@ Default paths (in `config.py`):
 
 ---
 
-## 📊 Sample Output
+## Sample Output
 
 ```
 Loading data...
@@ -342,7 +342,7 @@ Example: `logs/experiment_20260414_123456.log`
 
 ---
 
-## ⚙️ Dependencies
+## Dependencies
 
 - Python 3.10+
 - OpenAI SDK (GPT-4o access)
@@ -353,13 +353,13 @@ Example: `logs/experiment_20260414_123456.log`
 
 ---
 
-## 📄 License
+## License
 
 Bachelor thesis project in Web Programing - 2026
 
 ---
 
-## 👤 Author
+## Author
 
 Ester and Leia
 
