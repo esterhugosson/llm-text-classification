@@ -1,13 +1,13 @@
 # Entry point for the experiment
 
+# 
 import sys
 import argparse
-from typing import Optional, List
 
 from src.experiments.experiment import Experiment
 from src.experiments.config import MODELS, CATEGORIES, validate_config
-from src.utils.logger import setup_logger, get_logger
-from src.utils.error_handler import handle_errors, log_exception
+from src.utils.logger import setup_logger
+from src.utils.error_handler import log_exception
 
 logger = setup_logger(__name__)
 
@@ -21,25 +21,27 @@ def main():
         epilog="""
 Examples:
   # Run all models and categories
-  python -m src.experiments.runner
+  python -m src
   
   # Quick test with just 2 messages per category
-  python -m src.experiments.runner --test --limit 2
+  python -m src --test --limit 2
   
   # Run only GPT-4 on interactional_move
-  python -m src.experiments.runner --models gpt4o --categories interactional_move
+  python -m src --models gpt4o --categories interactional_move
   
-  # Run Claude and LLaMA on multiple categories
-  python -m src.experiments.runner --models claude llama3 --categories prompt_type is_followup
+  # Run Claude on multiple categories
+  python -m src --models claude --categories prompt_type is_followup
         """
     )
     
+    # Define an argument for test mode
     parser.add_argument(
         "--test",
         action="store_true",
         help="Run in test mode (only GPT-4, limited messages)"
     )
     
+    # Define message limit argument
     parser.add_argument(
         "--limit",
         type=int,
@@ -47,6 +49,7 @@ Examples:
         help="Limit messages per category (e.g., --limit 2 for quick test)"
     )
     
+    # Define models argument
     parser.add_argument(
         "--models",
         nargs="+",
@@ -54,6 +57,7 @@ Examples:
         help=f"Models to test (default: all). Options: {', '.join(MODELS.keys())}"
     )
     
+    # Define categories argument
     parser.add_argument(
         "--categories",
         nargs="+",
@@ -61,12 +65,14 @@ Examples:
         help=f"Categories to test (default: all). Options: {', '.join(CATEGORIES.keys())}"
     )
     
+    # Define paths for interactions
     parser.add_argument(
         "--interactions",
         default="data/process_data/test_interactions.json",
         help="Path to interactions file"
     )
     
+    # Define path for ground truth
     parser.add_argument(
         "--ground-truth",
         default="data/process_data/processed_ground_truths.json",
@@ -75,7 +81,6 @@ Examples:
     
     args = parser.parse_args()
     
-    # Validate config
     try:
         validate_config()
         logger.info("Configuration validated successfully")

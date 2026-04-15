@@ -1,7 +1,5 @@
 # Main experiment orchestration
 
-import sys
-import traceback
 from datetime import datetime
 from typing import Optional, List
 
@@ -9,7 +7,7 @@ from src.llm.gpt_4o import LLMClassifierGpt4o
 from src.llm.claude_sonnet import LLMClassifierClaudeSonnet
 from src.llm.llama_3 import LLMClassifierLlama3
 
-from src.experiments.config import MODELS, CATEGORIES, STRATEGIES
+from src.experiments.config import MODELS, CATEGORIES, STRATEGIES, INTERACTIONS_PATH, GROUND_TRUTH_PATH
 from src.experiments.stats import ExperimentStats
 
 from src.data.loaders.ground_truth_loader import load_ground_truths
@@ -31,8 +29,8 @@ class Experiment:
     
     def __init__(
         self,
-        interactions_path: str = "data/dataset/interactions.json",
-        ground_truth_path: str = "data/process_data/processed_ground_truths.json",
+        interactions_path: str = INTERACTIONS_PATH,
+        ground_truth_path: str = GROUND_TRUTH_PATH,
         message_limit: Optional[int] = None,
     ):
         """Initialize experiment with data paths"""
@@ -50,6 +48,8 @@ class Experiment:
         self.matcher = None
         self.prompt_loader = PromptLoader()
     
+
+    # Se över om vi behäver lägga try except sats.
     def _load_data(self):
         """Load interactions and ground truth"""
         print("Loading data...")

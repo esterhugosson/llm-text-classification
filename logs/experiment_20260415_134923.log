@@ -1,0 +1,4 @@
+2026-04-15 13:49:23 - __main__ - INFO - [runner.py:81] - Configuration validated successfully
+2026-04-15 13:49:23 - __main__ - INFO - [runner.py:94] - Starting experiment with models=['llama3'], categories=None
+2026-04-15 13:59:21 - __main__ - INFO - [runner.py:107] - Experiment completed successfully!
+2026-04-15 13:59:21 - __main__ - INFO - [runner.py:108] - Results saved to: src\results\raw\results_20260415_135920.json

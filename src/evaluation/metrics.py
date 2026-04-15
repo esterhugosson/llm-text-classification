@@ -5,7 +5,7 @@ import sys
 from pathlib import Path
 from collections import defaultdict
 from typing import Dict, List
-from sklearn.metrics import accuracy_score, f1_score, classification_report, confusion_matrix
+from sklearn.metrics import accuracy_score, f1_score, classification_report, cohen_kappa_score
 import pandas as pd
 
 
@@ -145,9 +145,45 @@ class MetricsEvaluator:
             print(df.to_string(index=False))
             print()
     
+    def evaluate_cohen_kappa(self):
+        """Cohen's Kappa for inter-rater agreement"""
+        print(f"\n{'='*70}")
+        print(f"  COHEN'S KAPPA")
+        print(f"{'='*70}\n")
+        
+        y_true = [r["true_label"] for r in self.results]
+        y_pred = [r["predicted_label"] for r in self.results if r["predicted_label"]]
+        
+        # Filter to same length
+        valid_results = [(t, p) for t, p in zip(y_true, y_pred) if p]
+        if valid_results:
+            y_true_valid, y_pred_valid = zip(*valid_results)
+            
+            kappa = cohen_kappa_score(y_true_valid, y_pred_valid)
+            
+            print(f"  Cohen's Kappa (overall):    {kappa:.4f}")
+            print(f"  Interpretation: ", end="")
+            
+            # Interpretation guidelines
+            if kappa < 0:
+                print("Poor agreement")
+            elif kappa < 0.2:
+                print("Slight agreement")
+            elif kappa < 0.4:
+                print("Fair agreement")
+            elif kappa < 0.6:
+                print("Moderate agreement")
+            elif kappa < 0.8:
+                print("Substantial agreement")
+            else:
+                print("Almost perfect agreement")
+            
+            print(f"\n{'='*70}\n")
+    
     def run_all_evaluations(self):
         """Run all evaluation types"""
         self.evaluate_overall()
+        self.evaluate_cohen_kappa()
         self.evaluate_per_category()
         self.evaluate_per_model()
         self.evaluate_per_model_category()
