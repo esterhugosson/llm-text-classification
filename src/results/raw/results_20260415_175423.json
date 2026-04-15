@@ -1,0 +1,50 @@
+[
+  {
+    "thread_id": "thread_utJ1F4Ta8Ft9fIANC1fmHDx8",
+    "message_id": 2701,
+    "text": "Kan du hjälpa mig att skriva en social berättelse för en 11-åring som inte vill komma till skolan?",
+    "category": "is_followup",
+    "strategy": "basic",
+    "model": "gpt4o",
+    "role": 0,
+    "true_label": false,
+    "predicted_label": "False",
+    "match": false
+  },
+  {
+    "thread_id": "thread_utJ1F4Ta8Ft9fIANC1fmHDx8",
+    "message_id": 2702,
+    "text": "Självklart! En social berättelse är ett bra sätt att hjälpa barn att förstå och hantera olika situationer. Här är ett exempel på en social berättelse ",
+    "category": "is_followup",
+    "strategy": "basic",
+    "model": "gpt4o",
+    "role": 1,
+    "true_label": false,
+    "predicted_label": "False",
+    "match": false
+  },
+  {
+    "thread_id": "thread_utJ1F4Ta8Ft9fIANC1fmHDx8",
+    "message_id": 2701,
+    "text": "Kan du hjälpa mig att skriva en social berättelse för en 11-åring som inte vill komma till skolan?",
+    "category": "is_followup",
+    "strategy": "few_shot",
+    "model": "gpt4o",
+    "role": 0,
+    "true_label": false,
+    "predicted_label": "false",
+    "match": false
+  },
+  {
+    "thread_id": "thread_utJ1F4Ta8Ft9fIANC1fmHDx8",
+    "message_id": 2702,
+    "text": "Självklart! En social berättelse är ett bra sätt att hjälpa barn att förstå och hantera olika situationer. Här är ett exempel på en social berättelse ",
+    "category": "is_followup",
+    "strategy": "few_shot",
+    "model": "gpt4o",
+    "role": 1,
+    "true_label": false,
+    "predicted_label": "false",
+    "match": false
+  }
+]

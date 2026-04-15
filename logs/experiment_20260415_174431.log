@@ -1,0 +1,4 @@
+2026-04-15 17:44:31 - __main__ - INFO - [runner.py:86] - Configuration validated successfully
+2026-04-15 17:44:31 - __main__ - INFO - [runner.py:99] - Starting experiment with models=['claude'], categories=['is_followup']
+2026-04-15 17:44:32 - __main__ - INFO - [runner.py:112] - Experiment completed successfully!
+2026-04-15 17:44:32 - __main__ - INFO - [runner.py:113] - Results saved to: src\results\raw\results_20260415_174432.json

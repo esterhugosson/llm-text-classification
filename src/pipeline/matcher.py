@@ -30,3 +30,10 @@ class GroundTruthMatcher:
         if not msg:
             return None
         return msg.get(category)
+    
+    def get_assistant_name(self, thread_id, message_id):
+        """Get assistant name used during data collection"""
+        msg = self.get_truth(thread_id, message_id)
+        if not msg:
+            return None
+        return msg.get("assistant_name")
