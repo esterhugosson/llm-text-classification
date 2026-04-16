@@ -20,8 +20,8 @@ CATEGORIES = {
 STRATEGIES = ["basic", "few_shot"]
 
 TEMPERATURE = 0
-TOP_K = 0.9
-MAX_TOKENS=200
+TOP_K = 1
+MAX_TOKENS = 20
 
 # Base data directory
 DATA_DIR = Path(os.getenv("DATA_DIR", "data"))
