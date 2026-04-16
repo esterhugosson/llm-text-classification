@@ -1,12 +1,11 @@
 # Data structures for the project
 
 from dataclasses import dataclass
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, Union
 
 
 @dataclass
 class Message:
-    """Represents a single message"""
     thread_id: str
     message_id: int
     text: str
@@ -15,10 +14,10 @@ class Message:
 
 @dataclass
 class GroundTruthLabel:
-    """Ground truth labels for a message"""
     thread_id: str
     message_id: int
-    labels: Dict[str, str]  # category -> label
+    labels: Dict[str, str]
+    assistant_name: Optional[str] = None
 
 
 @dataclass
@@ -31,15 +30,16 @@ class PredictionResult:
     strategy: str
     model: str
     role: int
-    true_label: str
+    true_label: Union[str, bool]
     predicted_label: Optional[str]
     match: bool
+    assistant_name: Optional[str] = None
     
     def to_dict(self) -> Dict[str, Any]:
-        """Convert to dictionary for JSON serialization"""
         return {
             "thread_id": self.thread_id,
             "message_id": self.message_id,
+            "assistant_name": self.assistant_name,
             "text": self.text,
             "category": self.category,
             "strategy": self.strategy,

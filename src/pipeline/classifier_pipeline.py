@@ -1,7 +1,6 @@
 # Classification pipeline - the core logic
 
-import json
-from typing import Dict, Any, Optional, Tuple, List
+from typing import Dict, Optional, Tuple, List
 from src.data.models.data_models import Message, PredictionResult
 from src.pipeline.filter import InteractionFilter
 
@@ -56,10 +55,17 @@ class ClassificationPipeline:
             if predicted_label is None or predicted_label == "ERROR":
                 predicted_label = None
             
+            assistant_name = self.matcher.get_assistant_name(msg.thread_id, msg.message_id)
+
+            # Normalize both to string and lowercase (handle boolean values)
+            pred_normalized = str(predicted_label).lower() if predicted_label is not None else None
+            true_normalized = str(true_label).lower() if true_label is not None else None
+            
             # Build result
             result = PredictionResult(
                 thread_id=msg.thread_id,
                 message_id=msg.message_id,
+                assistant_name=assistant_name,
                 text=msg.text[:150],
                 category=category,
                 strategy=strategy,
@@ -67,7 +73,10 @@ class ClassificationPipeline:
                 role=msg.role,
                 true_label=true_label,
                 predicted_label=predicted_label,
-                match=predicted_label == true_label if predicted_label else False,
+                match = (
+                    pred_normalized == true_normalized 
+                    if pred_normalized is not None and true_normalized is not None else False
+                )
             )
             
             return result
@@ -155,5 +164,9 @@ class ClassificationPipeline:
                 # Check limit per category
                 if message_limit and category_count >= message_limit:
                     break
+            
+            # Check limit per category
+            if message_limit and category_count >= message_limit:
+                break # Exit outer loop as well
         
         return results, category_count

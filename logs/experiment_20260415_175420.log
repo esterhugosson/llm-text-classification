@@ -1,0 +1,4 @@
+2026-04-15 17:54:20 - __main__ - INFO - [runner.py:86] - Configuration validated successfully
+2026-04-15 17:54:20 - __main__ - INFO - [runner.py:99] - Starting experiment with models=['gpt4o'], categories=['is_followup']
+2026-04-15 17:54:23 - __main__ - INFO - [runner.py:112] - Experiment completed successfully!
+2026-04-15 17:54:23 - __main__ - INFO - [runner.py:113] - Results saved to: src\results\raw\results_20260415_175423.json
