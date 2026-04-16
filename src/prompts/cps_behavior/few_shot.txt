@@ -1,4 +1,4 @@
-You are an expert educational dialogue analyst with deep knowledge of learner-chatbot interactions. Your task is to categorize educational dialogue moves using a provided codebook.
+You are an expert educational dialogue analyst with deep knowledge of learner-chatbot interactions. Your task is to categorize educational dialogue moves using a provided labels from a codebook.
 
 Task:
 Classify the following interaction into one cps_behaviour category.
@@ -23,18 +23,19 @@ Definition: No collaborative problem-solving behavior visible.
 -----Examples----
 
 Example 1: "Jag undervisar i teknik. hur kan du hjälpa mig för en effektiv undervisning som är bra för eleverna och minskar min arbetsbelastning. Skapa en terminsupplägg, med allt från planering till bedömningsmatris.  Jag vill helst att allt ska skötas av AI. Gör mig inte besviken."
-Answer 1: {"label": "task_delegationt"}
+Answer 1: {"label": "task_delegation"}
 
-Example 2: "hjärtat blodomlopp"
+Example 2: "Mina tankar är att de elever som klarar av att vara med på samlingar är med. De elever med särskilda behov samlar vi i en liten grupp och anpassar aktiviteter och samtal med dem."
 Answer 2: {"label": "shared_understanding"}
 
 Example 3: "Jag tror jag vill ha ett upplägg som ser ut såhär ungefär:"
 Answer 3: {"label": "negotiation_coordination"}
 
-Example 4: "läsförståelse om hjärtat för årskurs 2"
+Example 4: "tack! Hen tycker att skolan stör hans fritid"
 Answer 4: {"label": "team_maintenance"}
 
-Example 5: "Självklart! Om du har en specifik idé i åtanke för upplägget, tveka inte att dela den så kan vi arbeta utifrån det. Annars kan jag ge ett förslag som är flexibelt och kan anpassas beroende på dina undervisningsmål och resurser. Här är ett alternativt upplägg med en mer detaljorienterad strategi:\n\n### Terminsupplägg för Teknikundervisning\n\n#### Block 1: Introduktion och Grundläggande Koncept\n- **Vecka 1:** Vad är teknik?\n  - **Aktiviteter:**\n    - Introduktionsföreläsning och diskussion om teknikens roll i samhället.\n    - Grundläggande begrepp, använd AI-visualiseringar och filmer.\n  - **AI-verktyg:** Interaktiv quiz via lärplattform för återmatning.\n\n- **Vecka 2:** Teknikens historiska utveckling\n  - **Aktiviteter:**\n    - Tidslinjeövning där elever skapar digitala tidslinjer över betydande tekniska upptäckter.\n    - Gruppdiskussioner om teknikens påverkan på olika kulturer.\n  - **AI-verktyg:** Tidslinjebyggare med automatiserade tips och resurshänvisningar.\n\n#### Block 2: Teknik och Designprocessen\n- **Vecka 3-4:** Designprocess och problemlösning\n  - **Aktiviteter:**\n    - Introduktionen av designprocessens steg genom en spelifierad AI-miljö.\n    - Praktisk uppgift där elever skapar egna problemställningar med lösningsförslag.\n  - **AI-verktyg:** Simuleringar och automatiserade förslag på lösningar.\n\n#### Block 3: Material och Produktskapande\n- **Vecka 5-6:** Materiallära och prototyptillverkning\n  - **Aktiviteter:**\n    - Hand-on aktiviteter: Undersök och experimentera med olika material.\n    - Skapa enkla prototyper med återvunna material.\n  - **AI-verktyg:** Online guider för materialval och design.\n\n#### Block 4: Teknik och Hållbarhet\n- **Vecka 7-8:** Hållbar utveckling och teknik\n  - **Aktiviteter:**\n    - Gruppdiskussioner om hur teknik kan bidra till hållbar utveckling.\n    - Skapa digitala presentationer av hållbara tekniska innovationer.\n  - **AI-verktyg:** Feedbackgeneration och automatiserad källgranskning.\n\n#### Block 5: Teknik och Framtiden\n- **Vecka 9-10:** Teknologi och framtidsvisioner\n  - **Aktiviteter:**\n    - Workshops om framtidens teknologi med kreativt skapande av prototyper.\n    - AI-drivna framtidsspaningar och diskussionsgäster via videolänkar.\n  - **AI-verktyg:** Scenarioplanering och simuleringar.\n\n#### Block 6: Färdigheter och Presentation\n- **Vecka 11-12:** Projektarbete och kommunikation\n  - **Aktiviteter:**\n    - Arbeta i grupper för att utveckla och förbättra projektidéer.\n    - Förbered presentationer med hjälp av AI-verktyg för visualisering.\n  - **AI-verktyg:** Automatiserad feedback och analys av projektarbete.\n\n#### Block 7: Avslutning och Utvärdering\n- **Vecka 13-14:** Reflektion och sammanfattning\n  - **Aktiviteter:**\n    - Reflektion över terminen genom AI-stött självvärderingsverktyg.\n    - Sammanfattning av lärdomar och fortsatt personlig planering.\n  - **AI-verktyg:** Självvärderings- och målsättningsverktyg.\n\n### Bedömningsmatris\n- **Kriterier:**\n  1. Kunskapsdjup och förståelse\n  2. Problemlösningsförmåga och kreativitet\n  3. Kommunikation och presentation\n  4. Engagemang och samarbetsförmåga\n- **Verktyg:** Använd AI till att ge detaljerad återkoppling och poängsättning baserat på automatiserade analyser av inlämnade arbeten och presentationer.\n\nDetta upplägg låter dig integrera AI på ett sätt som stöder både undervisning och lärande, och du kan anpassa detta beroende på dina och elevernas behov. Lycka till med din undervisning!"
+[osäker]
+Example 5: "Vad tror du om vädret i Sverige i sommar?"
 Answer 5: {"label": "none"}
 
 Rules:

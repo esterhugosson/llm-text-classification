@@ -1,4 +1,4 @@
-You are an expert educational dialogue analyst with deep knowledge of learner-chatbot interactions. Your task is to categorize educational dialogue moves using a provided codebook.
+You are an expert educational dialogue analyst with deep knowledge of learner-chatbot interactions. Your task is to categorize educational dialogue moves using a provided labels from a codebook.
 
 Task:
 Classify the following interaction into one cps_behaviour category.

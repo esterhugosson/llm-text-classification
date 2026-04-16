@@ -1,4 +1,4 @@
-You are an expert educational dialogue analyst with deep knowledge of learner-chatbot interactions. Your task is to categorize educational dialogue moves using a provided codebook.
+You are an expert educational dialogue analyst with deep knowledge of learner-chatbot interactions. Your task is to categorize educational dialogue moves using a provided labels from a codebook.
 
 Task:
 Classify the following interaction into one prompt_type category.
@@ -42,16 +42,16 @@ Answer 1: {"label": "solution_request"}
 Example 2: "Kan du hjälpa mig att skriva en social berättelse för en 11-åring som inte vill komma till skolan?"
 Answer 2: {"label": "specific_request"}
 
-Example 3: "gör en enkel faktatext för barn om hjärtat"
+Example 3: "I en tid då samhällsklimatet hårdnat och tryggheten behöver stärkas blir fritidspedagogiken viktigare än någonsin. På fritids byggs grunden för demokratiska medborgare och en hållbar framtid men uppdraget spänner över en stor och komplex del av elevernas utveckling.\n\nVilka konkreta insatser behövs för att skapa en meningsfull fritid där trygghet, lek och lärande samverkar på bästa sätt, på våra fritidshem?"
 Answer 3: {"label": "elaborated_request"}
 
-Example 4: "hur får jag honom att sluta slåss och kränka andra när hen blir stressad"
+Example 4: "student are shy and used to not want to talk"
 Answer 4: {"label": "request_elaboration"}
 
 Example 5: "Why is this better?"
 Answer 5: {"label": "request_evaluation"}
 
-Example 6: "skriv en enkel faktatext om hjärtat och blodomloppet för årskurs 1"
+Example 6: "give me an example of toy phones for role play"
 Answer 6: {"label": "request_example"}
 
 Example 7: "Kanske den meterologiska."
@@ -60,10 +60,10 @@ Answer 7: {"label": "refine_adapt"}
 Example 8: "Oj, nu glömde du de första stödorden."
 Answer 8: {"label": "correction_challenge"}
 
-Example 9: ""
+Example 9: "Vad tror du om vädret i Sverige i sommar?"
 Answer 9: {"label": "testing_bot"}
 
-Example 10: ""
+Example 10: "hej"
 Answer 10: {"label": "none"}
 
 Rules:

@@ -1,4 +1,4 @@
-You are an expert educational dialogue analyst with deep knowledge of learner-chatbot interactions. Your task is to categorize educational dialogue moves using a provided codebook.
+You are an expert educational dialogue analyst with deep knowledge of learner-chatbot interactions. Your task is to categorize educational dialogue moves using a provided labels from a codebook.
 
 Task:
 Classify the following interaction into one is_followup category.
@@ -13,10 +13,10 @@ Definition: Message starts a new request or does not depend on prior turns.
 
 -----Examples----
 
-Example 1: "Jag tror jag vill ha ett upplägg som ser ut såhär ungefär:"
+Example 1: "hur ökar jag motivationen för att producera egna texter, samma ålder som ovan"
 Answer 1: {"label": "true"}
 
-Example 2: "Låt oss gräva djupare. Den meteorologiska definitionen är baserad på faktiska temperaturmönster, vilket kan ge en mer exakt beskrivning av väderförhållandena. Tänk på hur detta kan påverka saker som jordbruk, fritidsaktiviteter och energiåtgång. På vilket sätt tror du denna definition är mer praktisk i ditt dagliga liv?"
+Example 2: "gör en enkel faktatext om magen och tarmarna för elever i årskurs 2"
 Answer 2: {"label": "false"}
 
 Rules:
