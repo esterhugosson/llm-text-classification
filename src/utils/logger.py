@@ -1,4 +1,4 @@
-# Logging utility for the entire project
+# Logger methods to have consistent logging in this project. 
 
 import logging
 import sys
@@ -40,7 +40,7 @@ def setup_logger(name: str, level=logging.INFO) -> logging.Logger:
     
     # File handler (DEBUG and above)
     log_file = LOGS_DIR / f"experiment_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
-    file_handler = logging.FileHandler(log_file)
+    file_handler = logging.FileHandler(log_file, encoding='utf-8')
     file_handler.setLevel(logging.DEBUG)
     file_format = logging.Formatter(
         '%(asctime)s - %(name)s - %(levelname)s - [%(filename)s:%(lineno)d] - %(message)s',

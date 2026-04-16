@@ -1,19 +1,15 @@
-# Entry point for the experiment
-
-# 
 import sys
 import argparse
 
 from src.experiments.experiment import Experiment
 from src.experiments.config import MODELS, CATEGORIES, validate_config
 from src.utils.logger import setup_logger
-from src.utils.error_handler import log_exception
+from src.utils.error_handler import log_exception, DataLoadError, ClassificationError
 
 logger = setup_logger(__name__)
 
 
 def main():
-    """Main entry point"""
     
     parser = argparse.ArgumentParser(
         description="Run LLM classification experiment",
@@ -34,14 +30,12 @@ Examples:
         """
     )
     
-    # Define an argument for test mode
     parser.add_argument(
         "--test",
         action="store_true",
         help="Run in test mode (only GPT-4, limited messages)"
     )
     
-    # Define message limit argument
     parser.add_argument(
         "--limit",
         type=int,
@@ -49,7 +43,6 @@ Examples:
         help="Limit messages per category (e.g., --limit 2 for quick test)"
     )
     
-    # Define models argument
     parser.add_argument(
         "--models",
         nargs="+",
@@ -57,7 +50,6 @@ Examples:
         help=f"Models to test (default: all). Options: {', '.join(MODELS.keys())}"
     )
     
-    # Define categories argument
     parser.add_argument(
         "--categories",
         nargs="+",
@@ -65,7 +57,6 @@ Examples:
         help=f"Categories to test (default: all). Options: {', '.join(CATEGORIES.keys())}"
     )
     
-    # Define paths for interactions
     parser.add_argument(
         "--interactions",
         default="data/process_data/test_interactions.json",
@@ -90,11 +81,11 @@ Examples:
     
     # Handle test mode
     if args.test:
-        args.models = ["gpt4o"]  # Only GPT-4
-        args.limit = args.limit or 2  # Default 2 messages
+        args.models = ["gpt4o"] 
+        args.limit = args.limit or 2
         logger.info("Running in TEST MODE: GPT-4 only, limited messages")
     
-    # Create and run experiment
+    # == Create and run experiment ==
     try:
         logger.info(f"Starting experiment with models={args.models}, categories={args.categories}")
         
@@ -109,20 +100,26 @@ Examples:
             categories=args.categories,
         )
         
-        logger.info(f"Experiment completed successfully!")
+        logger.info(f"Experiment completed!")
         logger.info(f"Results saved to: {output_path}")
-        print(f"\nExperiment completed successfully!")
-        print(f"   Results: {output_path}")
         
         return 0
     
+    except DataLoadError as e:
+        logger.error(f"Data loading failed: {e}")
+        print(f"✗ Data loading failed: {e}")
+        return 1
+    except ClassificationError as e:
+        logger.error(f"Classification failed: {e}")
+        print(f"✗ Classification failed: {e}")
+        return 1
     except FileNotFoundError as e:
         logger.error(f"File not found: {e}")
-        print(f"File not found: {e}")
+        print(f"✗ File not found: {e}")
         return 1
     except Exception as e:
         log_exception(e, "in experiment execution")
-        print(f"Error: {e}")
+        print(f"✗ Unexpected error: {e}")
         return 1
 
 

@@ -6,7 +6,6 @@ from typing import Dict, Any, Optional, Union
 
 @dataclass
 class Message:
-    """Represents a single message"""
     thread_id: str
     message_id: int
     text: str
@@ -15,10 +14,10 @@ class Message:
 
 @dataclass
 class GroundTruthLabel:
-    """Ground truth labels for a message"""
     thread_id: str
     message_id: int
-    labels: Dict[str, str]  # category -> label
+    labels: Dict[str, str]
+    assistant_name: Optional[str] = None
 
 
 @dataclass
@@ -37,7 +36,6 @@ class PredictionResult:
     assistant_name: Optional[str] = None
     
     def to_dict(self) -> Dict[str, Any]:
-        """Convert to dictionary for JSON serialization"""
         return {
             "thread_id": self.thread_id,
             "message_id": self.message_id,

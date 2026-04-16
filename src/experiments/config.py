@@ -1,22 +1,12 @@
-# Configuration for LLM Classification Experiment
-
 import os
 from pathlib import Path
-
-# ============================================================================
-# MODEL CONFIGURATION
-# ============================================================================
+from src.utils.error_handler import validate_or_error, ConfigError
 
 MODELS = {
     "gpt4o": "gpt-4o",
     "claude": "claude-sonnet-4-6",
     "llama3": "llama3:8b"
 }
-
-
-# ============================================================================
-# CLASSIFICATION CATEGORIES
-# ============================================================================
 
 CATEGORIES = {
     "response_stance": 1,      # Only chatbot responses (role=1)
@@ -27,30 +17,16 @@ CATEGORIES = {
     "is_followup": None,       # All speakers
 }
 
-
-# ============================================================================
-# STRATEGIES
-# ============================================================================
-
 STRATEGIES = ["basic", "few_shot"]
-
-
-# ============================================================================
-# LLM PARAMETERS
-# ============================================================================
 
 TEMPERATURE = 0
 # TOP-K = 0.9
-
-# ============================================================================
-# DATA PATHS (with environment variable support)
-# ============================================================================
 
 # Base data directory
 DATA_DIR = Path(os.getenv("DATA_DIR", "data"))
 PROCESS_DATA_DIR = DATA_DIR / "process_data"
 
-# Input files
+# Input file paths
 INTERACTIONS_PATH = str(PROCESS_DATA_DIR / "processed_interactions.json")
 GROUND_TRUTH_PATH = str(PROCESS_DATA_DIR / "processed_ground_truths.json")
 
@@ -62,13 +38,8 @@ RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 PROMPTS_DIR = Path("src/prompts")
 
 
-# ============================================================================
-# VALIDATION
-# ============================================================================
 
 def validate_config() -> bool:
-    """Validate that all required files exist"""
-    from src.utils.error_handler import validate_or_error, ConfigError
     
     validate_or_error(
         Path(INTERACTIONS_PATH).exists(),
@@ -87,5 +58,14 @@ def validate_config() -> bool:
         ConfigError,
         f"Prompts directory not found: {PROMPTS_DIR}"
     )
+
+    for category in CATEGORIES.keys():
+        for strategy in STRATEGIES:
+            prompt_path = PROMPTS_DIR / category / f"{strategy}.txt"
+            validate_or_error(
+                prompt_path.exists(),
+                ConfigError,
+                f"Prompt not found: {prompt_path}"
+            )
     
     return True
