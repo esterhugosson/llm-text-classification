@@ -29,7 +29,7 @@ PROCESS_DATA_DIR = DATA_DIR / "process_data"
 
 # Input file paths
 INTERACTIONS_PATH = str(PROCESS_DATA_DIR / "processed_interactions.json")
-GROUND_TRUTH_PATH = str(PROCESS_DATA_DIR / "processed_ground_truths.json")
+GROUND_TRUTH_PATH = str(PROCESS_DATA_DIR / "processed_ground_truths_plus.json")
 
 # Output directory
 RESULTS_DIR = Path("src/results/raw")
