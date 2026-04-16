@@ -2,8 +2,7 @@ from pathlib import Path
 import csv
 from typing import Dict, List
 
-interactions_data_path = Path(__file__).parent / 'dataset' / 'interactions.csv'
-
+interactions_data_path = Path(__file__).parent.parent / 'dataset' / 'interactions.csv'
 def loadInteractions() -> Dict[str, List[Dict]]:
     data = {}
     with open(interactions_data_path, 'r', encoding='utf-8') as f:
@@ -73,16 +72,16 @@ def loadTruths() -> Dict[str, List[Dict]]:
 if __name__ == "__main__":
     import json
 
-    """ interactions = loadInteractions()
-    output_path = Path(__file__).parent / 'processed_interactions.json'
+    interactions = loadInteractions()
+    output_path = Path(__file__).parent / 'processed_interactions_plus.json'
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(interactions, f, indent=2, ensure_ascii=False)
-    print(f"Data saved to {output_path}") """
+    print(f"Data saved to {output_path}") 
 
-    truths = loadTruths()
+    """ truths = loadTruths()
     output_truth_path = Path(__file__).parent / 'processed_ground_truths_plus.json'
     with open(output_truth_path, 'w', encoding='utf-8') as f:
         json.dump(truths, f, indent=2, ensure_ascii=False)
-    print(f"Truth data saved to {output_truth_path}")
+    print(f"Truth data saved to {output_truth_path}") """
 
 

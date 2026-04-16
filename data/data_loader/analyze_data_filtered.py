@@ -4,7 +4,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 
 # Load the processed data
-data_path = Path(__file__).parent.parent / 'process_data' / 'processed_ground_truths.json'
+data_path = Path(__file__).parent.parent / 'process_data' / 'processed_ground_truths_plus.json'
 with open(data_path, 'r', encoding='utf-8') as f:
     data = json.load(f)
 
