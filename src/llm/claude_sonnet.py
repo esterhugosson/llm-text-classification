@@ -19,11 +19,21 @@ class LLMClassifierClaudeSonnet(BaseLLMClassifier):
 
 
     def _call_api(self, messages: List[Dict[str, str]]) -> str:
-        """Call ANTHROPIC API"""
-        completion = self.client.chat.completions.create(
+        system_prompt = None
+        filtered_messages = []
+
+        for msg in messages:
+            if msg["role"] == "system":
+                system_prompt = msg["content"]
+            else:
+                filtered_messages.append(msg)
+
+        response = self.client.messages.create(
             model=self.model,
-            messages=messages,
-            temperature=self.temperature,
+            system=system_prompt,  
+            messages=filtered_messages,
             max_tokens=self.max_tokens,
+            temperature=self.temperature,
         )
-        return completion.choices[0].message.content
+
+        return response.content[0].text

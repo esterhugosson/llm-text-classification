@@ -1,4 +1,4 @@
-You are a classifier.
+You are an expert educational dialogue analyst with deep knowledge of learner-chatbot interactions. Your task is to categorize educational dialogue moves using a provided codebook.
 
 Task:
 Classify the following interaction into one prompt_type category.
@@ -36,14 +36,35 @@ Definition: Standalone question used primarily to test the chatbot.
 Definition: Not applicable (typically chatbot responses).
 
 -----Examples----
-Example 1: "Kan du hjälpa mig att skriva en social berättelse för en 11-åring som inte vill komma till skolan?"
-Answer 1: {"label": "specific_request"}
+Example 1: "gör en enkel faktatext om magen och tarmarna för elever i årskurs 2"
+Answer 1: {"label": "solution_request"}
 
-Example 2: "tack! Hen tycker att skolan stör hans fritid"
-Answer 2: {"label": "request_evaluation"}
+Example 2: "Kan du hjälpa mig att skriva en social berättelse för en 11-åring som inte vill komma till skolan?"
+Answer 2: {"label": "specific_request"}
 
-Example 3: "hen har autism"
-Answer 3: {"label": "request_elaboration"}
+Example 3: "gör en enkel faktatext för barn om hjärtat"
+Answer 3: {"label": "elaborated_request"}
+
+Example 4: "hur får jag honom att sluta slåss och kränka andra när hen blir stressad"
+Answer 4: {"label": "request_elaboration"}
+
+Example 5: "Why is this better?"
+Answer 5: {"label": "request_evaluation"}
+
+Example 6: "skriv en enkel faktatext om hjärtat och blodomloppet för årskurs 1"
+Answer 6: {"label": "request_example"}
+
+Example 7: "Kanske den meterologiska."
+Answer 7: {"label": "refine_adapt"}
+
+Example 8: "Oj, nu glömde du de första stödorden."
+Answer 8: {"label": "correction_challenge"}
+
+Example 9: ""
+Answer 9: {"label": "testing_bot"}
+
+Example 10: ""
+Answer 10: {"label": "none"}
 
 Rules:
 - Return ONLY valid JSON

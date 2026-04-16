@@ -22,7 +22,7 @@ class BaseLLMClassifier(ABC):
         
         Args:
             model: Model identifier (e.g., "gpt-4o", "claude-sonnet-4-6")
-            temperature: Sampling temperature (0.0 to 2.0)
+            temperature: Sampling temperature (0.0)
             max_tokens: Maximum tokens in response
             system_prompt: System message for the classifier
         """

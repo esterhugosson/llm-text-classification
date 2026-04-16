@@ -1,4 +1,4 @@
-You are a classifier.
+You are an expert educational dialogue analyst with deep knowledge of learner-chatbot interactions. Your task is to categorize educational dialogue moves using a provided codebook.
 
 Task:
 Classify the following interaction into one response_substance category.
@@ -18,7 +18,7 @@ Definition: No substantive response of this type.
 Example 1: "Hjärtat och blodomloppet är centrala komponenter i det kardiovaskulära systemet, vilket ansvarar för att transportera blod genom kroppen. Här är en översikt över hur detta system fungerar:\n\n### Hjärtat\nHjärtat är en muskulär pump som består av fyra kammare:\n1. **Höger förmak** - Tar emot syrefattigt blod från kroppen genom de övre och nedre hålvenerna.\n2. **Höger kammare** - Pumpas syrefattigt blod till lungorna genom lungartärerna för att syresättas.\n3. **Vänster förmak** - Tar emot syrerikt blod från lungorna genom lungvenerna.\n4. **Vänster kammare** - Pumpas syrerikt blod ut till kroppens organ och vävnader genom aortan.\n\n### Blodomloppet\nBlodomloppet kan delas in i två huvuddelar:\n\n1. **Lilla kretsloppet (lungcirkulationen)**:\n   - Syrefattigt blod pumpas från höger kammare till lungorna via lungartärerna.\n   - I lungorna sker gasutbytet där koldioxid lämnas av och syre upptas.\n   - Syrerikt blod återvänder till vänster förmak via lungvenerna.\n\n2. **Stora kretsloppet (systemcirkulationen)**:\n   - Syrerikt blod pumpas från vänster kammare ut i kroppen via aortan.\n   - Blodet levererar syre och näringsämnen till kroppens celler och tar upp koldioxid och avfallsprodukter.\n   - Syrefattigt blod returneras till höger förmak via vener som övergår i de övre och nedre hålvenerna.\n\n### Viktiga funktioner:\n- **Transport**: Blodet transporterar syre, koldioxid, näringsämnen, hormoner och avfallsprodukter.\n- **Reglering**: Hjälper till med regleringen av kroppens temperatur, pH och vätskevolym.\n- **Skydd**: Innehåller vita blodkroppar och antikroppar som skyddar mot infektioner.\n\n### Blodkärl\n- **Artärer**: Leder blod bort från hjärtat (ofta syrerikt blod).\n- **Vener**: Leder blod tillbaka till hjärtat (ofta syrefattigt blod).\n- **Kapillärer**: Små, tunna kärl där utbyte av gaser, näringsämnen och avfallsprodukter sker mellan blod och celler.\n\nDet kardiovaskulära systemet är avgörande för kroppens överlevnad och funktion, och det förser alla kroppens delar med syre och näringsämnen samtidigt som det avlägsnar avfallsprodukter."
 Answer 1: {"label": "elaborate"}
 
-Example 2: 
+Example 2: "Let's explore this topic together. English-speaking countries span the globe and include diverse cultures and histories. What specific aspects are you interested in discussing?"
 Answer 2: {"label": "refines_previous"}
 
 Example 3: "läsförståelse om hjärtat för årskurs 2"
