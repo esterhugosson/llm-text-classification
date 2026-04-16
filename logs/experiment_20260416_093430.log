@@ -1,0 +1,4 @@
+2026-04-16 09:34:30 - src.experiments.runner - INFO - [runner.py:77] - Configuration validated successfully
+2026-04-16 09:34:30 - src.experiments.runner - INFO - [runner.py:90] - Starting experiment with models=['claude', 'gpt4o'], categories=['is_followup']
+2026-04-16 09:35:03 - src.experiments.runner - INFO - [runner.py:103] - Experiment completed!
+2026-04-16 09:35:03 - src.experiments.runner - INFO - [runner.py:104] - Results saved to: src/results/raw/results_20260416_093503.json

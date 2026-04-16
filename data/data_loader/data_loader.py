@@ -29,7 +29,7 @@ def loadInteractions() -> Dict[str, List[Dict]]:
 
 # user_id;thread_id;Title;assistant_name;message_id;Text;Created;Created_dt;turn_index_in_thread;speaker;cps_behavior;response_substance;response_stance;interactional_move;prompt_type;is_followup
 
-truth_data_path = Path(__file__).parent.parent / 'ground_truth' / 'ground_truth_2.csv'
+truth_data_path = Path(__file__).parent.parent / 'ground_truth' / 'Manually_coded_plus_2.csv'
 
 def loadTruths() -> Dict[str, List[Dict]]:
     data = {}
@@ -54,7 +54,8 @@ def loadTruths() -> Dict[str, List[Dict]]:
                 'response_stance': row.get('response_stance', '').strip(),
                 'interactional_move': row.get('interactional_move', '').strip(),
                 'prompt_type': row.get('prompt_type', '').strip(),
-                'is_followup': row.get('is_followup', '').strip().upper() == 'TRUE'
+                'OLD_is_followup': row.get('OLD_is_followup', '').strip().upper() == 'SANT',
+                'is_followup': row.get('is_followup', '').strip().upper() == 'SANT'
             }
             data[thread_id].append(interaction)
     
@@ -79,7 +80,7 @@ if __name__ == "__main__":
     print(f"Data saved to {output_path}") """
 
     truths = loadTruths()
-    output_truth_path = Path(__file__).parent / 'processed_ground_truths_2.json'
+    output_truth_path = Path(__file__).parent / 'processed_ground_truths_plus.json'
     with open(output_truth_path, 'w', encoding='utf-8') as f:
         json.dump(truths, f, indent=2, ensure_ascii=False)
     print(f"Truth data saved to {output_truth_path}")
