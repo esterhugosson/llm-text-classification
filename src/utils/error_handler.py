@@ -1,6 +1,4 @@
-import functools
 import traceback
-from typing import Callable, Any
 from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
@@ -35,6 +33,3 @@ def validate_or_error(condition: bool, error_class: type, message: str) -> None:
     if not condition:
         logger.error(f"Validation failed: {message}")
         raise error_class(message)
-
-def handle_errors():
-    pass

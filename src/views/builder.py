@@ -8,7 +8,7 @@ from src.experiments.stats import ExperimentStats
 class ExperimentViewBuilder:
     """Handles all console output and formatting for the experiment"""
     
-    def print_experiment_header(self, models: List[str], categories: List[str], timestamp: Optional[datetime] = None):
+    def print_experiment_header(self, models: List[str], categories: List[tuple], timestamp: Optional[datetime] = None):
         """Print the main experiment header"""
         if timestamp is None:
             timestamp = datetime.now()
@@ -17,7 +17,7 @@ class ExperimentViewBuilder:
         print(f"  STARTING EXPERIMENT")
         print(f"  {timestamp.strftime('%Y-%m-%d %H:%M:%S')}")
         print(f"  Models: {', '.join(models)}")
-        print(f"  Categories: {', '.join(categories)}")
+        print(f"  Categories: {', '.join([cat[0] for cat in categories])}")
         print(f"{'='*70}\n")
     
     def print_model_header(self, model_name: str, model_idx: int, total_models: int):

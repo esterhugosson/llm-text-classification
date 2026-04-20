@@ -17,7 +17,10 @@ CATEGORIES = {
     "is_followup": None,       # All speakers
 }
 
-STRATEGIES = ["basic", "few_shot"]
+STRATEGIES = {
+    "basic": "basic", 
+    "few_shot": "few_shot"
+}
 
 TEMPERATURE = 0
 TOP_K = 1

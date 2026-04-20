@@ -1,0 +1,4 @@
+2026-04-20 14:56:51 - src.experiments.runner - INFO - [runner.py:63] - Configuration validated successfully
+2026-04-20 14:56:51 - src.experiments.runner - INFO - [runner.py:78] - Starting experiment with models=['llama3'], categories=['is_followup'], strategies=['few_shot']
+2026-04-20 14:56:51 - src.experiments.runner - INFO - [runner.py:111] - Experiment completed!
+2026-04-20 14:56:51 - src.experiments.runner - INFO - [runner.py:112] - Results saved to: src\results\raw\results_20260420_145651.json

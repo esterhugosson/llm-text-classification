@@ -51,15 +51,3 @@ class ExperimentStats:
         if self.total_predictions == 0:
             return 0.0
         return self.successful_predictions / self.total_predictions
-    
-    def print_summary(self):
-        """Print summary statistics"""
-        print(f"\n{'='*70}")
-        print(f"STATISTICS")
-        print(f"{'='*70}\n")
-        print(f"  Total predictions:     {self.total_predictions}")
-        print(f"  ✓ Successful:          {self.successful_predictions}")
-        print(f"  ✗ Failed:              {self.failed_predictions}")
-        print(f"  ⊘ Skipped:             {self.skipped_messages}")
-        print(f"  Overall accuracy:      {self.get_overall_accuracy():.2%}")
-        print(f"\n{'='*70}\n")

@@ -5,7 +5,6 @@ from src.llm.gpt_4o import LLMClassifierGpt4o
 from src.llm.claude_sonnet import LLMClassifierClaudeSonnet
 from src.llm.llama_3 import LLMClassifierLlama3
 
-from src.experiments.config import MODELS, CATEGORIES, STRATEGIES, INTERACTIONS_PATH, GROUND_TRUTH_PATH
 from src.experiments.stats import ExperimentStats
 
 from src.data.loaders.ground_truth_loader import load_ground_truths
@@ -25,15 +24,13 @@ logger = get_logger(__name__)
 # Main experiment orchestration
 
 class Experiment:
-    """Main experiment runner"""
-    
     def __init__(
         self,
-        interactions_path: str = INTERACTIONS_PATH,
-        ground_truth_path: str = GROUND_TRUTH_PATH,
+        interactions_path,
+        ground_truth_path,
         message_limit: Optional[int] = None,
     ):
-        """Initialize experiment with data paths"""
+        # Data paths and limits
         self.interactions_path = interactions_path
         self.ground_truth_path = ground_truth_path
         self.message_limit = message_limit
@@ -53,10 +50,8 @@ class Experiment:
         logger.info("Starting data loading...")
         
         try:
-            # Load interactions
+            # Load interactions and ground truths
             self.interactions = load_interactions(self.interactions_path)
-            
-            # Load ground truths
             self.ground_truths = load_ground_truths(self.ground_truth_path)
             
             # Initialize matcher
@@ -68,7 +63,7 @@ class Experiment:
                 logger.error(msg)
                 raise DataLoadError(msg) from e
             
-            # Count and validate
+            # Count and validate messages and ground truths
             total_messages = sum(len(msgs) for msgs in self.interactions.values())
             
             if total_messages == 0:
@@ -79,8 +74,8 @@ class Experiment:
                 msg = "No ground truth labels found"
                 logger.warning(msg)
             
-            logger.info(f"✓ Data loaded: {len(self.interactions)} threads, {total_messages} messages")
-            logger.info(f"✓ Ground truth: {len(self.ground_truths)} threads")
+            logger.info(f"Data loaded: {len(self.interactions)} threads, {total_messages} messages")
+            logger.info(f"Ground truth: {len(self.ground_truths)} threads")
             
         except DataLoadError:
             # Already logged by loader
@@ -112,14 +107,9 @@ class Experiment:
     def run(
         self,
         models: Optional[List[str]] = None,
-        categories: Optional[List[str]] = None,
+        categories: Optional[List[tuple]] = None,
+        strategies: Optional[List[str]] = None
     ) -> str:
-        
-        # Use all if not specified
-        if models is None:
-            models = list(MODELS.keys())
-        if categories is None:
-            categories = list(CATEGORIES.keys())
         
         # Load data
         try:
@@ -127,6 +117,8 @@ class Experiment:
         except DataLoadError as e:
             logger.error(f"Cannot proceed: {str(e)}")
             raise
+
+        print(models, categories, strategies)
         
         # Print header using view
         self.view.print_experiment_header(models, categories, datetime.now())
@@ -155,18 +147,15 @@ class Experiment:
                 log_exception(e, f"in pipeline creation for {model_name}")
                 continue
             
-            for cat_idx, (category, role_filter) in enumerate(CATEGORIES.items(), 1):
-                # Skip if not in requested categories
-                if category not in categories:
-                    continue
-                
+            for cat_idx, (category, role_filter) in enumerate(categories, 1):
+
                 role_label = {0: "teacher", 1: "chatbot", None: "all"}.get(
                     role_filter, role_filter
                 )
-                self.view.print_category_header(category, cat_idx, len(CATEGORIES), role_label)
+                self.view.print_category_header(category, cat_idx, len(categories), role_label)
                 
-                for strat_idx, strategy in enumerate(STRATEGIES, 1):
-                    self.view.print_strategy_header(strategy, strat_idx, len(STRATEGIES))
+                for strat_idx, strategy in enumerate(strategies, 1):
+                    self.view.print_strategy_header(strategy, strat_idx, len(strategies))
                     
                     try:
                         self._classify_category(model_name, category, role_filter, strategy, pipeline)

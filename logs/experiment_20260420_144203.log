@@ -1,0 +1,2 @@
+2026-04-20 14:42:03 - src.experiments.runner - INFO - [runner.py:63] - Configuration validated successfully
+2026-04-20 14:42:03 - src.experiments.runner - INFO - [runner.py:78] - Starting experiment with models=['llama3'], categories=['interactional_move'], strategies=['basic']

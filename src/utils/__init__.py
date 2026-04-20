@@ -6,7 +6,6 @@ from src.utils.error_handler import (
     DataLoadError,
     ClassificationError,
     ConfigError,
-    handle_errors,
     log_exception,
     validate_or_error
 )

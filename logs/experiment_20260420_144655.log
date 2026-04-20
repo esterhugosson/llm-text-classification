@@ -1,0 +1,4 @@
+2026-04-20 14:46:55 - src.experiments.runner - INFO - [runner.py:63] - Configuration validated successfully
+2026-04-20 14:46:55 - src.experiments.runner - INFO - [runner.py:78] - Starting experiment with models=['llama3'], categories=['interactional_move'], strategies=['basic']
+2026-04-20 14:46:56 - src.experiments.runner - INFO - [runner.py:111] - Experiment completed!
+2026-04-20 14:46:56 - src.experiments.runner - INFO - [runner.py:112] - Results saved to: src\results\raw\results_20260420_144656.json
