@@ -125,10 +125,13 @@ class Experiment:
         self.view.print_experiment_header(models, categories, datetime.now())
         
         # Loop: model → category → strategy → messages
+        # 1: MODEL
         for model_idx, model_name in enumerate(models, 1):
+            # Print header
             self.view.print_model_header(model_name, model_idx, len(models))
             
             try:
+                # Get regarding classifier
                 classifier = self._get_classifier(model_name)
             except ClassificationError as e:
                 logger.error(f"Skipping model {model_name}: {str(e)}")
@@ -148,17 +151,23 @@ class Experiment:
                 log_exception(e, f"in pipeline creation for {model_name}")
                 continue
             
+            # 2: CATEGORY
             for cat_idx, (category, role_filter) in enumerate(categories, 1):
 
+                # For the the role filter, give them a name
                 role_label = {0: "teacher", 1: "chatbot", None: "all"}.get(
-                    role_filter, role_filter
+                    role_filter, role_filter 
                 )
+                # Print header
                 self.view.print_category_header(category, cat_idx, len(categories), role_label)
                 
+                # 3: STRATEGY
                 for strat_idx, strategy in enumerate(strategies, 1):
+                    # Print header
                     self.view.print_strategy_header(strategy, strat_idx, len(strategies))
                     
                     try:
+                        # 4: MESSAGES
                         self._classify_category(model_name, category, role_filter, strategy, pipeline)
                     except ClassificationError as e:
                         logger.error(f"Error classifying {category} with {strategy}: {str(e)}")
@@ -171,8 +180,10 @@ class Experiment:
         output_path = self._finalize()
         return output_path
     
+    # Helper method for classiffication of specific messages 
     def _classify_category(self, model_name, category, role_filter, strategy, pipeline):
         try:
+            # Using the pip
             results, category_count = pipeline.classify_category(
                 interactions=self.interactions,
                 category=category,

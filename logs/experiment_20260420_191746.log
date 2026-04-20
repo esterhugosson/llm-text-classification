@@ -1,0 +1,4 @@
+2026-04-20 19:17:46 - src.experiments.runner - INFO - [runner.py:63] - Configuration validated successfully
+2026-04-20 19:17:46 - src.experiments.runner - INFO - [runner.py:78] - Starting experiment with models=['llama3'], categories=['prompt_type', 'interactional_move', 'cps_behavior', 'is_followup'], strategies=['basic', 'few_shot']
+2026-04-20 19:17:46 - src.experiments.runner - INFO - [runner.py:100] - Experiment completed!
+2026-04-20 19:17:46 - src.experiments.runner - INFO - [runner.py:101] - Results saved to: src\results\raw\results_20260420_191746.json

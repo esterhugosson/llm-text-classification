@@ -3,11 +3,15 @@
 from typing import Dict, Optional, Tuple, List
 from src.data.models.data_models import Message, PredictionResult
 from src.pipeline.filter import InteractionFilter
+from src.utils.logger import get_logger
+
+logger = get_logger(__name__)
 
 
 class ClassificationPipeline:
     """Handles the classification of messages"""
     
+    # Initializes the classifier, the ground truth matcher and the loader for the prompts 
     def __init__(self, classifier, matcher, prompt_loader):
         """
         Args:
@@ -46,20 +50,19 @@ class ClassificationPipeline:
             true_label = self.matcher.get_label(msg.thread_id, msg.message_id, category)
             print(f"True label for thread {msg.thread_id}, message {msg.message_id}, category {category}: {true_label}")
             if true_label is None:
-                # ABORT MISSIONA
+                logger.info("No ground truth to compare with, no classification done")
                 return None # No ground truth for this category
             
-            # Classify
+            # LLM classify message based on prompt and the message's content.
             prediction = self.classifier.classify(prompt, msg.text)
             predicted_label = prediction.get("label")
-            print(f"+++++")
-            print(f"Predicted label: {predicted_label}, True label: {true_label}")
-            print(f"+++++")
             
             # Check if valid
             if predicted_label is None or predicted_label == "ERROR":
+                logger.error("Error making prediction")
                 predicted_label = None
             
+            # Name of chatbot  
             assistant_name = self.matcher.get_assistant_name(msg.thread_id, msg.message_id)
 
             # Normalize both to string and lowercase (handle boolean values)
@@ -114,52 +117,44 @@ class ClassificationPipeline:
             (list of PredictionResult, count of classified messages)
         """
         
-        msg_filter = InteractionFilter(required_role=role_filter, min_text_length=10)
+        message_filter = InteractionFilter(required_role=role_filter, min_text_length=10)
         results = []
-        category_count = 0
         
         # Loop through all messages
         for thread_id, messages_data in interactions.items():
-            for msg_data in messages_data:
-                msg_id = msg_data.get("id")
-                text = msg_data.get("text", "").strip()
-                msg_role = msg_data.get("role")
+            for message_data in messages_data:
+                # Extract message information to create Message object
+                message_id = message_data.get("id")
+                text = message_data.get("text", "").strip()
+                message_role = message_data.get("role")
                 
                 # Create Message object
-                msg = Message(
+                message = Message(
                     thread_id=thread_id,
-                    message_id=msg_id,
+                    message_id=message_id,
                     text=text,
-                    role=msg_role,
+                    role=message_role,
                 )
                 
                 # Use filter to check if message should be classified
-                if not msg_filter.allow(msg):
+                if not message_filter.allow(message):
                     continue
-
-                print(f"-------")
-                print(f"-------")
-                print(f"Classifying thread {thread_id}, message {msg_id} with role {msg_role}")
-                print(f"-------")
-                print(f"-------")
                 
                 # Classify
-                result = self.classify_message(msg, category, strategy, model_name)
-
-                print(f"Result for thread {thread_id}, message {msg_id}: {result}")
+                result = self.classify_message(message, category, strategy, model_name)
                 
                 if result is None:
+                    logger.info("No result from the classification process for message:", message_id)
                     continue
                 
                 results.append(result)
-                category_count += 1
                 
                 # Check limit per category
-                if message_limit and category_count >= message_limit:
+                if message_limit and len(results) >= message_limit:
                     break
             
-            # Check limit per category
-            if message_limit and category_count >= message_limit:
-                break # Exit outer loop as well
+            # Check limit per category (I know, repetitive, but a must to break out of both loops)
+            if message_limit and len(results) >= message_limit:
+                break
         
-        return results, category_count
+        return results, len(results)
