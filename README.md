@@ -19,6 +19,9 @@ python -m src --test
 
 # Run with custom options
 python -m src --limit 5 --categories response_substance --models gpt4o
+
+# Run metrics evauation
+python -m src.evaluation
 ```
 
 ### Output
