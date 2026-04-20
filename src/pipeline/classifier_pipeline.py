@@ -44,12 +44,17 @@ class ClassificationPipeline:
             
             # Get true label from ground truth
             true_label = self.matcher.get_label(msg.thread_id, msg.message_id, category)
+            print(f"True label for thread {msg.thread_id}, message {msg.message_id}, category {category}: {true_label}")
             if true_label is None:
-                return None  # No ground truth for this category
+                # ABORT MISSIONA
+                return None # No ground truth for this category
             
             # Classify
             prediction = self.classifier.classify(prompt, msg.text)
             predicted_label = prediction.get("label")
+            print(f"+++++")
+            print(f"Predicted label: {predicted_label}, True label: {true_label}")
+            print(f"+++++")
             
             # Check if valid
             if predicted_label is None or predicted_label == "ERROR":
@@ -85,27 +90,6 @@ class ClassificationPipeline:
             print(f"Error classifying msg {msg.message_id}: {e}")
             return None
     
-    def classify_batch(
-        self,
-        messages: list[Message],
-        category: str,
-        strategy: str,
-        model_name: str
-    ) -> list[PredictionResult]:
-        """
-        Classify a batch of messages
-        
-        Returns:
-            List of PredictionResult objects
-        """
-        results = []
-        for msg in messages:
-            result = self.classify_message(msg, category, strategy, model_name)
-            if result is not None:
-                results.append(result)
-        
-        return results
-    
     def classify_category(
         self,
         interactions: Dict[str, List[Dict]],
@@ -129,6 +113,7 @@ class ClassificationPipeline:
         Returns:
             (list of PredictionResult, count of classified messages)
         """
+        
         msg_filter = InteractionFilter(required_role=role_filter, min_text_length=10)
         results = []
         category_count = 0
@@ -148,12 +133,20 @@ class ClassificationPipeline:
                     role=msg_role,
                 )
                 
-                # Use filter to check if message passes
+                # Use filter to check if message should be classified
                 if not msg_filter.allow(msg):
                     continue
+
+                print(f"-------")
+                print(f"-------")
+                print(f"Classifying thread {thread_id}, message {msg_id} with role {msg_role}")
+                print(f"-------")
+                print(f"-------")
                 
                 # Classify
                 result = self.classify_message(msg, category, strategy, model_name)
+
+                print(f"Result for thread {thread_id}, message {msg_id}: {result}")
                 
                 if result is None:
                     continue

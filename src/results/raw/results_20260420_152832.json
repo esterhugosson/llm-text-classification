@@ -1,0 +1,15 @@
+[
+  {
+    "thread_id": "thread_NOSZtw85ib76uShXy8gAwl0d",
+    "message_id": 2389,
+    "assistant_name": "ReflektoBot",
+    "text": "What have you learned  about me from our conversation,",
+    "category": "is_followup",
+    "strategy": "few_shot",
+    "model": "llama3",
+    "role": 0,
+    "true_label": true,
+    "predicted_label": "false",
+    "match": false
+  }
+]

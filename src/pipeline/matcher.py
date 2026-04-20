@@ -1,13 +1,15 @@
-# Ground truth lookup
+# Ground truth matcher, to get the "true"(human annotated) label for chosen interaction more easy
 
 class GroundTruthMatcher:
+
     def __init__(self, ground_truths):
-        
         self.lookup = self._build_lookup(ground_truths)
         self.ground_truths = ground_truths
 
 
+    # Build a easy 
     def _build_lookup(self, ground_truths) :
+        
         # Build lookup: (thread_id, message_id) -> true_labels dict
         ground_truth_lookup = {}
         for thread_id, messages in ground_truths.items():
@@ -37,3 +39,17 @@ class GroundTruthMatcher:
         if not msg:
             return None
         return msg.get("assistant_name")
+
+
+    def debug(self):
+        print(" ")
+        print(" ")
+        print(" ")
+        print(" ")
+        print(" ")
+        print("THE LOOKUP LOOKS", self.lookup)
+        print(" ")
+        print(" ")
+        print(" ")
+        print(" ")
+        print(" ")

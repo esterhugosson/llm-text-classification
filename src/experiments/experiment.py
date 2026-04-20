@@ -54,7 +54,7 @@ class Experiment:
             self.interactions = load_interactions(self.interactions_path)
             self.ground_truths = load_ground_truths(self.ground_truth_path)
             
-            # Initialize matcher
+            # Run matcher which will match messages in interactions to existed classified ground truths.
             try:
                 self.matcher = GroundTruthMatcher(self.ground_truths)
                 logger.debug("Ground truth matcher initialized")
@@ -119,6 +119,7 @@ class Experiment:
             raise
 
         print(models, categories, strategies)
+
         
         # Print header using view
         self.view.print_experiment_header(models, categories, datetime.now())
