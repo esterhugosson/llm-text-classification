@@ -1,0 +1,37 @@
+2026-04-21 13:30:29 - root - INFO - [runner.py:63] - Configuration validated successfully
+2026-04-21 13:30:29 - root - INFO - [runner.py:78] - Starting experiment with models=['llama3'], categories=['is_followup'], strategies=['few_shot']
+2026-04-21 13:30:29 - src.experiments.experiment - INFO - [experiment.py:50] - Starting data loading...
+2026-04-21 13:30:29 - src.data.loaders.interaction_loader - INFO - [interaction_loader.py:55] - ✓ Loaded interactions: 2 threads
+2026-04-21 13:30:29 - src.data.loaders.ground_truth_loader - INFO - [ground_truth_loader.py:52] - [DONE] Loaded ground truth: 29 threads
+2026-04-21 13:30:29 - src.experiments.experiment - INFO - [experiment.py:77] - Data loaded: 2 threads, 26 messages
+2026-04-21 13:30:29 - src.experiments.experiment - INFO - [experiment.py:78] - Ground truth: 29 threads
+2026-04-21 13:30:29 - src.pipeline.classifier_pipeline - INFO - [classifier_pipeline.py:147] - No result from the classification process for message: 1
+2026-04-21 13:30:29 - src.pipeline.classifier_pipeline - INFO - [classifier_pipeline.py:147] - No result from the classification process for message: 2
+2026-04-21 13:30:29 - src.pipeline.classifier_pipeline - INFO - [classifier_pipeline.py:147] - No result from the classification process for message: 3
+2026-04-21 13:30:29 - src.pipeline.classifier_pipeline - INFO - [classifier_pipeline.py:147] - No result from the classification process for message: 4
+2026-04-21 13:30:29 - src.pipeline.classifier_pipeline - INFO - [classifier_pipeline.py:147] - No result from the classification process for message: 5
+2026-04-21 13:30:29 - src.pipeline.classifier_pipeline - INFO - [classifier_pipeline.py:147] - No result from the classification process for message: 6
+2026-04-21 13:30:29 - src.pipeline.classifier_pipeline - INFO - [classifier_pipeline.py:147] - No result from the classification process for message: 9
+2026-04-21 13:30:29 - src.pipeline.classifier_pipeline - INFO - [classifier_pipeline.py:147] - No result from the classification process for message: 10
+2026-04-21 13:30:29 - src.pipeline.classifier_pipeline - INFO - [classifier_pipeline.py:147] - No result from the classification process for message: 11
+2026-04-21 13:30:29 - src.pipeline.classifier_pipeline - INFO - [classifier_pipeline.py:147] - No result from the classification process for message: 12
+2026-04-21 13:30:29 - src.pipeline.classifier_pipeline - INFO - [classifier_pipeline.py:147] - No result from the classification process for message: 13
+2026-04-21 13:30:29 - src.pipeline.classifier_pipeline - INFO - [classifier_pipeline.py:147] - No result from the classification process for message: 14
+2026-04-21 13:30:29 - src.pipeline.classifier_pipeline - INFO - [classifier_pipeline.py:147] - No result from the classification process for message: 47
+2026-04-21 13:30:29 - src.pipeline.classifier_pipeline - INFO - [classifier_pipeline.py:147] - No result from the classification process for message: 48
+2026-04-21 13:30:29 - src.pipeline.classifier_pipeline - INFO - [classifier_pipeline.py:147] - No result from the classification process for message: 53
+2026-04-21 13:30:29 - src.pipeline.classifier_pipeline - INFO - [classifier_pipeline.py:147] - No result from the classification process for message: 54
+2026-04-21 13:30:29 - src.pipeline.classifier_pipeline - INFO - [classifier_pipeline.py:147] - No result from the classification process for message: 55
+2026-04-21 13:30:29 - src.pipeline.classifier_pipeline - INFO - [classifier_pipeline.py:147] - No result from the classification process for message: 56
+2026-04-21 13:30:29 - src.pipeline.classifier_pipeline - INFO - [classifier_pipeline.py:147] - No result from the classification process for message: 99
+2026-04-21 13:30:29 - src.pipeline.classifier_pipeline - INFO - [classifier_pipeline.py:147] - No result from the classification process for message: 100
+2026-04-21 13:30:29 - src.pipeline.classifier_pipeline - INFO - [classifier_pipeline.py:147] - No result from the classification process for message: 101
+2026-04-21 13:30:29 - src.pipeline.classifier_pipeline - INFO - [classifier_pipeline.py:147] - No result from the classification process for message: 102
+2026-04-21 13:30:29 - src.pipeline.classifier_pipeline - INFO - [classifier_pipeline.py:147] - No result from the classification process for message: 115
+2026-04-21 13:30:29 - src.pipeline.classifier_pipeline - INFO - [classifier_pipeline.py:147] - No result from the classification process for message: 116
+2026-04-21 13:30:29 - src.pipeline.classifier_pipeline - INFO - [classifier_pipeline.py:147] - No result from the classification process for message: 7
+2026-04-21 13:30:29 - src.pipeline.classifier_pipeline - INFO - [classifier_pipeline.py:147] - No result from the classification process for message: 8
+2026-04-21 13:30:29 - src.experiments.experiment - INFO - [experiment.py:237] - Results saved successfully to src\results\raw\results_20260421_133029.json
+2026-04-21 13:30:29 - src.experiments.experiment - INFO - [experiment.py:250] - Experiment finalized with 0 results
+2026-04-21 13:30:29 - root - INFO - [runner.py:100] - Experiment completed!
+2026-04-21 13:30:29 - root - INFO - [runner.py:101] - Results saved to: src\results\raw\results_20260421_133029.json

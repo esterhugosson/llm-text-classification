@@ -7,7 +7,8 @@ class GroundTruthMatcher:
         self.ground_truths = ground_truths
 
 
-    # Build a easy 
+    # Method to quickly look up ground truth for a given thread_id and message_id, returns the whole dict for that message, which includes all categories and assistant name if available
+
     def _build_lookup(self, ground_truths) :
         
         # Build lookup: (thread_id, message_id) -> true_labels dict
@@ -33,14 +34,15 @@ class GroundTruthMatcher:
             return None
         return msg.get(category)
     
+    # Assistant meaning the chosen chatbot used during interaction
     def get_assistant_name(self, thread_id, message_id):
-        """Get assistant name used during data collection"""
         msg = self.get_truth(thread_id, message_id)
         if not msg:
             return None
         return msg.get("assistant_name")
 
 
+    # Just a temporary debug method
     def debug(self):
         print(" ")
         print(" ")

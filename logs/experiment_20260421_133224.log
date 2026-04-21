@@ -1,0 +1,11 @@
+2026-04-21 13:32:24 - root - INFO - [runner.py:63] - Configuration validated successfully
+2026-04-21 13:32:24 - root - INFO - [runner.py:78] - Starting experiment with models=['llama3'], categories=['is_followup'], strategies=['few_shot']
+2026-04-21 13:32:24 - src.experiments.experiment - INFO - [experiment.py:50] - Starting data loading...
+2026-04-21 13:32:24 - src.data.loaders.interaction_loader - INFO - [interaction_loader.py:55] - ✓ Loaded interactions: 2 threads
+2026-04-21 13:32:24 - src.data.loaders.ground_truth_loader - INFO - [ground_truth_loader.py:52] - [DONE] Loaded ground truth: 29 threads
+2026-04-21 13:32:24 - src.experiments.experiment - INFO - [experiment.py:77] - Data loaded: 2 threads, 26 messages
+2026-04-21 13:32:24 - src.experiments.experiment - INFO - [experiment.py:78] - Ground truth: 29 threads
+2026-04-21 13:32:24 - src.experiments.experiment - INFO - [experiment.py:237] - Results saved successfully to src\results\raw\results_20260421_133224.json
+2026-04-21 13:32:24 - src.experiments.experiment - INFO - [experiment.py:250] - Experiment finalized with 0 results
+2026-04-21 13:32:24 - root - INFO - [runner.py:100] - Experiment completed!
+2026-04-21 13:32:24 - root - INFO - [runner.py:101] - Results saved to: src\results\raw\results_20260421_133224.json

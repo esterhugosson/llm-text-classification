@@ -104,19 +104,15 @@ Examples:
 
     except DataLoadError as e:
         logger.error(f"Data loading failed: {e}")
-        print(f"Data loading failed: {e}")
         return 1
     except ClassificationError as e:
         logger.error(f"Classification failed: {e}")
-        print(f"Classification failed: {e}")
         return 1
     except FileNotFoundError as e:
         logger.error(f"File not found: {e}")
-        print(f"File not found: {e}")
         return 1
     except Exception as e:
         log_exception(e, "in experiment execution")
-        print(f"Unexpected error: {e}")
         return 1
 
 

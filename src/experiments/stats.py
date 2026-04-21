@@ -11,7 +11,6 @@ class ExperimentStats:
     total_predictions: int = 0
     successful_predictions: int = 0
     failed_predictions: int = 0
-    skipped_messages: int = 0
     
     # Per-model stats
     per_model: Dict[str, dict] = field(default_factory=dict)
@@ -46,8 +45,3 @@ class ExperimentStats:
         if match:
             self.per_category[category]["correct"] += 1
     
-    def get_overall_accuracy(self) -> float:
-        """Get overall accuracy"""
-        if self.total_predictions == 0:
-            return 0.0
-        return self.successful_predictions / self.total_predictions

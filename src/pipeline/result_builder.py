@@ -14,25 +14,11 @@ class ResultBuilder:
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
         self.results: List[PredictionResult] = []
-    
+
     def add_result(self, result: PredictionResult):
-        """Add a single result"""
         self.results.append(result)
     
-    def add_results(self, results: List[PredictionResult]):
-        """Add multiple results"""
-        self.results.extend(results)
-    
     def save(self, filename: str = None) -> str:
-        """
-        Save results to JSON file
-        
-        Args:
-            filename: Custom filename (default: results_TIMESTAMP.json)
-            
-        Returns:
-            Path to saved file
-        """
         if filename is None:
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
             filename = f"results_{timestamp}.json"
@@ -47,15 +33,3 @@ class ResultBuilder:
             json.dump(data, f, indent=2, ensure_ascii=False)
         
         return str(output_path)
-    
-    def get_stats(self) -> dict:
-        """Get statistics about results"""
-        total = len(self.results)
-        matches = sum(1 for r in self.results if r.match)
-        accuracy = matches / total if total > 0 else 0
-        
-        return {
-            "total": total,
-            "matches": matches,
-            "accuracy": accuracy,
-        }

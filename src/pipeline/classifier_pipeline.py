@@ -48,9 +48,8 @@ class ClassificationPipeline:
             
             # Get true label from ground truth
             true_label = self.matcher.get_label(msg.thread_id, msg.message_id, category)
-            print(f"True label for thread {msg.thread_id}, message {msg.message_id}, category {category}: {true_label}")
             if true_label is None:
-                logger.info("No ground truth to compare with, no classification done")
+                # logger.info("No ground truth to compare with, no classification done")
                 return None # No ground truth for this category
             
             # LLM classify message based on prompt and the message's content.
@@ -90,7 +89,7 @@ class ClassificationPipeline:
             return result
         
         except Exception as e:
-            print(f"Error classifying msg {msg.message_id}: {e}")
+            logger.error(f"Error classifying msg {msg.message_id}: {e}")
             return None
     
     def classify_category(
@@ -117,7 +116,7 @@ class ClassificationPipeline:
             (list of PredictionResult, count of classified messages)
         """
         
-        message_filter = InteractionFilter(required_role=role_filter, min_text_length=10)
+        message_filter = InteractionFilter(required_role=role_filter)
         results = []
         
         # Loop through all messages
@@ -136,7 +135,7 @@ class ClassificationPipeline:
                     role=message_role,
                 )
                 
-                # Use filter to check if message should be classified
+                # Use filter to check if message should be classified within this category, if not, skip it
                 if not message_filter.allow(message):
                     continue
                 
@@ -144,7 +143,6 @@ class ClassificationPipeline:
                 result = self.classify_message(message, category, strategy, model_name)
                 
                 if result is None:
-                    logger.info("No result from the classification process for message:", message_id)
                     continue
                 
                 results.append(result)

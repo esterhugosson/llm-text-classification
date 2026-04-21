@@ -22,7 +22,7 @@ def setup_logger(name: str, level=logging.INFO) -> logging.Logger:
     Returns:
         Configured logger instance
     """
-    logger = logging.getLogger(name)
+    logger = logging.getLogger()
     logger.setLevel(level)
     
     # Prevent duplicate handlers
