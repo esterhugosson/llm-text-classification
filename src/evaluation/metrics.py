@@ -5,6 +5,22 @@ from sklearn.metrics import (
     cohen_kappa_score
 )
 
+def overall_accuracy(df):
+    return df["match"].mean()
+
+def accuracy_by(df, column):
+    return df.groupby(column)["match"].mean()
+
+def accuracy_by_two(df, column, secondColumn):
+    return df.groupby(column, secondColumn)["match"].mean().trim()
+
+def accuracy_pivot(df, row, col):
+    return df.pivot_table(
+        values="match",
+        index=row,
+        columns=col,
+        aggfunc="mean"
+    )
 
 def evaluate(resultsJson):
 
@@ -19,4 +35,4 @@ def evaluate(resultsJson):
         "report": classification_report(y_true, y_pred, output_dict=False)
     }
 
-    return results
+    return y_true, y_pred
