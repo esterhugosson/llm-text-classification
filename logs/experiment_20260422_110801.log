@@ -1,0 +1,11 @@
+2026-04-22 11:08:01 - root - INFO - [runner.py:65] - Configuration validated successfully
+2026-04-22 11:08:01 - root - INFO - [runner.py:80] - Starting experiment with models=['gpt4o'], categories=['cps_behavior'], strategies=['basic', 'few_shot']
+2026-04-22 11:08:01 - src.experiments.experiment - INFO - [experiment.py:50] - Starting data loading...
+2026-04-22 11:08:01 - src.data.loaders.interaction_loader - INFO - [interaction_loader.py:55] - [DONE] Loaded interactions: 409 threads
+2026-04-22 11:08:01 - src.data.loaders.ground_truth_loader - INFO - [ground_truth_loader.py:52] - [DONE] Loaded ground truth: 29 threads
+2026-04-22 11:08:01 - src.experiments.experiment - INFO - [experiment.py:77] - Data loaded: 409 threads, 3576 messages
+2026-04-22 11:08:01 - src.experiments.experiment - INFO - [experiment.py:78] - Ground truth: 29 threads
+2026-04-22 11:10:01 - src.experiments.experiment - INFO - [experiment.py:235] - Results saved successfully to src\results\raw\results_20260422_111001.json
+2026-04-22 11:10:01 - src.experiments.experiment - INFO - [experiment.py:248] - Experiment finalized with 182 results
+2026-04-22 11:10:01 - root - INFO - [runner.py:102] - Experiment completed!
+2026-04-22 11:10:01 - root - INFO - [runner.py:103] - Results saved to: src\results\raw\results_20260422_111001.json

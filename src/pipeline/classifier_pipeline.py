@@ -5,6 +5,7 @@ from src.data.models.data_models import Message, PredictionResult
 from src.pipeline.filter import InteractionFilter
 from src.utils.logger import get_logger
 from src.views.builder import ExperimentViewBuilder
+import time
 
 logger = get_logger(__name__)
 
@@ -44,55 +45,71 @@ class ClassificationPipeline:
         Returns:
             PredictionResult or None if classification failed
         """
-        try:
-            # Get prompt
-            prompt = self.prompt_loader.load_prompt(category, strategy)
-            
-            # Get true label from ground truth
-            true_label = self.matcher.get_label(msg.thread_id, msg.message_id, category)
-            if true_label is None:
-                # logger.info("No ground truth to compare with, no classification done")
-                return None # No ground truth for this category
-            
-            # LLM classify message based on prompt and the message's content.
-            prediction = self.classifier.classify(prompt, msg.text)
-            predicted_label = prediction.get("label")
-            
-            # Check if valid
-            if predicted_label is None or predicted_label == "ERROR":
-                logger.error("Error making prediction")
-                predicted_label = None
-            
-            # Name of chatbot  
-            assistant_name = self.matcher.get_assistant_name(msg.thread_id, msg.message_id)
 
-            # Normalize both to string and lowercase (handle boolean values)
-            pred_normalized = str(predicted_label).lower() if predicted_label is not None else None
-            true_normalized = str(true_label).lower() if true_label is not None else None
-            
-            # Build result
-            result = PredictionResult(
-                thread_id=msg.thread_id,
-                message_id=msg.message_id,
-                assistant_name=assistant_name,
-                text=msg.text[:150],
-                category=category,
-                strategy=strategy,
-                model=model_name,
-                role=msg.role,
-                true_label=true_label,
-                predicted_label=predicted_label,
-                match = (
-                    pred_normalized == true_normalized 
-                    if pred_normalized is not None and true_normalized is not None else False
+        max_retries = 3
+        retry_delay = 1
+
+        for attempt in range(max_retries):
+            try:
+                # Get prompt
+                prompt = self.prompt_loader.load_prompt(category, strategy)
+                
+                # Get true label from ground truth
+                true_label = self.matcher.get_label(msg.thread_id, msg.message_id, category)
+                if true_label is None:
+                    # logger.info("No ground truth to compare with, no classification done")
+                    return None # No ground truth for this category
+                
+                # LLM classify message based on prompt and the message's content.
+                prediction = self.classifier.classify(prompt, msg.text)
+                predicted_label = prediction.get("label")
+                
+                # Check if valid
+                if predicted_label is None or predicted_label == "ERROR":
+                    logger.error("Error making prediction")
+                    predicted_label = None
+                
+                # Name of chatbot  
+                assistant_name = self.matcher.get_assistant_name(msg.thread_id, msg.message_id)
+
+                # Normalize both to string and lowercase (handle boolean values)
+                pred_normalized = str(predicted_label).lower() if predicted_label is not None else None
+                true_normalized = str(true_label).lower() if true_label is not None else None
+                
+                # Build result
+                result = PredictionResult(
+                    thread_id=msg.thread_id,
+                    message_id=msg.message_id,
+                    assistant_name=assistant_name,
+                    text=msg.text,
+                    category=category,
+                    strategy=strategy,
+                    model=model_name,
+                    role=msg.role,
+                    true_label=true_label,
+                    predicted_label=predicted_label,
+                    match = (
+                        pred_normalized == true_normalized 
+                        if pred_normalized is not None and true_normalized is not None else False
+                    )
                 )
-            )
+                
+                return result
             
-            return result
-        
-        except Exception as e:
-            logger.error(f"Error classifying msg {msg.message_id}: {e}")
-            return None
+            except Exception as e:
+                error_str = str(e).lower()
+                is_rate_limit = (
+                    "429" in error_str or 
+                    "rate_limit" in error_str or
+                    "RateLimitError" in e.__class__.__name__
+                )
+                if is_rate_limit and attempt < max_retries - 1:
+                    wait_time = retry_delay * (2 ** attempt)
+                    logger.warning(f"Rate limited. Retrying in {wait_time}s...")
+                    time.sleep(wait_time)
+                    continue
+                logger.error(f"Error classifying msg {msg.message_id}: {e}")
+                return None
     
     def classify_category(
         self,

@@ -34,7 +34,6 @@ Answer 3: {"label": "negotiation_coordination"}
 Example 4: "tack! Hen tycker att skolan stör hans fritid"
 Answer 4: {"label": "team_maintenance"}
 
-[osäker]
 Example 5: "Vad tror du om vädret i Sverige i sommar?"
 Answer 5: {"label": "none"}
 
