@@ -5,10 +5,10 @@ Classify the following interaction into one is_followup category.
 
 Possible labels:
 
-1. True
+1. true
 Definition: Message explicitly builds on a previous response.
 
-2. False
+2. false
 Definition: Message starts a new request or does not depend on prior turns.
 
 -----Examples----
