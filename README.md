@@ -329,6 +329,18 @@ STATISTICS
   response_substance     80.00% (8/10)
 ```
 
+## Results and analysis
+Ideas at the moment:
+- Compare claude and chatgpt obviously (and compare these with ground truth)
+- Which labels does chatgpt and claude use compared to human (similiar to when we checked if the data is balanced)
+  *Could give answer if codebook is clear enough*
+- For each category, check accuracy, macro f1, kappa etc.
+- Compare assistant used in conversation.
+- Compare zero shot vs few shot per category and model
+- Analyse label confusion: which labels does Claude mix up the most?
+- How much does teacher responses and chatbot responses differ regarding classification made by llm?
+- Look if context helps by checking how many rights the llm has on first message compared to later messages in thread -- could mean that llm could be better with context maybe like the human. And if so maybe implement if we have time to let the llm see the whole thread for each message, and test with for example is_followup. 
+
 ## Logging & Debugging
 
 **Console Output:**
