@@ -1,0 +1,17 @@
+category,model,strategy,rows,accuracy
+cps_behavior,claude,basic,91,0.5275
+cps_behavior,claude,few_shot,91,0.4945
+cps_behavior,gpt4o,basic,91,0.5385
+cps_behavior,gpt4o,few_shot,91,0.5055
+interactional_move,claude,basic,98,0.6224
+interactional_move,claude,few_shot,98,0.6122
+interactional_move,gpt4o,basic,98,0.4796
+interactional_move,gpt4o,few_shot,89,0.427
+is_followup,claude,basic,189,0.4762
+is_followup,claude,few_shot,189,0.582
+is_followup,gpt4o,basic,189,0.3386
+is_followup,gpt4o,few_shot,189,0.4339
+prompt_type,claude,basic,91,0.2747
+prompt_type,claude,few_shot,91,0.2967
+prompt_type,gpt4o,basic,91,0.2637
+prompt_type,gpt4o,few_shot,91,0.2967
