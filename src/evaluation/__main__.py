@@ -1,6 +1,7 @@
 from src.data.loaders.results_loader import load_results
 from src.evaluation.metrics import Metrics
 import json
+from pathlib import Path
 
 
 # Files to all data
