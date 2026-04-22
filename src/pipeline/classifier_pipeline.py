@@ -4,6 +4,7 @@ from typing import Dict, Optional, Tuple, List
 from src.data.models.data_models import Message, PredictionResult
 from src.pipeline.filter import InteractionFilter
 from src.utils.logger import get_logger
+from src.views.builder import ExperimentViewBuilder
 
 logger = get_logger(__name__)
 
@@ -22,6 +23,7 @@ class ClassificationPipeline:
         self.classifier = classifier
         self.matcher = matcher
         self.prompt_loader = prompt_loader
+        self.view = ExperimentViewBuilder()
     
     def classify_message(
         self,
@@ -146,6 +148,9 @@ class ClassificationPipeline:
                     continue
                 
                 results.append(result)
+
+                # Display progress using view
+                self.view.print_classification_progress(result.message_id, result.predicted_label, result.match)
                 
                 # Check limit per category
                 if message_limit and len(results) >= message_limit:

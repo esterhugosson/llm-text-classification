@@ -26,9 +26,6 @@ class ExperimentStats:
         self.failed_predictions += 1
         self.total_predictions += 1
     
-    def increment_skip(self):
-        self.skipped_messages += 1
-    
     def add_model_result(self, model: str, category: str, match: bool):
         """Track result for model+category"""
         if model not in self.per_model:

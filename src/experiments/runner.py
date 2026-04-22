@@ -1,12 +1,14 @@
 import sys
+import os
 import argparse
 
 from src.experiments.experiment import Experiment
 from src.experiments.config import MODELS, CATEGORIES, validate_config, INTERACTIONS_PATH, GROUND_TRUTH_PATH, STRATEGIES
-from src.utils.logger import setup_logger
+from src.utils.logger import setup_logger, ignore_library_logs
 from src.utils.error_handler import log_exception, DataLoadError, ClassificationError
 
 logger = setup_logger(__name__)
+ignore_library_logs()
 
 
 def main():

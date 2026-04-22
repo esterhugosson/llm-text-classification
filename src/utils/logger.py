@@ -58,3 +58,9 @@ def setup_logger(name: str, level=logging.INFO) -> logging.Logger:
 def get_logger(name: str) -> logging.Logger:
     """Get or create a logger for a module"""
     return logging.getLogger(name)
+
+def ignore_library_logs():
+    logging.getLogger("httpx").setLevel(logging.WARNING)
+    logging.getLogger("ollama").setLevel(logging.WARNING)
+    logging.getLogger("anthropic").setLevel(logging.WARNING)
+    logging.getLogger("openai").setLevel(logging.WARNING)

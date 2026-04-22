@@ -122,7 +122,8 @@ class Experiment:
 
         
         # Print header using view
-        self.view.print_experiment_header(models, categories, datetime.now())
+        category_names = [cat for cat, role in categories]
+        self.view.print_experiment_header(models, category_names, datetime.now())
         
         # Loop: model → category → strategy → messages
         # 1: MODEL
@@ -193,7 +194,6 @@ class Experiment:
                 message_limit=self.message_limit
             )
             
-            logger.debug(f"Classified {len(results)} messages for {category}")
         except Exception as e:
             msg = f"Pipeline failed for {model_name}/{category}/{strategy}: {str(e)}"
             logger.error(msg)
@@ -215,8 +215,6 @@ class Experiment:
                 else:
                     self.stats.increment_failure()
                 
-                # Display progress using view
-                self.view.print_classification_progress(result.message_id, result.predicted_label, result.match)
             except Exception as e:
                 logger.warning(f"Failed to record result for message {result.message_id}: {str(e)}")
                 # Continue processing other results

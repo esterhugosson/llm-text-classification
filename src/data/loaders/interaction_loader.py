@@ -52,6 +52,6 @@ def load_interactions(path: str) -> Dict[str, List[Dict[str, Any]]]:
                 logger.error(msg)
                 raise DataLoadError(msg)
     
-    logger.info(f"✓ Loaded interactions: {len(interactions_data)} threads")
+    logger.info(f"[DONE] Loaded interactions: {len(interactions_data)} threads")
     return interactions_data
 

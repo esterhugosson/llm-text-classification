@@ -63,7 +63,6 @@ class ExperimentViewBuilder:
         print(f"  Total predictions:     {stats.total_predictions}")
         print(f"  ✓ Successful:          {stats.successful_predictions}")
         print(f"  ✗ Failed:              {stats.failed_predictions}")
-        print(f"  ⊘ Skipped:             {stats.skipped_messages}")
         
         accuracy = stats.successful_predictions / stats.total_predictions if stats.total_predictions > 0 else 0
         print(f"  Overall accuracy:      {accuracy:6.2%}")

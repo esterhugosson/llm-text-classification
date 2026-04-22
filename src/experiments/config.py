@@ -31,7 +31,7 @@ DATA_DIR = Path(os.getenv("DATA_DIR", "data"))
 PROCESS_DATA_DIR = DATA_DIR / "process_data"
 
 # Input file paths
-INTERACTIONS_PATH = str(PROCESS_DATA_DIR / "test.json")
+INTERACTIONS_PATH = str(PROCESS_DATA_DIR / "processed_interactions_without_examples.json")
 GROUND_TRUTH_PATH = str(PROCESS_DATA_DIR / "processed_ground_truths_plus.json")
 
 # Output directory
