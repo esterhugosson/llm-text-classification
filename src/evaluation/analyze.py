@@ -110,10 +110,14 @@ print(pivot2)
 
 print("\n========== TRUE LABEL DISTRIBUTION PER CATEGORY ==========")
 
-categories = df["category"].unique()
+ground_truth_df = df.drop_duplicates(
+    subset=["thread_id", "message_id", "category"]
+)
+
+categories = ground_truth_df["category"].unique()
 
 for cat in categories:
-    sub = df[df["category"] == cat]
+    sub = ground_truth_df[ground_truth_df["category"] == cat]
 
     counter = Counter(sub["true_label"])
     total = sum(counter.values())

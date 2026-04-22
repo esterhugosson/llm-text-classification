@@ -1,0 +1,65 @@
+{
+  "all_results": {
+    "accuracy": 0.4509594882729211,
+    "macro_f1": 0.34669702584307666,
+    "weighted_f1": 0.48013409219776265,
+    "cohen_kappa": 0.3930991680507361,
+    "report": "                             precision    recall  f1-score   support\n\n       correction_challenge       0.18      0.17      0.17        12\n         elaborated_request       0.22      0.25      0.23        36\n                      false       0.19      0.98      0.31        96\n   negotiation_coordination       0.37      0.30      0.33        60\n                       none       0.52      0.71      0.60       220\noffer_choice_coconstruction       0.00      0.00      0.00         0\n            probe_alignment       0.83      0.31      0.45        16\nprobe_evaluation_reflection       0.53      0.52      0.53        60\n            probe_more_info       0.67      0.26      0.37       132\n               refine_adapt       0.88      0.14      0.24       108\n    repair_meta_interaction       0.00      0.00      0.00         0\n        request_elaboration       0.06      0.25      0.09         8\n         request_evaluation       0.73      0.28      0.40        40\n            request_example       0.36      0.25      0.30        16\n       shared_understanding       0.63      0.29      0.40       112\n           solution_request       0.26      0.44      0.33        32\n           specific_request       0.26      0.41      0.32        64\n            task_delegation       0.71      0.87      0.78       128\n           team_maintenance       0.58      0.31      0.41        48\n                testing_bot       0.45      0.46      0.46        28\n                       true       0.99      0.38      0.55       660\n\n                   accuracy                           0.45      1876\n                  macro avg       0.45      0.36      0.35      1876\n               weighted avg       0.70      0.45      0.48      1876\n"
+  },
+  "claude_cps_behavior": {
+    "accuracy": 0.510989010989011,
+    "macro_f1": 0.424703557312253,
+    "weighted_f1": 0.5091690917777875,
+    "cohen_kappa": 0.36453511180855236,
+    "report": "                          precision    recall  f1-score   support\n\nnegotiation_coordination       0.37      0.43      0.40        30\n                    none       0.14      0.62      0.23         8\n    shared_understanding       0.67      0.25      0.36        56\n         task_delegation       0.73      0.84      0.78        64\n        team_maintenance       0.44      0.29      0.35        24\n\n                accuracy                           0.51       182\n               macro avg       0.47      0.49      0.42       182\n            weighted avg       0.59      0.51      0.51       182\n"
+  },
+  "claude_interactional_move": {
+    "accuracy": 0.6173469387755102,
+    "macro_f1": 0.3634861821428986,
+    "weighted_f1": 0.6341753839621643,
+    "cohen_kappa": 0.4422099112089247,
+    "report": "                             precision    recall  f1-score   support\n\n                       none       0.80      0.89      0.84        92\noffer_choice_coconstruction       0.00      0.00      0.00         0\n            probe_alignment       0.67      0.25      0.36         8\nprobe_evaluation_reflection       0.51      0.63      0.57        30\n            probe_more_info       0.82      0.27      0.41        66\n    repair_meta_interaction       0.00      0.00      0.00         0\n\n                   accuracy                           0.62       196\n                  macro avg       0.47      0.34      0.36       196\n               weighted avg       0.76      0.62      0.63       196\n"
+  },
+  "claude_is_followup": {
+    "accuracy": 0.5291005291005291,
+    "macro_f1": 0.4872427983539095,
+    "weighted_f1": 0.5965379841923052,
+    "cohen_kappa": 0.16674097191261694,
+    "report": "              precision    recall  f1-score   support\n\n       false       0.21      0.96      0.34        48\n        true       0.99      0.47      0.63       330\n\n    accuracy                           0.53       378\n   macro avg       0.60      0.71      0.49       378\nweighted avg       0.89      0.53      0.60       378\n"
+  },
+  "claude_prompt_type": {
+    "accuracy": 0.2857142857142857,
+    "macro_f1": 0.2790113997044535,
+    "weighted_f1": 0.30212901329905417,
+    "cohen_kappa": 0.2030450013473456,
+    "report": "                      precision    recall  f1-score   support\n\ncorrection_challenge       0.14      0.17      0.15         6\n  elaborated_request       0.21      0.28      0.24        18\n                none       0.15      0.30      0.20        10\n        refine_adapt       0.82      0.17      0.28        54\n request_elaboration       0.04      0.25      0.07         4\n  request_evaluation       0.86      0.30      0.44        20\n     request_example       0.50      0.25      0.33         8\n    solution_request       0.26      0.50      0.34        16\n    specific_request       0.28      0.31      0.29        32\n         testing_bot       0.39      0.50      0.44        14\n\n            accuracy                           0.29       182\n           macro avg       0.36      0.30      0.28       182\n        weighted avg       0.49      0.29      0.30       182\n"
+  },
+  "gpt4o_cps_behavior": {
+    "accuracy": 0.521978021978022,
+    "macro_f1": 0.4283759167820178,
+    "weighted_f1": 0.5184395223880559,
+    "cohen_kappa": 0.36966560509554147,
+    "report": "                          precision    recall  f1-score   support\n\nnegotiation_coordination       0.36      0.17      0.23        30\n                    none       0.13      0.75      0.23         8\n    shared_understanding       0.61      0.34      0.44        56\n         task_delegation       0.70      0.89      0.78        64\n        team_maintenance       0.80      0.33      0.47        24\n\n                accuracy                           0.52       182\n               macro avg       0.52      0.50      0.43       182\n            weighted avg       0.60      0.52      0.52       182\n"
+  },
+  "gpt4o_interactional_move": {
+    "accuracy": 0.4489795918367347,
+    "macro_f1": 0.34727568613017534,
+    "weighted_f1": 0.5507328142887629,
+    "cohen_kappa": 0.2934579439252336,
+    "report": "                             precision    recall  f1-score   support\n\n                       none       0.89      0.62      0.73        92\noffer_choice_coconstruction       0.00      0.00      0.00         0\n            probe_alignment       1.00      0.38      0.55         8\nprobe_evaluation_reflection       0.57      0.40      0.47        30\n            probe_more_info       0.55      0.24      0.34        66\n    repair_meta_interaction       0.00      0.00      0.00         0\n\n                   accuracy                           0.45       196\n                  macro avg       0.50      0.27      0.35       196\n               weighted avg       0.73      0.45      0.55       196\n"
+  },
+  "gpt4o_is_followup": {
+    "accuracy": 0.3862433862433862,
+    "macro_f1": 0.37531342603145657,
+    "weighted_f1": 0.4369584016267398,
+    "cohen_kappa": 0.09688581314878897,
+    "report": "              precision    recall  f1-score   support\n\n       false       0.17      1.00      0.29        48\n        true       1.00      0.30      0.46       330\n\n    accuracy                           0.39       378\n   macro avg       0.59      0.65      0.38       378\nweighted avg       0.89      0.39      0.44       378\n"
+  },
+  "gpt4o_prompt_type": {
+    "accuracy": 0.2802197802197802,
+    "macro_f1": 0.270531328320802,
+    "weighted_f1": 0.2761970861218981,
+    "cohen_kappa": 0.18727842923370608,
+    "report": "                      precision    recall  f1-score   support\n\ncorrection_challenge       0.25      0.17      0.20         6\n  elaborated_request       0.24      0.22      0.23        18\n                none       0.12      0.40      0.19        10\n        refine_adapt       1.00      0.11      0.20        54\n request_elaboration       0.09      0.25      0.13         4\n  request_evaluation       0.62      0.25      0.36        20\n     request_example       0.29      0.25      0.27         8\n    solution_request       0.27      0.38      0.32        16\n    specific_request       0.25      0.50      0.33        32\n         testing_bot       0.55      0.43      0.48        14\n\n            accuracy                           0.28       182\n           macro avg       0.37      0.30      0.27       182\n        weighted avg       0.53      0.28      0.28       182\n"
+  }
+}

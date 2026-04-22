@@ -451,8 +451,8 @@
     "model": "gpt4o",
     "role": 1,
     "true_label": "none",
-    "predicted_label": "none",
-    "match": true
+    "predicted_label": "offer_choice_coconstruction",
+    "match": false
   },
   {
     "thread_id": "thread_cNLTG7ll54IuGKfmBWBbQDX6",
@@ -698,7 +698,7 @@
     "model": "gpt4o",
     "role": 1,
     "true_label": "probe_more_info",
-    "predicted_label": "offer_choice_coconstruction",
+    "predicted_label": "none",
     "match": false
   },
   {
@@ -711,8 +711,8 @@
     "model": "gpt4o",
     "role": 1,
     "true_label": "probe_more_info",
-    "predicted_label": "probe_more_info",
-    "match": true
+    "predicted_label": "offer_choice_coconstruction",
+    "match": false
   },
   {
     "thread_id": "thread_80BrZZxXedeaHWB04rNmQ0kx",
@@ -1010,7 +1010,7 @@
     "model": "gpt4o",
     "role": 1,
     "true_label": "none",
-    "predicted_label": "probe_more_info",
+    "predicted_label": "repair_meta_interaction",
     "match": false
   },
   {
@@ -1348,8 +1348,8 @@
     "model": "gpt4o",
     "role": 1,
     "true_label": "none",
-    "predicted_label": "none",
-    "match": true
+    "predicted_label": "offer_choice_coconstruction",
+    "match": false
   },
   {
     "thread_id": "thread_utJ1F4Ta8Ft9fIANC1fmHDx8",
@@ -1374,8 +1374,8 @@
     "model": "gpt4o",
     "role": 1,
     "true_label": "none",
-    "predicted_label": "offer_choice_coconstruction",
-    "match": false
+    "predicted_label": "none",
+    "match": true
   },
   {
     "thread_id": "thread_XagbO5WsmWZ6gedGkXxIfT0v",
@@ -1470,6 +1470,19 @@
   },
   {
     "thread_id": "thread_XagbO5WsmWZ6gedGkXxIfT0v",
+    "message_id": 2784,
+    "assistant_name": "ReflektoBot",
+    "text": "Det är verkligen viktigt för elever med särskilda behov att ha en klar struktur och tydliga gränser för att känna sig trygga. Att etablera dessa från början kan vara avgörande. Kanske kan du använda ett tillvägagångssätt som kombinerar visuella hjälpmedel och rutinövningar för att kommunicera denna struktur effektivt. \n\nHur tänker du att ni skulle kunna introducera och förstärka gränserna på ett sätt som är både tydligt och stöttande för dessa elever?",
+    "category": "interactional_move",
+    "strategy": "few_shot",
+    "model": "gpt4o",
+    "role": 1,
+    "true_label": "probe_more_info",
+    "predicted_label": "probe_more_info",
+    "match": true
+  },
+  {
+    "thread_id": "thread_XagbO5WsmWZ6gedGkXxIfT0v",
     "message_id": 2804,
     "assistant_name": "ReflektoBot",
     "text": "Det låter som en bra idé att involvera eleverna i processen att skapa regler och rutiner. Deras delaktighet kan öka känslan av ägarskap och förståelse för varför reglerna finns. För att göra det än mer effektivt, hur skulle ni kunna hantera situationer där elever glömmer bort eller har svårt att följa de överenskomna reglerna? Finns det strategier på plats för att påminna och stödja dem på ett positivt sätt?",
@@ -1478,8 +1491,8 @@
     "model": "gpt4o",
     "role": 1,
     "true_label": "probe_evaluation_reflection",
-    "predicted_label": "probe_evaluation_reflection",
-    "match": true
+    "predicted_label": "probe_more_info",
+    "match": false
   },
   {
     "thread_id": "thread_XagbO5WsmWZ6gedGkXxIfT0v",
@@ -1517,8 +1530,8 @@
     "model": "gpt4o",
     "role": 1,
     "true_label": "probe_evaluation_reflection",
-    "predicted_label": "probe_evaluation_reflection",
-    "match": true
+    "predicted_label": "probe_more_info",
+    "match": false
   },
   {
     "thread_id": "thread_XagbO5WsmWZ6gedGkXxIfT0v",
@@ -1530,7 +1543,7 @@
     "model": "gpt4o",
     "role": 1,
     "true_label": "probe_more_info",
-    "predicted_label": "probe_evaluation_reflection",
+    "predicted_label": "offer_choice_coconstruction",
     "match": false
   },
   {
@@ -1626,6 +1639,19 @@
   },
   {
     "thread_id": "thread_5nIpJfRV4RwAzNlV8Ctptsii",
+    "message_id": 3336,
+    "assistant_name": "StandardBot",
+    "text": "For students who have advanced beyond the basics and can already discuss topics like food, family, and school schedules, it's important to challenge them further while broadening their vocabulary and grammatical understanding. This lesson will focus on discussing hobbies and daily routines, incorporating reflexive verbs and frequency expressions.\n\n### Lesson Plan: Spanish A1+/A2 Level\n\n**Topic:** Hobbies and Daily Routines\n\n**Objective:** By the end of this lesson, students will be able to discuss their hobbies and describe their daily routines using reflexive verbs and frequency expressions.\n\n**Duration:** 60 Minutes\n\n---\n\n**Materials:**\n- Whiteboard and markers\n- Flashcards with hobbies and daily activities\n- Handout with reflexive verbs and frequency expressions\n- Audio clips of dialogues discussing hobbies/routines\n- Visual aids (charts with reflexive verbs conjugations)\n\n---\n\n### Lesson Outline:\n\n1. **Warm-up (10 minutes)**\n   - **Activity:** Start with a simple Q&A session about what students did over the weekend. This primes them for discussing activities.\n   - **Purpose:** To transition from known topics to new content and engage them in speaking from the start.\n\n2. **Introduction to Hobbies Vocabulary (10 minutes)**\n   - **Key Vocabulary:** Leer (to read), Escuchar música (to listen to music), Jugar al fútbol (to play soccer), Pintar (to paint), Cocinar (to cook).\n   - **Activity:** Use flashcards to introduce these activities. Practice pronunciation and ask students if any of these are their hobbies. Add more as needed based on students' interests.\n\n3. **Introduction to Daily Routines and Reflexive Verbs (15 minutes)**\n   - **Key Reflexive Verbs:** Levantarse (to get up), Ducharse (to shower), Desayunar (to eat breakfast), Acostarse (to go to bed).\n   - **Activity:** Demonstrate sentences using reflexive verbs on the whiteboard, highlighting the reflexive pronouns (me, te, se, nos, os, se). Discuss and write down daily routine phrases using these verbs.\n   - **Visual Aid:** Show a conjugation chart for reflexive verbs.\n\n4. **Practice Reflexive Verbs and Routines (10 minutes)**\n   - **Activity:** Pair up students to share their daily routines with each other using reflexive verbs. Encourage them to use full sentences.\n   - **Purpose:** To solidify understanding of reflexive verbs in the context of daily routines.\n\n5. **Introduce Frequency Expressions (5 minutes)**\n   - **Key Expressions:** Siempre (always), A menudo (often), A veces (sometimes), Rara vez (rarely), Nunca (never).\n   - **Activity:** Explain how these expressions modify sentences and provide examples.\n\n6. **Interactive Activity – Describe a Typical Day (10 minutes)**\n   - **Activity:** Have students write a short paragraph about a typical day using reflexive verbs and frequency expressions. Allow time for a few students to share with the class.\n   - **Purpose:** To integrate new vocabulary and grammar into a coherent narrative.\n\n7. **Wrap-up and Review (5 minutes)**\n   - **Activity:** Go over common mistakes observed during the class. Use a short quiz on reflexive verbs and frequency expressions for reinforcement.\n   - **Purpose:** To assess learning and correct any misconceptions immediately.\n\n8. **Homework Assignment**\n   - Ask students to create a dialogue or comic strip featuring a character’s daily routine, incorporating reflexive verbs and frequency expressions.\n\n---\n\n**Notes for Teachers:**\n- Encourage fluency by asking open-ended questions.\n- Use peer feedback during pair activities to promote collaborative learning.\n- Adjust the pace to ensure comprehension before moving to the next topic.\n\nThis lesson builds on existing knowledge while introducing more complex grammatical structures in a practical context that allows for personalized expression and creativity.",
+    "category": "interactional_move",
+    "strategy": "few_shot",
+    "model": "gpt4o",
+    "role": 1,
+    "true_label": "probe_more_info",
+    "predicted_label": "none",
+    "match": false
+  },
+  {
+    "thread_id": "thread_5nIpJfRV4RwAzNlV8Ctptsii",
     "message_id": 3360,
     "assistant_name": "StandardBot",
     "text": "Integrating AI literacy into a language lesson can enrich both the technological awareness and the language skills of students. Here’s how you can incorporate AI literacy into the Spanish lesson plan focused on discussing hobbies and daily routines:\n\n### Enhanced Lesson Plan: Spanish A1+/A2 Level with AI Literacy\n\n**Topic:** Hobbies, Daily Routines, and Introduction to AI in Everyday Life\n\n**Objective:** By the end of the lesson, students will be able to discuss their hobbies and daily routines using reflexive verbs and frequency expressions. They will also gain a basic understanding of AI and how it relates to their daily lives.\n\n**Duration:** 60 Minutes\n\n---\n\n**Materials:**\n- Whiteboard and markers\n- Flashcards with hobbies and daily activities\n- Handout with reflexive verbs and frequency expressions\n- Audio clips of dialogues discussing hobbies/routines\n- Visual aids (charts with reflexive verbs conjugations)\n- Short video or infographic explaining AI in simple terms\n- Example sentences showcasing AI-related vocabulary\n\n---\n\n### Lesson Outline:\n\n1. **Warm-up (5 minutes)**\n   - **Activity:** Start with a brief Q&A session about what students did over the weekend. Ask if they used any technology to assist them.\n   - **Purpose:** To transition from known topics to new content and engage them in speaking from the start.\n\n2. **Introduction to Hobbies Vocabulary (10 minutes)**\n   - **Key Vocabulary:** Leer (to read), Escuchar música (to listen to music), Jugar al fútbol (to play soccer), Pintar (to paint), Cocinar (to cook).\n   - **Activity:** Use flashcards to introduce these activities. Practice pronunciation and ask students if any of these are their hobbies. Add more as needed based on students' interests.\n\n3. **Introduction to Daily Routines and Reflexive Verbs (10 minutes)**\n   - **Key Reflexive Verbs:** Levantarse (to get up), Ducharse (to shower), Desayunar (to eat breakfast), Acostarse (to go to bed).\n   - **Activity:** Demonstrate sentences using reflexive verbs on the whiteboard, highlighting the reflexive pronouns (me, te, se, nos, os, se). Use visual aids for verb conjugations.\n\n4. **AI Introduction (5 minutes)**\n   - **Activity:** Show a short video or present an infographic that explains AI in simple terms, focusing on examples like virtual assistants (e.g., Siri, Alexa), recommendation systems (like Netflix or Spotify), or language learning apps.\n   - **Purpose:** To introduce students to the basic concept of AI and its presence in daily life.\n\n5. **AI and Daily Routines Discussion (10 minutes)**\n   - **Key Vocabulary:** Asistente virtual (virtual assistant), Recomendaciones (recommendations), Aplicaciones (apps).\n   - **Activity:** Discuss how AI might fit into their daily routines. For example, \"Uso una aplicación para aprender español\" (I use an app to learn Spanish) or \"Mi asistente virtual me despierta\" (My virtual assistant wakes me up).\n   - **Purpose:** To integrate AI-related vocabulary into known conversational contexts.\n\n6. **Interactive Activity – AI-Assisted Day (10 minutes)**\n   - **Activity:** Have students write a short paragraph imagining a day assisted by AI, including reflexive verbs and frequency expressions. Allow time for a few students to share with the class.\n   - **Purpose:** To practice language skills while integrating an understanding of AI tools and their applications.\n\n7. **Wrap-up and Review (5 minutes)**\n   - **Activity:** Go over common mistakes and reinforce learning. Conduct a quick verbal quiz on AI vocabulary and reflexive verbs.\n   - **Purpose:** To assess and consolidate the day’s learning.\n\n8. **Homework Assignment**\n   - Ask students to research one AI tool or application in Spanish and write a few sentences about how it can help improve their daily routines.\n\n---\n\n**Notes for Teachers:**\n- Personalize AI examples to suit student interests, such as music apps for those who like listening to music.\n- Maintain a balance between language learning and AI literacy to keep the lesson engaging for language objectives.\n- Encourage students to think critically about AI's role in their lives and discuss ethical considerations if time allows.\n\nBy linking AI concepts to daily life and language learning, students will not only enhance their Spanish skills but also gain relevant tech awareness.",
@@ -1634,14 +1660,27 @@
     "model": "gpt4o",
     "role": 1,
     "true_label": "none",
-    "predicted_label": "offer_choice_coconstruction",
-    "match": false
+    "predicted_label": "none",
+    "match": true
   },
   {
     "thread_id": "thread_5nIpJfRV4RwAzNlV8Ctptsii",
     "message_id": 3372,
     "assistant_name": "StandardBot",
     "text": "Developing a lesson plan that combines AI literacy with Spanish speaking skills at the A1.2 level allows students to engage with contemporary topics while practicing language skills. The lesson focuses on introducing basic AI concepts and integrating them into simple Spanish conversations.\n\n### Lesson Plan: Spanish A1.2 Level with AI Literacy\n\n**Topic:** Basic AI Concepts and Conversational Spanish\n\n**Objective:** By the end of the lesson, students will be able to discuss basic AI concepts in Spanish and use simple sentences to talk about how AI influences daily life.\n\n**Duration:** 60 Minutes\n\n---\n\n**Materials:**\n- Whiteboard and markers\n- Flashcards with AI-related vocabulary\n- Short video or infographic explaining AI in simple terms (in Spanish)\n- Handout with vocabulary and example sentences\n- Props for role-playing (e.g., toy phones to simulate virtual assistants)\n\n---\n\n### Lesson Outline:\n\n1. **Warm-up (5 minutes)**\n   - **Activity:** Begin with a brief discussion about technology students use every day. Introduce the concept by asking questions like \"¿Quién usa un asistente virtual como Siri o Alexa?\" (Who uses a virtual assistant like Siri or Alexa?)\n   - **Purpose:** To engage students and introduce the topic relevance.\n\n2. **Introduction to AI Vocabulary (10 minutes)**\n   - **Key Vocabulary:** Inteligencia artificial (artificial intelligence), Asistente virtual (virtual assistant), Aplicaciones (apps), Tecnología (technology), Recomendaciones (recommendations).\n   - **Activity:** Use flashcards to introduce these words in Spanish, emphasizing pronunciation and simple context usage.\n   - **Purpose:** To build a foundational vocabulary related to AI.\n\n3. **AI Concept Introduction (10 minutes)**\n   - **Activity:** Show a short video or present an infographic in Spanish that explains AI basics. Discuss AI's role in everyday applications, like virtual assistants or recommendation systems.\n   - **Purpose:** To contextualize AI vocabulary within real-world applications.\n\n4. **AI in Daily Life – Group Activity (15 minutes)**\n   - **Activity:** In small groups, students brainstorm how they use AI-based tools in their daily routines. Provide templates with simple sentence starters like \"Uso un asistente virtual para...\" (I use a virtual assistant to...) or \"La aplicación me ayuda a...\" (The app helps me to…).\n   - **Purpose:** To encourage active use of new vocabulary in a conversational context.\n\n5. **Role-play Exercise (10 minutes)**\n   - **Activity:** Using props, students simulate conversations with a virtual assistant. For example, asking for music recommendations or setting reminders. Phrases include \"¿Puedes recomendarme una canción?\" (Can you recommend a song?) or \"Pon una alarma para mañana.\" (Set an alarm for tomorrow.)\n   - **Purpose:** To practice speaking in a realistic and relatable scenario.\n\n6. **Wrap-up and Review (5 minutes)**\n   - **Activity:** Recap key vocabulary and phrases learned. Have students share one sentence about how they use AI in their daily lives.\n   - **Purpose:** To reinforce learning and provide immediate feedback.\n\n7. **Homework Assignment**\n   - Ask students to prepare a short dialogue using AI vocabulary, where they explain to a friend how they use a particular AI tool. Encourage recording in audio or video format if possible.\n\n---\n\n**Notes for Teachers:**\n- Tailor examples to student interests to maintain engagement.\n- Encourage students to think creatively about AI applications.\n- Use visual aids and hands-on activities to support language acquisition.\n\nThis lesson plan uses AI as a means to practice language skills, allowing students to connect Spanish learning to the modern world. It emphasizes speaking and listening, providing students with opportunities to use new vocabulary in meaningful ways.",
+    "category": "interactional_move",
+    "strategy": "few_shot",
+    "model": "gpt4o",
+    "role": 1,
+    "true_label": "none",
+    "predicted_label": "none",
+    "match": true
+  },
+  {
+    "thread_id": "thread_iyHh5IENSXUZYUCjcWYU3Efr",
+    "message_id": 2286,
+    "assistant_name": "StandardBot",
+    "text": "För att skapa en meningsfull fritid där trygghet, lek och lärande samverkar på bästa sätt på fritidshem, krävs ett antal konkreta insatser:\n\n1. **Trygg och inkluderande miljö:**\n   - Skapa fysiska och psykiska miljöer där alla barn känner sig trygga och inkluderade. Detta kan inkludera att säkerställa övervakning av vuxna och aktivt arbeta med att motverka mobbning och diskriminering.\n   - Utbilda personal i att hantera konflikter och att stödja barnens sociala och emotionella utveckling.\n\n2. **Strukturerade och varierade aktiviteter:**\n   - Planera och erbjuda ett brett utbud av aktiviteter som integrerar lek, lärande och fysisk aktivitet. Det bör finnas något för alla intressen och behov, såsom konst och hantverk, sport, naturutflykter och drama.\n   - Använd en flexibel schema för att kunna anpassa aktiviteter efter barnens intresse och behov.\n\n3. **Barnens delaktighet och inflytande:**\n   - Involvera barnen i planeringen av aktiviteterna och ge dem möjlighet att uttrycka sina intressen och idéer. Detta ger barnen en känsla av ägarskap och motivation.\n   - Inrätta barnråd eller regelbundna möten där barnens röster hörs och deras åsikter tas på allvar.\n\n4. **Kompetent och engagerad personal:**\n   - Säkerställ att fritidspedagogerna har relevant utbildning och fortbildning, speciellt inom områden som barnpsykologi och pedagogiska metoder.\n   - Uppmuntra personalens engagemang och passion för att arbeta med barn, för att skapa en positiv och inspirerande miljö.\n\n5. **Föräldrasamverkan:**\n   - Bygg ett starkt partnerskap med föräldrar och vårdnadshavare för att stödja barnens utveckling och skapa en koherent helhet av barnens vardag.\n   - Regular och öppen kommunikation med hemmet underlättar förståelse och samarbete kring barnets behov och utveckling.\n\n6. **Fokus på demokratiska värderingar och hållbar utveckling:**\n   - Integrera värdegrundsarbete i dagliga aktiviteter, där barn lär sig om respekt, samarbete och ansvar inom gruppen.\n   - Introducera koncept av hållbarhet genom aktiviteter som inkluderar naturupplevelser, återvinning och projektarbeten som handlar om globala utmaningar.\n\n7. **Användning av utvärdering och feedback:**\n   - Ha system för att regelbundet utvärdera och förbättra aktiviteter och pedagogiska metoder baserat på feedback från barn, föräldrar och personal.\n\nMed dessa insatser kan fritidshemmen bli en ännu mer betydelsefull plats för barns utveckling och trivsel, samtidigt som de förbereder sig för en framtid som demokratiska och ansvarstagande medborgare.",
     "category": "interactional_move",
     "strategy": "few_shot",
     "model": "gpt4o",
@@ -1686,7 +1725,7 @@
     "model": "gpt4o",
     "role": 1,
     "true_label": "none",
-    "predicted_label": "probe_evaluation_reflection",
+    "predicted_label": "offer_choice_coconstruction",
     "match": false
   },
   {
@@ -1694,6 +1733,19 @@
     "message_id": 2260,
     "assistant_name": "StandardBot",
     "text": "Hej! Hur kan jag hjälpa dig idag?",
+    "category": "interactional_move",
+    "strategy": "few_shot",
+    "model": "gpt4o",
+    "role": 1,
+    "true_label": "none",
+    "predicted_label": "none",
+    "match": true
+  },
+  {
+    "thread_id": "thread_cNLTG7ll54IuGKfmBWBbQDX6",
+    "message_id": 2264,
+    "assistant_name": "StandardBot",
+    "text": "Att övertyga rektorer och andra beslutsfattare att investera i en AI-språktjänst för undervisning i teknik kräver en genomtänkt strategi. Här är några steg och argument som du kan använda för att stödja ditt förslag:\n\n### 1. Förbered en Stark Presentation\n- **Syfte och Vision**: Börja med att förklara Nextgen Classroom AB:s övergripande syfte och vision, och hur det kan integreras i skolans målsättningar.\n- **Demonstration av Tjänsten**: Om möjligt, ge en direkt demonstration av tjänstens funktioner för att åskådliggöra nyttan.\n\n### 2. Fördelar med AI i Undervisning\n- **Anpassat Lärande**: Förklara hur AI kan anpassa undervisningsmaterial efter individuella studenters lärhastigheter och förmågor.\n- **Förbättrad Engagemang**: Beskriv hur interaktiv och dynamisk teknik kan öka elevernas engagemang.\n- **Automatisering av Bedömning och Feedback**: Betona hur AI kan automatisera bedömning och ge snabb feedback, vilket sparar tid för lärarna.\n\n### 3. Pedagogiska Fördelar\n- **Förbättrad Lärandeutkomst**: Påvisa forskning eller fallstudier som visar förbättrade resultat genom användningen av AI-teknik.\n- **Utveckling av Framtidsfärdigheter**: Diskutera vikten av att introducera elever till avancerad teknik som förbereder dem för framtidens arbetsmarknad.\n\n### 4. Ekonomiska Argument\n- **Långsiktiga Kostnadsbesparingar**: Argumentera för hur investeringen kan leda till långsiktiga besparingar genom effektiviseringar och förbättrade utbildningsresultat.\n- **Tillgång till Uppdaterat Material**: Berätta hur AI kontinuerligt kan uppdatera material för att hålla undervisningen aktuell.\n\n### 5. Förberedda Svar på Invändningar\n- **Dataskydd och Integritet**: Hantera eventuella bekymmer om dataskydd och elevens integritet genom att visa hur Nextgen Classroom AB säkerställer detta.\n- **Implementeringsprocess**: Förklara hur introduktionen av systemet i skolans verksamhet kan ske smidigt med utbildning och support för lärarna.\n\n### 6. Praktiska Exempel och Bevis\n- **Case Studies**: Om möjligt, inkludera exempel på andra skolor eller institutioner som framgångsrikt har implementerat denna tjänst.\n- **Bruk i Andra Ämnen**: Diskutera möjliga användningsområden utöver teknik‐undervisning för att visa universell tillämpning.\n\n### 7. Framtidsvision\n- **Adaptabilitet**: Diskutera potentialen för framtida uppgraderingar och ytterligare utveckling av tjänsten, vilket säkerställer att skolans investering förblir relevant.\n\nGenom att presentera dessa punkter kan du skapa en stark och övertygande argumentation för varför Nextgen Classroom AB skulle vara en värdefull tillgång för skolans teknikundervisning. Lycka till!",
     "category": "interactional_move",
     "strategy": "few_shot",
     "model": "gpt4o",
@@ -1738,8 +1790,8 @@
     "model": "gpt4o",
     "role": 1,
     "true_label": "probe_more_info",
-    "predicted_label": "probe_more_info",
-    "match": true
+    "predicted_label": "offer_choice_coconstruction",
+    "match": false
   },
   {
     "thread_id": "thread_fjOU9u8F2DwedJrXsCisJksE",
@@ -1868,8 +1920,8 @@
     "model": "gpt4o",
     "role": 1,
     "true_label": "none",
-    "predicted_label": "offer_choice_coconstruction",
-    "match": false
+    "predicted_label": "none",
+    "match": true
   },
   {
     "thread_id": "thread_Qscp3pZvIp56boNC4nmYZcCy",
@@ -1963,6 +2015,19 @@
     "match": true
   },
   {
+    "thread_id": "thread_R8ttf3ZyH96kKfSV6dnp7ERz",
+    "message_id": 2274,
+    "assistant_name": "StandardBot",
+    "text": "Jag har tyvärr ingen möjlighet att ge specifika väderprognoser eller förutsägelser för sommaren i Sverige, eftersom jag inte har tillgång till realtidsdata. Generellt sett kan dock vädret i Sverige under sommaren vara ganska varierande beroende på region. I södra delarna är somrarna ofta milda och kan ibland bli ganska varma, medan de norra delarna vanligtvis har svalare somrar. Det förekommer också perioder med regn. För mer exakt information rekommenderas det att kolla med en pålitlig väderkälla närmare sommaren.",
+    "category": "interactional_move",
+    "strategy": "few_shot",
+    "model": "gpt4o",
+    "role": 1,
+    "true_label": "none",
+    "predicted_label": "none",
+    "match": true
+  },
+  {
     "thread_id": "thread_8KbdRBEl3Aq78U4XQcukG7cc",
     "message_id": 2326,
     "assistant_name": "ReflektoBot",
@@ -1985,7 +2050,7 @@
     "model": "gpt4o",
     "role": 1,
     "true_label": "probe_alignment",
-    "predicted_label": "offer_choice_coconstruction",
+    "predicted_label": "probe_more_info",
     "match": false
   },
   {
@@ -2024,6 +2089,19 @@
     "model": "gpt4o",
     "role": 1,
     "true_label": "probe_alignment",
+    "predicted_label": "probe_alignment",
+    "match": true
+  },
+  {
+    "thread_id": "thread_OCz7W9KHT8C8hA2CVUi1Bd1h",
+    "message_id": 2290,
+    "assistant_name": "ReflektoBot",
+    "text": "I'm unable to create or display pictures directly. However, I can guide you or suggest tools you could use to create an illustration based on the description we discussed. There are various online tools and apps like Canva, Adobe Spark, or free drawing software like Krita or GIMP where you can craft such a visual. Would you like any tips on how to get started with these tools?",
+    "category": "interactional_move",
+    "strategy": "few_shot",
+    "model": "gpt4o",
+    "role": 1,
+    "true_label": "probe_more_info",
     "predicted_label": "offer_choice_coconstruction",
     "match": false
   },
@@ -2037,8 +2115,8 @@
     "model": "gpt4o",
     "role": 1,
     "true_label": "probe_more_info",
-    "predicted_label": "probe_more_info",
-    "match": true
+    "predicted_label": "repair_meta_interaction",
+    "match": false
   },
   {
     "thread_id": "thread_ZVexdQ7lwqocgUghJQVCOWl2",
@@ -2211,6 +2289,19 @@
   },
   {
     "thread_id": "thread_tiVensGVQ7Z1Z5RSCnmFlXMb",
+    "message_id": 2498,
+    "assistant_name": "StandardBot",
+    "text": "Vi har fokuserat huvudsakligen på AI-litteracitet i grundskolan, där jag tillhandahöll en enkel text och sedan förtydligade den med punktform för att passa en presentation. Utöver det har vi inte diskuterat några andra ämnen i denna konversation. Om det finns något annat du vill ta upp eller om jag kan hjälpa till med mer information, så är du varmt välkommen att säga till!",
+    "category": "interactional_move",
+    "strategy": "few_shot",
+    "model": "gpt4o",
+    "role": 1,
+    "true_label": "probe_more_info",
+    "predicted_label": "probe_more_info",
+    "match": true
+  },
+  {
+    "thread_id": "thread_tiVensGVQ7Z1Z5RSCnmFlXMb",
     "message_id": 2514,
     "assistant_name": "StandardBot",
     "text": "I den här konversationen har vi inte specifikt diskuterat engelsktalande länder eller arbetet med dem. Vi har fokuserat enbart på AI-litteracitet i grundskolan i allmänhet och en presentation riktad till lärare. Om du har frågor om hur AI-litteracitet hanteras i engelsktalande länder eller om du behöver information relaterad till det, är du välkommen att fråga!",
@@ -2284,8 +2375,8 @@
     "model": "gpt4o",
     "role": 1,
     "true_label": "none",
-    "predicted_label": "offer_choice_coconstruction",
-    "match": false
+    "predicted_label": "none",
+    "match": true
   },
   {
     "thread_id": "thread_bNCJnAKK0j1KsCqDNFshlJ5V",
@@ -2297,14 +2388,27 @@
     "model": "gpt4o",
     "role": 1,
     "true_label": "none",
-    "predicted_label": "offer_choice_coconstruction",
-    "match": false
+    "predicted_label": "none",
+    "match": true
   },
   {
     "thread_id": "thread_0WEUU1yJ51ZGwUFwWy1acSTl",
     "message_id": 2542,
     "assistant_name": "StandardBot",
     "text": "Självklart! Att skapa en pedagogisk planering för svenska i årskurs 6 handlar om att fokusera på de centrala målen och innehållen i läroplanen för svenska. Här är ett förslag på en planering som sträcker sig över en termin, med olika teman och aktiviteter.\n\n### Översikt av planeringen:\n\n**Tema:** Berättande och språkutveckling  \n**Längd:** En termin (ca 20 veckor)  \n**Mål:** Utveckla elevernas förmåga att läsa, skriva och analysera texter samt förbättra deras muntliga och skriftliga färdigheter.\n\n### Vecka 1-4: Introduktion till litteratur\n\n- **Läsning:** Introduktion till olika texttyper, såsom sagor, noveller och romaner. Eleverna får läsa och diskutera ett gemensamt verk som passar årskursen, till exempel en bok från klassikerlistan.\n- **Skrivuppgift:** Skriva en kort sammanfattning av berättelsen. Fokusera på handling, karaktärer och miljö.\n- **Muntlig aktivitet:** Gruppen diskuterar bokens tema och budskap. Var och en delar sin syn på karaktärernas beteenden och beslut.\n\n### Vecka 5-8: Skrivarverkstad\n\n- **Skrivning:** Eleverna får skriva egna berättelser inspirerade av boken de läst. Fokus på struktur med början, mitt och slut.\n- **Grammatik och stavning:** Repetition av grundläggande grammatiska regler. Korrigera gemensamt stavfel och grammatiska misstag ur texterna.\n- **Muntlig framställning:** Eleverna presenterar sina berättelser för klassen. Diskussion och feedback.\n\n### Vecka 9-12: Poesi och språkets rytm\n\n- **Läsning:** Introduktion till poesi och lyrik. Studera olika poetiska former såsom haiku och rim.\n- **Skrivuppgift:** Skriv egna dikter med olika teman.\n- **Utforskande aktivitet:** Laborera med språkljud och rytm. Använd musik eller digitala verktyg för att skapa multimodala presentationer.\n\n### Vecka 13-16: Språkförståelse och ordförråd\n\n- **Läsning:** Studera faktatexter. Tydliggöra skillnaden mellan sakprosa och skönlitteratur.\n- **Ordförråd:** Arbeta med att förstå och använda nya ord och uttryck i egna meningar.\n- **Diskussion:** Analysera texters syfte och mottagare.\n\n### Vecka 17-20: Avslutande projekt och reflektion\n\n- **Projekt:** Eleverna gör ett avslutande projekt där de får välja en texttyp (berättelse, faktatext eller dikt) som de vill fördjupa sig i. De skapar en egen text och presenterar den.\n- **Utvärdering:** Reflektera över de lärdomar som terminen har gett. Eleverna fyller i en egen reflektion över sina framsteg och vad de vill förbättra.\n\n### Bedömning\n\n- **Formativ bedömning:** Löpande genom observationer, diskussioner och skrivuppgifter.\n- **Summativ bedömning:** Avslutande projektet och reflektion används för att bedöma elevens kunskaper och förmågor.\n\nGenom denna planering får eleverna möjlighet att utveckla sitt språk i olika former, från narrativa till analytiska och estetiska uttryck, och detta bidrar till en bred och varierad språkutveckling. Anpassa planen efter dina elevers behov och skolans resurser. Lycka till!",
+    "category": "interactional_move",
+    "strategy": "few_shot",
+    "model": "gpt4o",
+    "role": 1,
+    "true_label": "none",
+    "predicted_label": "offer_choice_coconstruction",
+    "match": false
+  },
+  {
+    "thread_id": "thread_0WEUU1yJ51ZGwUFwWy1acSTl",
+    "message_id": 2592,
+    "assistant_name": "StandardBot",
+    "text": "Att öka motivationen för att producera egna texter i årskurs 6 kan vara en utmaning, men det finns flera strategier och tillvägagångssätt som kan göra skrivandet mer engagerande och roligt för eleverna. Här kommer några idéer:\n\n### 1. Anpassa och variera uppgifterna\n- **Elevens intressen:** Låt eleverna välja ämnen att skriva om som speglar deras personliga intressen, vare sig det handlar om sport, musik, datorspel eller djur.\n- **Mångfald av genrer:** Introducera olika genrer som dagboksskrivande, poesi, brev, fantasy, mysteriesammanhang m.m., för att eleverna ska få prova på olika uttrycksformer.\n\n### 2. Skapa en inspirerande miljö\n- **Författarhörnor:** Organisera klassrummet så det finns mysiga läshörnor eller skrivbås som kan locka eleverna att sätta sig och skriva.\n- **Skrivkaféer:** Anordna skrivtillfällen med bakgrundsmusik och fika där eleverna får skriva och sedan dela texter i en avslappnad miljö.\n\n### 3. Samarbete och feedback\n- **Kamratrespons:** Låt eleverna läsa varandras texter och ge positiv feedback för att bygga självkänsla och förbättra arbetet genom samarbete.\n- **Skrivpartners:** Tilldela elever skrivpartners som de kan diskutera idéer och projekt med, vilket ofta gör processen mer lustfylld.\n\n### 4. Inkludera teknik och multimodala element\n- **Digitala verktyg:** Använd digitala verktyg som berättelseverktyg online, digitala skisser eller presentationer som kan levandegöra texten genom ljud, bilder och filmklipp.\n- **Bloggar eller klassgemensamma dokument:** Låt eleverna publicera sina texter på en klassblogg eller i ett gemensamt dokument där de kan kommentera och diskutera.\n\n### 5. Belöning och erkännande\n- **Författarlördagar:** Anordna tidningsutgivningar eller ”Författarlördagar” där eleverna får läsa sina verk för en publik av föräldrar och andra elever.\n- **Utställningar:** Sätt upp en skrivartavla i klassrummet där elevernas texter kan ställas ut som ett sätt att fira deras arbete och prestation.\n\n### 6. Koppla till verkliga livet\n- **Autentiska mottagare:** Hitta riktiga mottagare för skrivandet, som att skicka brev till en lokal politiker, skriva artiklar för en skoltidning, eller bidra till en riktig antologi.\n- **Författarbesök:** Bjud in lokala författare till skolan för att prata med eleverna om deras skrivprocess och inspirera dem till att själva sätta ord på sina idéer.\n\nGenom att göra skrivande till en social och kreativ process kan du hjälpa eleverna bygga en positiv relation till skrivande där de känner sig liga delaktiga och motiverade. Anpassa dessa förslag till dina egna elevers behov och intressen för bästa resultat.",
     "category": "interactional_move",
     "strategy": "few_shot",
     "model": "gpt4o",
@@ -2338,6 +2442,19 @@
     "true_label": "probe_more_info",
     "predicted_label": "probe_more_info",
     "match": true
+  },
+  {
+    "thread_id": "thread_xttTZ9rdJqStJ2FT5GF0KfTg",
+    "message_id": 3438,
+    "assistant_name": "ReflektoBot",
+    "text": "This lesson plan creatively merges AI literacy with Spanish language skills. Let’s consider how it aligns with different aspects of AI literacy:\n\n**Operational:**\nThe lesson engages students with basic AI concepts and vocabulary, providing a hands-on understanding of how AI technologies like virtual assistants function. You might want to incorporate an activity where students demonstrate using an application or website that employs AI, thus deepening their understanding of practical AI usage.\n\n**Cultural:**\nWhile the lesson plan introduces AI’s influence on daily life, consider expanding on how AI technologies can differ culturally. For instance, you could discuss variations in virtual assistants’ functionalities across different Spanish-speaking regions, exploring how cultural contexts can shape AI applications and acceptance.\n\n**Critical:**\nEncourage students to think about the broader societal implications of AI. Discuss questions like: How do AI tools impact our communication and daily decisions? Are there any concerns or limitations they might encounter? This approach helps students critically evaluate, not just understand, AI technology.\n\nIt’s a well-rounded lesson focusing on operational and cultural aspects; however, integrating more critical discussions can further enrich the lesson. If you have specific parts of the lesson plan or additional questions you'd like to explore, let me know!",
+    "category": "interactional_move",
+    "strategy": "few_shot",
+    "model": "gpt4o",
+    "role": 1,
+    "true_label": "probe_evaluation_reflection",
+    "predicted_label": "probe_more_info",
+    "match": false
   },
   {
     "thread_id": "thread_xttTZ9rdJqStJ2FT5GF0KfTg",
@@ -2414,7 +2531,7 @@
     "model": "gpt4o",
     "role": 1,
     "true_label": "none",
-    "predicted_label": "offer_choice_coconstruction",
+    "predicted_label": "probe_more_info",
     "match": false
   },
   {
@@ -2427,7 +2544,7 @@
     "model": "gpt4o",
     "role": 1,
     "true_label": "probe_more_info",
-    "predicted_label": "probe_more_info",
-    "match": true
+    "predicted_label": "offer_choice_coconstruction",
+    "match": false
   }
 ]
