@@ -1,16 +1,23 @@
+
+
 from sklearn.metrics import (
     accuracy_score,
+    precision_score,
+    recall_score,
     f1_score,
     classification_report,
     cohen_kappa_score
 )
 
+
 class Metrics:
 
     def __init__(self, df):
-        self.df = df
+        self.df = df.copy()
 
-
+    # -------------------------
+    # FILTER
+    # -------------------------
     def filter(self, **kwargs):
         filtered = self.df.copy()
 
@@ -18,6 +25,87 @@ class Metrics:
             filtered = filtered[filtered[column] == value]
 
         return filtered
+
+    # -------------------------
+    # PREP LABELS
+    # -------------------------
+    def _labels(self, df):
+        y_true = (
+            df["true_label"]
+            .astype(str)
+            .str.strip()
+            .str.lower()
+            .tolist()
+        )
+
+        y_pred = (
+            df["predicted_label"]
+            .astype(str)
+            .str.strip()
+            .str.lower()
+            .tolist()
+        )
+
+        return y_true, y_pred
+
+    # -------------------------
+    # EVALUATE
+    # -------------------------
+    def evaluate(self, df=None):
+        df = self.df if df is None else df
+
+        y_true, y_pred = self._labels(df)
+
+        return {
+            "precision": precision_score(
+                y_true,
+                y_pred,
+                average="macro",
+                zero_division=0
+            ),
+
+            "recall": recall_score(
+                y_true,
+                y_pred,
+                average="macro",
+                zero_division=0
+            ),
+
+            "macro_f1": f1_score(
+                y_true,
+                y_pred,
+                average="macro",
+                zero_division=0
+            ),
+
+            "accuracy": accuracy_score(
+                y_true,
+                y_pred
+            ),
+
+            "cohen_kappa": cohen_kappa_score(
+                y_true,
+                y_pred
+            ),
+
+            "report": classification_report(
+                y_true,
+                y_pred,
+                zero_division=0
+            )
+        }
+
+    # -------------------------
+    # GROUP RESULTS
+    # -------------------------
+    def evaluate_by(self, column):
+        results = {}
+
+        for value in self.df[column].unique():
+            sub = self.filter(**{column: value})
+            results[value] = self.evaluate(sub)
+
+        return results
 
 
     def overall_accuracy(self, df=None):
@@ -45,30 +133,3 @@ class Metrics:
             columns=col,
             aggfunc="mean"
         )
-
-    def evaluate(self, df=None):
-        df = self.df if df is None else df
-
-        y_true = df["true_label"].astype(str).str.strip().str.lower().tolist()
-        y_pred = df["predicted_label"].astype(str).str.strip().str.lower().tolist()
-
-
-        return {
-            "accuracy": accuracy_score(y_true, y_pred),
-            "macro_f1": f1_score(
-                y_true, y_pred,
-                average="macro",
-                zero_division=0
-            ),
-            "weighted_f1": f1_score(
-                y_true, y_pred,
-                average="weighted",
-                zero_division=0
-            ),
-            "cohen_kappa": cohen_kappa_score(y_true, y_pred),
-            "report": classification_report(
-                y_true,
-                y_pred,
-                zero_division=0
-            )
-        }
