@@ -31,7 +31,8 @@ class ClassificationPipeline:
         msg: Message,
         category: str,
         strategy: str,
-        model_name: str
+        model_name: str,
+        prev_msg: Optional[Message] = None
     ) -> Optional[PredictionResult]:
         """
         Classify a single message
@@ -53,6 +54,12 @@ class ClassificationPipeline:
             try:
                 # Get prompt
                 prompt = self.prompt_loader.load_prompt(category, strategy)
+
+                # Added change: Add previous message context if available
+                if prev_msg and "[PREVIOUS_MESSAGE]" in prompt:
+                    prompt = prompt.replace("[PREVIOUS_MESSAGE]", prev_msg.text)
+                elif "[PREVIOUS_MESSAGE]" in prompt:
+                    prompt = prompt.replace("[PREVIOUS_MESSAGE]", "No previous message")
                 
                 # Get true label from ground truth
                 true_label = self.matcher.get_label(msg.thread_id, msg.message_id, category)
@@ -140,7 +147,7 @@ class ClassificationPipeline:
         
         # Loop through all messages
         for thread_id, messages_data in interactions.items():
-            for message_data in messages_data:
+            for idx, message_data in enumerate(messages_data):
                 # Extract message information to create Message object
                 message_id = message_data.get("id")
                 text = message_data.get("text", "").strip()
@@ -157,9 +164,26 @@ class ClassificationPipeline:
                 # Use filter to check if message should be classified within this category, if not, skip it
                 if not message_filter.allow(message):
                     continue
-                
+
+                # Added change: Add previous message context if available and relevant for the category
+                prev_msg = None
+                if idx > 0:
+                    prev_data = messages_data[idx - 1]
+                    prev_id = prev_data.get("id")
+                    prev_text = prev_data.get("text", "").strip()
+
+                    if message_id - 1 == prev_id: # Ensure it's the previous message in the thread
+                        prev_msg = Message(
+                            thread_id=thread_id,
+                            message_id=prev_id,
+                            text=prev_text,
+                            role=prev_data.get("role"),
+                        )
+
+                # For debugging, print the context being classified
+                print(f"Context for message {message_id} in thread {thread_id}: {prev_msg.text if prev_msg else 'No previous message'}")
                 # Classify
-                result = self.classify_message(message, category, strategy, model_name)
+                result = self.classify_message(message, category, strategy, model_name, prev_msg)
                 
                 if result is None:
                     continue
