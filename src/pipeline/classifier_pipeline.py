@@ -25,24 +25,69 @@ class ClassificationPipeline:
         self.matcher = matcher
         self.prompt_loader = prompt_loader
         self.view = ExperimentViewBuilder()
-    
+
+    def _get_previous_messages(
+        self,
+        messages_data: List[Dict],
+        current_idx: int
+    ) -> List[Message]:
+        """
+        Walk backwards from current_idx and collect all consecutive previous
+        messages whose IDs are exactly 1 apart (no gaps allowed).
+
+        Args:
+            messages_data: Full list of messages in the thread
+            current_idx: Index of the message being classified
+
+        Returns:
+            List of Messages in chronological order (oldest first)
+        """
+        if current_idx <= 0:
+            return []
+
+        consecutive = []
+        expected_id = messages_data[current_idx].get("id") - 1
+
+        for i in range(current_idx - 1, -1, -1):
+            prev_data = messages_data[i]
+            prev_id = prev_data.get("id")
+
+            if prev_id != expected_id:
+                # Gap detected — stop collecting
+                break
+
+            consecutive.append(Message(
+                thread_id=messages_data[current_idx].get("thread_id",
+                          prev_data.get("thread_id")),
+                message_id=prev_id,
+                text=prev_data.get("text", "").strip(),
+                role=prev_data.get("role"),
+            ))
+
+            expected_id -= 1
+
+        # Reverse so the list is oldest → newest
+        consecutive.reverse()
+        return consecutive
+
     def classify_message(
         self,
         msg: Message,
         category: str,
         strategy: str,
         model_name: str,
-        prev_msg: Optional[Message] = None
+        prev_msgs: Optional[List[Message]] = None
     ) -> Optional[PredictionResult]:
         """
-        Classify a single message
-        
+        Classify a single message.
+
         Args:
             msg: Message to classify
             category: Classification category
             strategy: Strategy (basic or few_shot)
             model_name: Name of the model
-            
+            prev_msgs: Ordered list of consecutive previous messages (oldest first)
+
         Returns:
             PredictionResult or None if classification failed
         """
@@ -55,19 +100,25 @@ class ClassificationPipeline:
                 # Get prompt
                 prompt = self.prompt_loader.load_prompt(category, strategy)
 
-                # Added change: Add previous message context if available
-                if prev_msg and "[PREVIOUS_MESSAGE]" in prompt:
-                    prompt = prompt.replace("[PREVIOUS_MESSAGE]", prev_msg.text)
-                elif "[PREVIOUS_MESSAGE]" in prompt:
-                    prompt = prompt.replace("[PREVIOUS_MESSAGE]", "No previous message")
+                # Replace [PREVIOUS_MESSAGE] placeholder with full context block
+                if "[PREVIOUS_MESSAGE]" in prompt:
+                    if prev_msgs:
+                        context_block = "\n".join(
+                            f"[id={m.message_id}] {m.text}"
+                            for m in prev_msgs
+                        )
+                    else:
+                        context_block = "No previous message"
+                    prompt = prompt.replace("[PREVIOUS_MESSAGE]", context_block)
                 
                 # Get true label from ground truth
                 true_label = self.matcher.get_label(msg.thread_id, msg.message_id, category)
                 if true_label is None:
-                    # logger.info("No ground truth to compare with, no classification done")
-                    return None # No ground truth for this category
+                    return None  # No ground truth for this category
                 
-                # LLM classify message based on prompt and the message's content.
+                logger.info("Prompt looks like:", prompt)
+                
+                # LLM classify message based on prompt and the message's content
                 prediction = self.classifier.classify(prompt, msg.text)
                 predicted_label = prediction.get("label")
                 
@@ -95,7 +146,7 @@ class ClassificationPipeline:
                     role=msg.role,
                     true_label=true_label,
                     predicted_label=predicted_label,
-                    match = (
+                    match=(
                         pred_normalized == true_normalized 
                         if pred_normalized is not None and true_normalized is not None else False
                     )
@@ -128,8 +179,8 @@ class ClassificationPipeline:
         message_limit: Optional[int] = None
     ) -> Tuple[List[PredictionResult], int]:
         """
-        Classify all messages in a category with given strategy
-        
+        Classify all messages in a category with given strategy.
+
         Args:
             interactions: Dict of thread_id -> messages
             category: Classification category
@@ -137,7 +188,7 @@ class ClassificationPipeline:
             model_name: Name of the model
             role_filter: Role to filter by (0=teacher, 1=chatbot, None=all)
             message_limit: Max messages to classify
-            
+
         Returns:
             (list of PredictionResult, count of classified messages)
         """
@@ -145,15 +196,12 @@ class ClassificationPipeline:
         message_filter = InteractionFilter(required_role=role_filter)
         results = []
         
-        # Loop through all messages
         for thread_id, messages_data in interactions.items():
             for idx, message_data in enumerate(messages_data):
-                # Extract message information to create Message object
                 message_id = message_data.get("id")
                 text = message_data.get("text", "").strip()
                 message_role = message_data.get("role")
                 
-                # Create Message object
                 message = Message(
                     thread_id=thread_id,
                     message_id=message_id,
@@ -161,43 +209,33 @@ class ClassificationPipeline:
                     role=message_role,
                 )
                 
-                # Use filter to check if message should be classified within this category, if not, skip it
                 if not message_filter.allow(message):
                     continue
 
-                # Added change: Add previous message context if available and relevant for the category
-                prev_msg = None
-                if idx > 0:
-                    prev_data = messages_data[idx - 1]
-                    prev_id = prev_data.get("id")
-                    prev_text = prev_data.get("text", "").strip()
+                # Collect all consecutive previous messages (no ID gaps)
+                prev_msgs = self._get_previous_messages(messages_data, idx)
 
-                    if message_id - 1 == prev_id: # Ensure it's the previous message in the thread
-                        prev_msg = Message(
-                            thread_id=thread_id,
-                            message_id=prev_id,
-                            text=prev_text,
-                            role=prev_data.get("role"),
-                        )
+                # For debugging: show how much context was gathered
+                #if prev_msgs:
+                 #   ids = [str(m.message_id) for m in prev_msgs]
+                  #  print(f"Context for message {message_id} in thread {thread_id}: "
+                      #    f"previous message ids = [{', '.join(ids)}]")
+                #else:
+                 #   print(f"Context for message {message_id} in thread {thread_id}: "
+                      #    f"No previous messages")
 
-                # For debugging, print the context being classified
-                print(f"Context for message {message_id} in thread {thread_id}: {prev_msg.text if prev_msg else 'No previous message'}")
-                # Classify
-                result = self.classify_message(message, category, strategy, model_name, prev_msg)
+                result = self.classify_message(message, category, strategy, model_name, prev_msgs)
                 
                 if result is None:
                     continue
                 
                 results.append(result)
 
-                # Display progress using view
                 self.view.print_classification_progress(result.message_id, result.predicted_label, result.match)
                 
-                # Check limit per category
                 if message_limit and len(results) >= message_limit:
                     break
             
-            # Check limit per category (I know, repetitive, but a must to break out of both loops)
             if message_limit and len(results) >= message_limit:
                 break
         
