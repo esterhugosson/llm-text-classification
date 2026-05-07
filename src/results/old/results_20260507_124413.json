@@ -1,0 +1,67 @@
+[
+  {
+    "thread_id": "thread_NOSZtw85ib76uShXy8gAwl0d",
+    "message_id": 2389,
+    "assistant_name": "ReflektoBot",
+    "text": "What have you learned  about me from our conversation,",
+    "category": "cps_behavior",
+    "strategy": "basic",
+    "model": "llama3",
+    "role": 0,
+    "true_label": "shared_understanding",
+    "predicted_label": "shared_understanding",
+    "match": true
+  },
+  {
+    "thread_id": "thread_NOSZtw85ib76uShXy8gAwl0d",
+    "message_id": 2393,
+    "assistant_name": "ReflektoBot",
+    "text": "how can you reflect about the content that I have mentioned",
+    "category": "cps_behavior",
+    "strategy": "basic",
+    "model": "llama3",
+    "role": 0,
+    "true_label": "shared_understanding",
+    "predicted_label": "shared_understanding",
+    "match": true
+  },
+  {
+    "thread_id": "thread_NOSZtw85ib76uShXy8gAwl0d",
+    "message_id": 2407,
+    "assistant_name": "ReflektoBot",
+    "text": "Summarize what we have talked out in all of our talse",
+    "category": "cps_behavior",
+    "strategy": "basic",
+    "model": "llama3",
+    "role": 0,
+    "true_label": "shared_understanding",
+    "predicted_label": "shared_understanding",
+    "match": true
+  },
+  {
+    "thread_id": "thread_NOSZtw85ib76uShXy8gAwl0d",
+    "message_id": 2409,
+    "assistant_name": "ReflektoBot",
+    "text": "talks",
+    "category": "cps_behavior",
+    "strategy": "basic",
+    "model": "llama3",
+    "role": 0,
+    "true_label": "team_maintenance",
+    "predicted_label": "none",
+    "match": false
+  },
+  {
+    "thread_id": "thread_utJ1F4Ta8Ft9fIANC1fmHDx8",
+    "message_id": 2743,
+    "assistant_name": "StandardBot",
+    "text": "hen har autism",
+    "category": "cps_behavior",
+    "strategy": "basic",
+    "model": "llama3",
+    "role": 0,
+    "true_label": "negotiation_coordination",
+    "predicted_label": "task_delegation",
+    "match": false
+  }
+]

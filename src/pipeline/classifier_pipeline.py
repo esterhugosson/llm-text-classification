@@ -26,49 +26,67 @@ class ClassificationPipeline:
         self.prompt_loader = prompt_loader
         self.view = ExperimentViewBuilder()
 
-    def _get_previous_messages(
+    def _get_context_messages(
         self,
         messages_data: List[Dict],
-        current_idx: int
+        current_idx: int,
+        thread_id: str,
+        max_previous: int = 3,
+        max_next: int = 1
     ) -> List[Message]:
         """
-        Walk backwards from current_idx and collect all consecutive previous
-        messages whose IDs are exactly 1 apart (no gaps allowed).
+        Get context messages around the current message:
+        - Up to max_previous messages before current
+        - The current message itself
+        - Up to max_next messages after current
 
         Args:
             messages_data: Full list of messages in the thread
-            current_idx: Index of the message being classified
+            current_idx: Index of the current message being classified
+            thread_id: The thread ID
+            max_previous: Maximum number of previous messages to include
+            max_next: Maximum number of next messages to include
 
         Returns:
-            List of Messages in chronological order (oldest first)
+            List of Messages in chronological order
         """
-        if current_idx <= 0:
-            return []
+        context_messages = []
 
-        consecutive = []
-        expected_id = messages_data[current_idx].get("id") - 1
+        # Get previous messages (up to max_previous)
+        start_idx = max(0, current_idx - max_previous)
+        for i in range(start_idx, current_idx):
+            msg_data = messages_data[i]
+            message = Message(
+                thread_id=thread_id,
+                message_id=msg_data.get("id"),
+                text=msg_data.get("text", "").strip(),
+                role=msg_data.get("role"),
+            )
+            context_messages.append(message)
 
-        for i in range(current_idx - 1, -1, -1):
-            prev_data = messages_data[i]
-            prev_id = prev_data.get("id")
+        # Get the current message
+        current_data = messages_data[current_idx]
+        current_message = Message(
+            thread_id=thread_id,
+            message_id=current_data.get("id"),
+            text=current_data.get("text", "").strip(),
+            role=current_data.get("role"),
+        )
+        context_messages.append(current_message)
 
-            if prev_id != expected_id:
-                # Gap detected — stop collecting
-                break
+        # Get next messages (up to max_next)
+        end_idx = min(len(messages_data), current_idx + 1 + max_next)
+        for i in range(current_idx + 1, end_idx):
+            msg_data = messages_data[i]
+            message = Message(
+                thread_id=thread_id,
+                message_id=msg_data.get("id"),
+                text=msg_data.get("text", "").strip(),
+                role=msg_data.get("role"),
+            )
+            context_messages.append(message)
 
-            consecutive.append(Message(
-                thread_id=messages_data[current_idx].get("thread_id",
-                          prev_data.get("thread_id")),
-                message_id=prev_id,
-                text=prev_data.get("text", "").strip(),
-                role=prev_data.get("role"),
-            ))
-
-            expected_id -= 1
-
-        # Reverse so the list is oldest → newest
-        consecutive.reverse()
-        return consecutive
+        return context_messages
 
     def classify_message(
         self,
@@ -76,7 +94,7 @@ class ClassificationPipeline:
         category: str,
         strategy: str,
         model_name: str,
-        prev_msgs: Optional[List[Message]] = None
+        context_messages: Optional[List[Message]] = None
     ) -> Optional[PredictionResult]:
         """
         Classify a single message.
@@ -86,7 +104,7 @@ class ClassificationPipeline:
             category: Classification category
             strategy: Strategy (basic or few_shot)
             model_name: Name of the model
-            prev_msgs: Ordered list of consecutive previous messages (oldest first)
+            context_messages: List of context messages (previous + current + next)
 
         Returns:
             PredictionResult or None if classification failed
@@ -100,23 +118,29 @@ class ClassificationPipeline:
                 # Get prompt
                 prompt = self.prompt_loader.load_prompt(category, strategy)
 
-                # Replace [PREVIOUS_MESSAGE] placeholder with full context block
+                # Replace [PREVIOUS_MESSAGE] placeholder with context
                 if "[PREVIOUS_MESSAGE]" in prompt:
-                    if prev_msgs:
-                        context_block = "\n".join(
-                            f"[id={m.message_id}] {m.text}"
-                            for m in prev_msgs
-                        )
+                    if context_messages:
+                        context_lines = []
+                        for ctx_msg in context_messages:
+                            if ctx_msg.message_id == msg.message_id:
+                                # Mark the current message being classified
+                                context_lines.append(
+                                    f">>> CLASSIFYING: [id={ctx_msg.message_id}] {ctx_msg.text} <<<"
+                                )
+                            else:
+                                context_lines.append(
+                                    f"[id={ctx_msg.message_id}] {ctx_msg.text}"
+                                )
+                        context_block = "\n".join(context_lines)
                     else:
-                        context_block = "No previous message"
+                        context_block = "No context available"
                     prompt = prompt.replace("[PREVIOUS_MESSAGE]", context_block)
                 
                 # Get true label from ground truth
                 true_label = self.matcher.get_label(msg.thread_id, msg.message_id, category)
                 if true_label is None:
                     return None  # No ground truth for this category
-                
-                logger.info("Prompt looks like:", prompt)
                 
                 # LLM classify message based on prompt and the message's content
                 prediction = self.classifier.classify(prompt, msg.text)
@@ -212,19 +236,10 @@ class ClassificationPipeline:
                 if not message_filter.allow(message):
                     continue
 
-                # Collect all consecutive previous messages (no ID gaps)
-                prev_msgs = self._get_previous_messages(messages_data, idx)
+                # Get context messages: max 3 previous + current + max 1 next
+                context_messages = self._get_context_messages(messages_data, idx, thread_id, max_previous=3, max_next=1)
 
-                # For debugging: show how much context was gathered
-                #if prev_msgs:
-                 #   ids = [str(m.message_id) for m in prev_msgs]
-                  #  print(f"Context for message {message_id} in thread {thread_id}: "
-                      #    f"previous message ids = [{', '.join(ids)}]")
-                #else:
-                 #   print(f"Context for message {message_id} in thread {thread_id}: "
-                      #    f"No previous messages")
-
-                result = self.classify_message(message, category, strategy, model_name, prev_msgs)
+                result = self.classify_message(message, category, strategy, model_name, context_messages)
                 
                 if result is None:
                     continue
