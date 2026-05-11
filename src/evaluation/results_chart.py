@@ -5,6 +5,7 @@ from pathlib import Path
 import pandas as pd
 import matplotlib.pyplot as plt
 import json
+import seaborn as sns
 
 
 # ======================================
@@ -93,238 +94,169 @@ def save_plot(filename):
 # 1. MODEL COMPARISON
 # ======================================
 
-def plot_model_comparison(df):
+def plot_model_consistency(df):
 
-    grouped = (
-        df.groupby("model")["macro_f1"]
-        .mean()
-        .sort_values(ascending=False)
+    plt.figure(figsize=(8, 6))
+
+    df.boxplot(
+        column="macro_f1",
+        by="model"
     )
 
-    plt.figure(figsize=(6, 5))
+    plt.title("Model Consistency Across Tasks and Configurations")
 
-    grouped.plot(kind="bar")
+    plt.suptitle("")
 
-    plt.ylabel("Average Macro-F1")
+    plt.ylabel("Macro-F1")
 
-    plt.title("Overall Model Performance")
-
-    save_plot("01_model_comparison.png")
+    save_plot("10_model_consistency_boxplot.png")
 
 
-# ======================================
-# 2. STRATEGY COMPARISON
-# ======================================
-
-def plot_strategy_comparison(df):
-
-    grouped = (
-        df.groupby("strategy")["macro_f1"]
-        .mean()
-        .sort_values(ascending=False)
-    )
-
-    plt.figure(figsize=(6, 5))
-
-    grouped.plot(kind="bar")
-
-    plt.ylabel("Average Macro-F1")
-
-    plt.title("Prompting Strategy Comparison")
-
-    save_plot("02_strategy_comparison.png")
 
 
 # ======================================
-# 3. CONTEXT COMPARISON
+# MODEL PERFORMANCE BY TASK
 # ======================================
 
-def plot_context_comparison(df):
-
-    grouped = (
-        df.groupby("context")["macro_f1"]
-        .mean()
-        .sort_values(ascending=False)
-    )
-
-    plt.figure(figsize=(6, 5))
-
-    grouped.plot(kind="bar")
-
-    plt.ylabel("Average Macro-F1")
-
-    plt.title("Effect of Context")
-
-    save_plot("03_context_comparison.png")
-
-
-# ======================================
-# 4. MODEL × STRATEGY INTERACTION
-# ======================================
-
-def plot_model_strategy(df):
+def plot_model_by_task(df):
 
     pivot = df.pivot_table(
 
         values="macro_f1",
 
-        index="strategy",
+        index="task",
 
         columns="model",
 
         aggfunc="mean"
     )
 
-    plt.figure(figsize=(7, 5))
-
-    pivot.plot(marker="o")
-
-    plt.ylabel("Average Macro-F1")
-
-    plt.title("Model vs Prompting Strategy")
-
-    plt.grid(True)
-
-    save_plot("04_model_strategy_interaction.png")
-
-
-# ======================================
-# 5. MODEL × CONTEXT INTERACTION
-# ======================================
-
-def plot_model_context(df):
-
-    pivot = df.pivot_table(
-
-        values="macro_f1",
-
-        index="context",
-
-        columns="model",
-
-        aggfunc="mean"
+    ax = pivot.plot(
+        kind="bar",
+        figsize=(10, 6)
     )
 
-    plt.figure(figsize=(7, 5))
+    ax.set_ylabel("Average Macro-F1")
 
-    pivot.plot(marker="o")
+    ax.set_title("Model Performance Across Classification Tasks")
 
-    plt.ylabel("Average Macro-F1")
-
-    plt.title("Model vs Context")
-
-    plt.grid(True)
-
-    save_plot("05_model_context_interaction.png")
-
+    save_plot("11_model_by_task.png")
 
 # ======================================
-# 6. STRATEGY × CONTEXT
+# CONTEXT IMPACT PER TASK
 # ======================================
 
-def plot_strategy_context(df):
+def plot_context_by_task(df):
 
     pivot = df.pivot_table(
 
         values="macro_f1",
 
-        index="strategy",
+        index="task",
 
         columns="context",
 
         aggfunc="mean"
     )
 
-    plt.figure(figsize=(7, 5))
-
-    pivot.plot(marker="o")
-
-    plt.ylabel("Average Macro-F1")
-
-    plt.title("Prompting Strategy vs Context")
-
-    plt.grid(True)
-
-    save_plot("06_strategy_context_interaction.png")
-
-
-# ======================================
-# 7. TASK COMPARISON
-# ======================================
-
-def plot_task_comparison(df):
-
-    grouped = (
-        df.groupby("task")["macro_f1"]
-        .mean()
-        .sort_values(ascending=False)
+    ax = pivot.plot(
+        kind="bar",
+        figsize=(10, 6)
     )
 
-    plt.figure(figsize=(8, 5))
+    ax.set_ylabel("Average Macro-F1")
 
-    grouped.plot(kind="bar")
+    ax.set_title("Impact of Context Across Tasks")
 
-    plt.ylabel("Average Macro-F1")
-
-    plt.title("Task Difficulty Comparison")
-
-    save_plot("07_task_comparison.png")
+    save_plot("12_context_by_task.png")
 
 
 # ======================================
-# 8. FULL CONFIGURATION COMPARISON
+# STRATEGY EFFECT PER MODEL
 # ======================================
 
-def plot_full_configuration(df):
+def plot_strategy_by_model(df):
 
-    df["configuration"] = (
+    pivot = df.pivot_table(
 
+        values="macro_f1",
+
+        index="strategy",
+
+        columns="model",
+
+        aggfunc="mean"
+    )
+
+    ax = pivot.plot(
+        kind="bar",
+        figsize=(8, 6)
+    )
+
+    ax.set_ylabel("Average Macro-F1")
+
+    ax.set_title("Effect of Prompting Strategy per Model")
+
+    save_plot("13_strategy_by_model.png")
+
+# ======================================
+# CONFIGURATION HEATMAP
+# ======================================
+
+def plot_configuration_heatmap(df):
+
+    df["config"] = (
         df["model"]
-        + " | "
+        + "\n"
         + df["strategy"]
-        + " | "
+        + "\n"
         + df["context"]
     )
 
-    grouped = (
-        df.groupby("configuration")["macro_f1"]
-        .mean()
-        .sort_values(ascending=False)
+    pivot = df.pivot_table(
+
+        values="macro_f1",
+
+        index="task",
+
+        columns="config",
+
+        aggfunc="mean"
     )
 
     plt.figure(figsize=(12, 6))
 
-    grouped.plot(kind="bar")
-
-    plt.ylabel("Average Macro-F1")
-
-    plt.title("All Experimental Configurations")
-
-    save_plot("08_full_configuration_comparison.png")
-
-
-# ======================================
-# 9. KAPPA COMPARISON
-# ======================================
-
-def plot_kappa_comparison(df):
-
-    grouped = (
-        df.groupby("model")["cohen_kappa"]
-        .mean()
-        .sort_values(ascending=False)
+    sns.heatmap(
+        pivot,
+        annot=True,
+        fmt=".3f"
     )
 
-    plt.figure(figsize=(6, 5))
+    plt.title("Performance Across All Experimental Configurations")
 
-    grouped.plot(kind="bar")
+    save_plot("14_configuration_heatmap.png")
 
-    plt.ylabel("Average Cohen's Kappa")
+# ======================================
+# MODEL STABILITY
+# ======================================
 
-    plt.title("Model Agreement Comparison")
+def plot_model_stability(df):
 
-    save_plot("09_kappa_comparison.png")
+    stability = (
+        df.groupby("model")["macro_f1"]
+        .std()
+    )
 
+    ax = stability.plot(
+        kind="bar",
+        figsize=(6, 5)
+    )
+
+    ax.set_ylabel("Standard Deviation")
+
+    ax.set_title("Model Stability Across Experiments")
+
+    save_plot("15_model_stability.png")
 
 # ======================================
 # PRINT SUMMARY TABLES
@@ -365,7 +297,6 @@ def print_summary_tables(df):
         ].mean()
     )
 
-
 # ======================================
 # MAIN
 # ======================================
@@ -376,29 +307,23 @@ def run():
 
     print(df.head())
 
-    print_summary_tables(df)
+
 
     # ------------------------------
     # GENERATE CHARTS
     # ------------------------------
 
-    plot_model_comparison(df)
+    plot_model_consistency(df)
 
-    plot_strategy_comparison(df)
+    plot_model_by_task(df)
 
-    plot_context_comparison(df)
+    plot_context_by_task(df)
 
-    plot_model_strategy(df)
+    plot_strategy_by_model(df)
 
-    plot_model_context(df)
+    plot_configuration_heatmap(df)
 
-    plot_strategy_context(df)
-
-    plot_task_comparison(df)
-
-    plot_full_configuration(df)
-
-    plot_kappa_comparison(df)
+    plot_model_stability(df)
 
     print("\nAll charts generated successfully.")
 
