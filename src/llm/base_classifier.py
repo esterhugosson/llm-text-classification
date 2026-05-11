@@ -31,19 +31,18 @@ class BaseLLMClassifier(ABC):
         self.max_tokens = max_tokens
         self.system_prompt = system_prompt
     
-    def classify(self, prompt: str, text: str) -> Dict[str, Any]:
+    def classify(self, prompt: str) -> Dict[str, Any]:
         """
-        Classify text using the LLM
+        Classify using the LLM
         
         Args:
-            prompt: Classification prompt/instructions
-            text: Text to classify
+            prompt: Classification prompt/instructions (includes message to classify)
             
         Returns:
             Dictionary with classification result or error
         """
         # Build messages
-        messages = self._build_messages(prompt, text)
+        messages = self._build_messages(prompt)
         
         # Call the API (implemented by subclasses)
         response_text = self._call_api(messages)
@@ -51,13 +50,12 @@ class BaseLLMClassifier(ABC):
         # Parse and return result
         return self._parse_response(response_text)
     
-    def _build_messages(self, prompt: str, text: str) -> List[Dict[str, str]]:
+    def _build_messages(self, prompt: str) -> List[Dict[str, str]]:
         """
         Build message list in standard format
         
         Args:
-            prompt: Classification prompt
-            text: Text to classify
+            prompt: Classification prompt (includes message to classify)
             
         Returns:
             List of message dictionaries
@@ -69,7 +67,7 @@ class BaseLLMClassifier(ABC):
             },
             {
                 "role": "user",
-                "content": f"{prompt}\n\n{text}",
+                "content": prompt,
             },
         ]
     

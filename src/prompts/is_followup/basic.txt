@@ -12,8 +12,8 @@ Definition: Message explicitly builds on a previous response.
 Definition: Message starts a new request or does not depend on prior turns.
 
 Context Usage:
-- Use previous messages to understand the conversational flow and context
-- The message marked with >>> CLASSIFYING: <<< is the one being classified
+- Use surrounding messages to understand the conversational flow and context
+- The message marked with >>> CLASSIFYING: <<< is the current message being classified
 - Consider the relationship between messages to inform your classification
 - Always classify based on the intent and behavior of the CURRENT message only
 - Context informs interpretation but does not override the primary classification
@@ -29,5 +29,3 @@ Rules:
 
 Conversation Context:
 [PREVIOUS_MESSAGE]
-
-Current message to classify:
