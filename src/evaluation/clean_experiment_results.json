@@ -1,0 +1,450 @@
+[
+  {
+    "model": "claude_sonnet",
+    "task": "cps_behavior",
+    "context": true,
+    "strategy": "basic",
+    "n_samples": 91,
+    "metrics": {
+      "precision": 0.552,
+      "recall": 0.538,
+      "macro_f1": 0.521,
+      "accuracy": 0.549,
+      "cohen_kappa": 0.401
+    }
+  },
+  {
+    "model": "claude_sonnet",
+    "task": "cps_behavior",
+    "context": true,
+    "strategy": "few_shot",
+    "n_samples": 91,
+    "metrics": {
+      "precision": 0.569,
+      "recall": 0.554,
+      "macro_f1": 0.544,
+      "accuracy": 0.571,
+      "cohen_kappa": 0.43
+    }
+  },
+  {
+    "model": "claude_sonnet",
+    "task": "interactional_move",
+    "context": true,
+    "strategy": "basic",
+    "n_samples": 98,
+    "metrics": {
+      "precision": 0.528,
+      "recall": 0.353,
+      "macro_f1": 0.393,
+      "accuracy": 0.663,
+      "cohen_kappa": 0.489
+    }
+  },
+  {
+    "model": "claude_sonnet",
+    "task": "interactional_move",
+    "context": true,
+    "strategy": "few_shot",
+    "n_samples": 98,
+    "metrics": {
+      "precision": 0.331,
+      "recall": 0.298,
+      "macro_f1": 0.298,
+      "accuracy": 0.612,
+      "cohen_kappa": 0.423
+    }
+  },
+  {
+    "model": "claude_sonnet",
+    "task": "is_followup",
+    "context": true,
+    "strategy": "basic",
+    "n_samples": 189,
+    "metrics": {
+      "precision": 0.635,
+      "recall": 0.786,
+      "macro_f1": 0.627,
+      "accuracy": 0.72,
+      "cohen_kappa": 0.311
+    }
+  },
+  {
+    "model": "claude_sonnet",
+    "task": "is_followup",
+    "context": true,
+    "strategy": "few_shot",
+    "n_samples": 189,
+    "metrics": {
+      "precision": 0.654,
+      "recall": 0.819,
+      "macro_f1": 0.655,
+      "accuracy": 0.746,
+      "cohen_kappa": 0.358
+    }
+  },
+  {
+    "model": "claude_sonnet",
+    "task": "prompt_type",
+    "context": true,
+    "strategy": "basic",
+    "n_samples": 91,
+    "metrics": {
+      "precision": 0.455,
+      "recall": 0.302,
+      "macro_f1": 0.312,
+      "accuracy": 0.341,
+      "cohen_kappa": 0.243
+    }
+  },
+  {
+    "model": "claude_sonnet",
+    "task": "prompt_type",
+    "context": true,
+    "strategy": "few_shot",
+    "n_samples": 91,
+    "metrics": {
+      "precision": 0.474,
+      "recall": 0.375,
+      "macro_f1": 0.351,
+      "accuracy": 0.33,
+      "cohen_kappa": 0.251
+    }
+  },
+  {
+    "model": "gpt4o",
+    "task": "cps_behavior",
+    "context": true,
+    "strategy": "basic",
+    "n_samples": 91,
+    "metrics": {
+      "precision": 0.478,
+      "recall": 0.431,
+      "macro_f1": 0.436,
+      "accuracy": 0.582,
+      "cohen_kappa": 0.418
+    }
+  },
+  {
+    "model": "gpt4o",
+    "task": "cps_behavior",
+    "context": true,
+    "strategy": "few_shot",
+    "n_samples": 91,
+    "metrics": {
+      "precision": 0.531,
+      "recall": 0.496,
+      "macro_f1": 0.459,
+      "accuracy": 0.549,
+      "cohen_kappa": 0.4
+    }
+  },
+  {
+    "model": "gpt4o",
+    "task": "interactional_move",
+    "context": true,
+    "strategy": "basic",
+    "n_samples": 98,
+    "metrics": {
+      "precision": 0.364,
+      "recall": 0.222,
+      "macro_f1": 0.266,
+      "accuracy": 0.429,
+      "cohen_kappa": 0.282
+    }
+  },
+  {
+    "model": "gpt4o",
+    "task": "interactional_move",
+    "context": true,
+    "strategy": "few_shot",
+    "n_samples": 98,
+    "metrics": {
+      "precision": 0.419,
+      "recall": 0.266,
+      "macro_f1": 0.303,
+      "accuracy": 0.388,
+      "cohen_kappa": 0.269
+    }
+  },
+  {
+    "model": "gpt4o",
+    "task": "is_followup",
+    "context": true,
+    "strategy": "basic",
+    "n_samples": 189,
+    "metrics": {
+      "precision": 0.64,
+      "recall": 0.792,
+      "macro_f1": 0.636,
+      "accuracy": 0.73,
+      "cohen_kappa": 0.324
+    }
+  },
+  {
+    "model": "gpt4o",
+    "task": "is_followup",
+    "context": true,
+    "strategy": "few_shot",
+    "n_samples": 189,
+    "metrics": {
+      "precision": 0.683,
+      "recall": 0.838,
+      "macro_f1": 0.709,
+      "accuracy": 0.81,
+      "cohen_kappa": 0.44
+    }
+  },
+  {
+    "model": "gpt4o",
+    "task": "prompt_type",
+    "context": true,
+    "strategy": "basic",
+    "n_samples": 91,
+    "metrics": {
+      "precision": 0.358,
+      "recall": 0.272,
+      "macro_f1": 0.263,
+      "accuracy": 0.286,
+      "cohen_kappa": 0.188
+    }
+  },
+  {
+    "model": "gpt4o",
+    "task": "prompt_type",
+    "context": true,
+    "strategy": "few_shot",
+    "n_samples": 91,
+    "metrics": {
+      "precision": 0.404,
+      "recall": 0.37,
+      "macro_f1": 0.349,
+      "accuracy": 0.374,
+      "cohen_kappa": 0.292
+    }
+  },
+  {
+    "model": "claude_sonnet",
+    "task": "cps_behavior",
+    "context": false,
+    "strategy": "basic",
+    "n_samples": 91,
+    "metrics": {
+      "precision": 0.514,
+      "recall": 0.518,
+      "macro_f1": 0.438,
+      "accuracy": 0.527,
+      "cohen_kappa": 0.389
+    }
+  },
+  {
+    "model": "claude_sonnet",
+    "task": "cps_behavior",
+    "context": false,
+    "strategy": "few_shot",
+    "n_samples": 91,
+    "metrics": {
+      "precision": 0.434,
+      "recall": 0.459,
+      "macro_f1": 0.411,
+      "accuracy": 0.495,
+      "cohen_kappa": 0.34
+    }
+  },
+  {
+    "model": "claude_sonnet",
+    "task": "interactional_move",
+    "context": false,
+    "strategy": "basic",
+    "n_samples": 98,
+    "metrics": {
+      "precision": 0.519,
+      "recall": 0.377,
+      "macro_f1": 0.415,
+      "accuracy": 0.622,
+      "cohen_kappa": 0.452
+    }
+  },
+  {
+    "model": "claude_sonnet",
+    "task": "interactional_move",
+    "context": false,
+    "strategy": "few_shot",
+    "n_samples": 98,
+    "metrics": {
+      "precision": 0.361,
+      "recall": 0.305,
+      "macro_f1": 0.302,
+      "accuracy": 0.612,
+      "cohen_kappa": 0.433
+    }
+  },
+  {
+    "model": "claude_sonnet",
+    "task": "is_followup",
+    "context": false,
+    "strategy": "basic",
+    "n_samples": 189,
+    "metrics": {
+      "precision": 0.588,
+      "recall": 0.682,
+      "macro_f1": 0.446,
+      "accuracy": 0.476,
+      "cohen_kappa": 0.134
+    }
+  },
+  {
+    "model": "claude_sonnet",
+    "task": "is_followup",
+    "context": false,
+    "strategy": "few_shot",
+    "n_samples": 189,
+    "metrics": {
+      "precision": 0.608,
+      "recall": 0.743,
+      "macro_f1": 0.528,
+      "accuracy": 0.582,
+      "cohen_kappa": 0.205
+    }
+  },
+  {
+    "model": "claude_sonnet",
+    "task": "prompt_type",
+    "context": false,
+    "strategy": "basic",
+    "n_samples": 91,
+    "metrics": {
+      "precision": 0.355,
+      "recall": 0.255,
+      "macro_f1": 0.252,
+      "accuracy": 0.275,
+      "cohen_kappa": 0.184
+    }
+  },
+  {
+    "model": "claude_sonnet",
+    "task": "prompt_type",
+    "context": false,
+    "strategy": "few_shot",
+    "n_samples": 91,
+    "metrics": {
+      "precision": 0.379,
+      "recall": 0.349,
+      "macro_f1": 0.3,
+      "accuracy": 0.297,
+      "cohen_kappa": 0.222
+    }
+  },
+  {
+    "model": "gpt4o",
+    "task": "cps_behavior",
+    "context": false,
+    "strategy": "basic",
+    "n_samples": 91,
+    "metrics": {
+      "precision": 0.502,
+      "recall": 0.501,
+      "macro_f1": 0.428,
+      "accuracy": 0.538,
+      "cohen_kappa": 0.382
+    }
+  },
+  {
+    "model": "gpt4o",
+    "task": "cps_behavior",
+    "context": false,
+    "strategy": "few_shot",
+    "n_samples": 91,
+    "metrics": {
+      "precision": 0.539,
+      "recall": 0.491,
+      "macro_f1": 0.43,
+      "accuracy": 0.505,
+      "cohen_kappa": 0.358
+    }
+  },
+  {
+    "model": "gpt4o",
+    "task": "interactional_move",
+    "context": false,
+    "strategy": "basic",
+    "n_samples": 98,
+    "metrics": {
+      "precision": 0.499,
+      "recall": 0.252,
+      "macro_f1": 0.314,
+      "accuracy": 0.459,
+      "cohen_kappa": 0.302
+    }
+  },
+  {
+    "model": "gpt4o",
+    "task": "interactional_move",
+    "context": false,
+    "strategy": "few_shot",
+    "n_samples": 98,
+    "metrics": {
+      "precision": 0.5,
+      "recall": 0.294,
+      "macro_f1": 0.369,
+      "accuracy": 0.439,
+      "cohen_kappa": 0.285
+    }
+  },
+  {
+    "model": "gpt4o",
+    "task": "is_followup",
+    "context": false,
+    "strategy": "basic",
+    "n_samples": 189,
+    "metrics": {
+      "precision": 0.581,
+      "recall": 0.621,
+      "macro_f1": 0.334,
+      "accuracy": 0.339,
+      "cohen_kappa": 0.075
+    }
+  },
+  {
+    "model": "gpt4o",
+    "task": "is_followup",
+    "context": false,
+    "strategy": "few_shot",
+    "n_samples": 189,
+    "metrics": {
+      "precision": 0.592,
+      "recall": 0.676,
+      "macro_f1": 0.415,
+      "accuracy": 0.434,
+      "cohen_kappa": 0.121
+    }
+  },
+  {
+    "model": "gpt4o",
+    "task": "prompt_type",
+    "context": false,
+    "strategy": "basic",
+    "n_samples": 91,
+    "metrics": {
+      "precision": 0.377,
+      "recall": 0.234,
+      "macro_f1": 0.223,
+      "accuracy": 0.264,
+      "cohen_kappa": 0.155
+    }
+  },
+  {
+    "model": "gpt4o",
+    "task": "prompt_type",
+    "context": false,
+    "strategy": "few_shot",
+    "n_samples": 91,
+    "metrics": {
+      "precision": 0.392,
+      "recall": 0.356,
+      "macro_f1": 0.31,
+      "accuracy": 0.297,
+      "cohen_kappa": 0.218
+    }
+  }
+]

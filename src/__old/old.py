@@ -54,12 +54,6 @@ def test():
 
         metrics = Metrics(df)
 
-        # all rows in file
-        print_eval(
-            f"{name} - ALL",
-            metrics.evaluate()
-        )
-
         # basic only
         basic_df = metrics.filter(strategy="basic")
 

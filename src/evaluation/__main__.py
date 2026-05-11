@@ -6,138 +6,237 @@ from pathlib import Path
 
 
 # ======================================
-# LOAD ALL FILES
+# EXPERIMENT DEFINITIONS
 # ======================================
 
-datasets = {
-    "all_results": load_results("src/results/raw/experiment_1_22_april.json"),
+experiments = [
 
-    "claude_cps_behavior": load_results("src/results/raw/claude_cps_behavior.json"),
-    "claude_interactional_move": load_results("src/results/raw/claude_interactional_move.json"),
-    "claude_is_followup": load_results("src/results/raw/claude_is_followup.json"),
-    "claude_prompt_type": load_results("src/results/raw/claude_prompt_type.json"),
+    # ==================================
+    # CLAUDE — WITH CONTEXT
+    # ==================================
 
-    "gpt4o_cps_behavior": load_results("src/results/raw/gpt4o_cps_behavior.json"),
-    "gpt4o_interactional_move": load_results("src/results/raw/gpt4o_interactional_move.json"),
-    "gpt4o_is_followup": load_results("src/results/raw/gpt4o_is_followup.json"),
-    "gpt4o_prompt_type": load_results("src/results/raw/gpt4o_prompt_type.json"),
-}
+    {
+        "model": "claude_sonnet",
+        "task": "cps_behavior",
+        "context": True,
+        "path": "src/results/raw/claude_cps_behavior_with_context.json"
+    },
+
+    {
+        "model": "claude_sonnet",
+        "task": "interactional_move",
+        "context": True,
+        "path": "src/results/raw/claude_interactional_move_with_context.json"
+    },
+
+    {
+        "model": "claude_sonnet",
+        "task": "is_followup",
+        "context": True,
+        "path": "src/results/raw/claude_is_followup_with_context.json"
+    },
+
+    {
+        "model": "claude_sonnet",
+        "task": "prompt_type",
+        "context": True,
+        "path": "src/results/raw/claude_prompt_type_with_context.json"
+    },
+
+    # ==================================
+    # GPT-4o — WITH CONTEXT
+    # ==================================
+
+    {
+        "model": "gpt4o",
+        "task": "cps_behavior",
+        "context": True,
+        "path": "src/results/raw/gpt4o_cps_behavior_with_context.json"
+    },
+
+    {
+        "model": "gpt4o",
+        "task": "interactional_move",
+        "context": True,
+        "path": "src/results/raw/gpt4o_interactional_move_with_context.json"
+    },
+
+    {
+        "model": "gpt4o",
+        "task": "is_followup",
+        "context": True,
+        "path": "src/results/raw/gpt4o_is_followup_with_context.json"
+    },
+
+    {
+        "model": "gpt4o",
+        "task": "prompt_type",
+        "context": True,
+        "path": "src/results/raw/gpt4o_prompt_type_with_context.json"
+    },
+
+    # ==================================
+    # CLAUDE — WITHOUT CONTEXT
+    # ==================================
+
+    {
+        "model": "claude_sonnet",
+        "task": "cps_behavior",
+        "context": False,
+        "path": "src/results/raw/claude_cps_behavior.json"
+    },
+
+    {
+        "model": "claude_sonnet",
+        "task": "interactional_move",
+        "context": False,
+        "path": "src/results/raw/claude_interactional_move.json"
+    },
+
+    {
+        "model": "claude_sonnet",
+        "task": "is_followup",
+        "context": False,
+        "path": "src/results/raw/claude_is_followup.json"
+    },
+
+    {
+        "model": "claude_sonnet",
+        "task": "prompt_type",
+        "context": False,
+        "path": "src/results/raw/claude_prompt_type.json"
+    },
+
+    # ==================================
+    # GPT-4o — WITHOUT CONTEXT
+    # ==================================
+
+    {
+        "model": "gpt4o",
+        "task": "cps_behavior",
+        "context": False,
+        "path": "src/results/raw/gpt4o_cps_behavior.json"
+    },
+
+    {
+        "model": "gpt4o",
+        "task": "interactional_move",
+        "context": False,
+        "path": "src/results/raw/gpt4o_interactional_move.json"
+    },
+
+    {
+        "model": "gpt4o",
+        "task": "is_followup",
+        "context": False,
+        "path": "src/results/raw/gpt4o_is_followup.json"
+    },
+
+    {
+        "model": "gpt4o",
+        "task": "prompt_type",
+        "context": False,
+        "path": "src/results/raw/gpt4o_prompt_type.json"
+    }
+]
 
 
 # ======================================
-# PRINT HELPER
+# BUILD CLEAN RESULT STRUCTURE
 # ======================================
 
-def print_eval(title, result):
-    print(f"\n===== {title.upper()} =====")
-    print("Accuracy:", round(result["accuracy"], 3))
-    print("Macro F1:", round(result["macro_f1"], 3))
-    print("Weighted F1:", round(result["weighted_f1"], 3))
-    print("Kappa:", round(result["cohen_kappa"], 3))
+def build_results():
+
+    all_results = []
+
+    for exp in experiments:
+
+        print(f"Processing: {exp['model']} | {exp['task']} | context={exp['context']}")
+
+        # ------------------------------
+        # LOAD DATASET
+        # ------------------------------
+
+        df = load_results(exp["path"])
+
+        metrics = Metrics(df)
+
+        # ------------------------------
+        # EVALUATE BOTH STRATEGIES
+        # ------------------------------
+
+        for strategy in ["basic", "few_shot"]:
+
+            filtered_df = metrics.filter(strategy=strategy)
+
+            result = metrics.evaluate(filtered_df)
+
+            # --------------------------
+            # BUILD CLEAN RESULT OBJECT
+            # --------------------------
+
+            experiment_result = {
+
+                "model": exp["model"],
+
+                "task": exp["task"],
+
+                "context": exp["context"],
+
+                "strategy": strategy,
+
+                "n_samples": len(filtered_df),
+
+                "metrics": {
+
+                    "precision": round(result["precision"], 3),
+
+                    "recall": round(result["recall"], 3),
+
+                    "macro_f1": round(result["macro_f1"], 3),
+
+                    "accuracy": round(result["accuracy"], 3),
+
+                    "cohen_kappa": round(result["cohen_kappa"], 3)
+                }
+            }
+
+            all_results.append(experiment_result)
+
+    return all_results
 
 
 # ======================================
 # SAVE JSON
 # ======================================
 
-def save(results):
-    output_path = Path(__file__).parent / "evaluation_report.json"
+def save_results(results):
+
+    output_path = (
+        Path(__file__).parent / "clean_experiment_results.json"
+    )
 
     with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(results, f, indent=2, ensure_ascii=False)
 
-    print(f"\nSaved results to: {output_path}")
+        json.dump(
+            results,
+            f,
+            indent=2,
+            ensure_ascii=False
+        )
 
-
-# ======================================
-# CONVERT PANDAS TO JSON SAFE
-# ======================================
-
-def safe(value):
-
-    if hasattr(value, "to_dict"):
-        data = value.to_dict()
-
-        cleaned = {}
-
-        for key, val in data.items():
-
-            if isinstance(key, tuple):
-                key = " | ".join(str(x) for x in key)
-
-            cleaned[str(key)] = val
-
-        return cleaned
-
-    return value
+    print(f"\nSaved JSON to:\n{output_path}")
 
 
 # ======================================
-# BUILD REPORT FOR ONE DATASET
-# ======================================
-
-def build_report(df):
-    metrics = Metrics(df)
-
-    report = {
-        "metrics": metrics.evaluate(),
-
-        "accuracy_analysis": {
-            "overall_accuracy": metrics.overall_accuracy(),
-
-            "accuracy_by_model": safe(metrics.accuracy_by("model")),
-            "accuracy_by_strategy": safe(metrics.accuracy_by("strategy")),
-            "accuracy_by_category": safe(metrics.accuracy_by("category")),
-
-            "pivot_model_strategy": safe(
-                metrics.accuracy_pivot("model", "strategy")
-            ),
-
-            "pivot_model_category": safe(
-                metrics.accuracy_pivot("model", "category")
-            ),
-
-            "pivot_category_strategy": safe(
-                metrics.accuracy_pivot("category", "strategy")
-            ),
-
-            "assistant_category": safe(
-                metrics.accuracy_by_two(
-                    "assistant_name",
-                    "category"
-                )
-            ),
-
-            "model_category_strategy": safe(
-                metrics.accuracy_by_three(
-                    "model",
-                    "category",
-                    "strategy"
-                )
-            )
-        }
-    }
-
-    return report
-
-
-# ======================================
-# RUN ALL
+# MAIN
 # ======================================
 
 def main():
 
-    all_results = {}
+    results = build_results()
 
-    for name, df in datasets.items():
-
-        report = build_report(df)
-
-        print_eval(name, report["metrics"])
-
-        all_results[name] = report
-
-    save(all_results)
+    save_results(results)
 
 
 # ======================================

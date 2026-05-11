@@ -1,0 +1,281 @@
+{
+  "all_results": {
+    "metrics": {
+      "precision": 0.549178964178218,
+      "recall": 0.5915458797155225,
+      "macro_f1": 0.5337028287137093,
+      "accuracy": 0.6901785714285714,
+      "cohen_kappa": 0.5528659196023838,
+      "report": "                          precision    recall  f1-score   support\n\n                   false       0.32      0.89      0.47        96\nnegotiation_coordination       0.43      0.63      0.51        60\n                    none       0.21      0.38      0.27        16\n    shared_understanding       0.56      0.39      0.46       112\n         task_delegation       0.71      0.79      0.75       128\n        team_maintenance       0.64      0.33      0.44        48\n                    true       0.98      0.73      0.84       660\n\n                accuracy                           0.69      1120\n               macro avg       0.55      0.59      0.53      1120\n            weighted avg       0.79      0.69      0.72      1120\n"
+    },
+    "accuracy_analysis": {
+      "overall_accuracy": 0.6901785714285714,
+      "accuracy_by_model": {
+        "claude": 0.6767857142857143,
+        "gpt4o": 0.7035714285714286
+      },
+      "accuracy_by_strategy": {
+        "basic": 0.6732142857142858,
+        "few_shot": 0.7071428571428572
+      },
+      "accuracy_by_category": {
+        "cps_behavior": 0.5631868131868132,
+        "is_followup": 0.7513227513227513
+      },
+      "pivot_model_strategy": {
+        "basic": {
+          "claude": 0.6642857142857143,
+          "gpt4o": 0.6821428571428572
+        },
+        "few_shot": {
+          "claude": 0.6892857142857143,
+          "gpt4o": 0.725
+        }
+      },
+      "pivot_model_category": {
+        "cps_behavior": {
+          "claude": 0.5604395604395604,
+          "gpt4o": 0.5659340659340659
+        },
+        "is_followup": {
+          "claude": 0.7328042328042328,
+          "gpt4o": 0.7698412698412699
+        }
+      },
+      "pivot_category_strategy": {
+        "basic": {
+          "cps_behavior": 0.5659340659340659,
+          "is_followup": 0.7248677248677249
+        },
+        "few_shot": {
+          "cps_behavior": 0.5604395604395604,
+          "is_followup": 0.7777777777777778
+        }
+      },
+      "assistant_category": {
+        "ReflektoBot | cps_behavior": 0.44886363636363635,
+        "ReflektoBot | is_followup": 0.8222222222222222,
+        "StandardBot | cps_behavior": 0.6702127659574468,
+        "StandardBot | is_followup": 0.6868686868686869
+      },
+      "model_category_strategy": {
+        "claude | cps_behavior | basic": 0.5494505494505495,
+        "claude | cps_behavior | few_shot": 0.5714285714285714,
+        "claude | is_followup | basic": 0.7195767195767195,
+        "claude | is_followup | few_shot": 0.746031746031746,
+        "gpt4o | cps_behavior | basic": 0.5824175824175825,
+        "gpt4o | cps_behavior | few_shot": 0.5494505494505495,
+        "gpt4o | is_followup | basic": 0.7301587301587301,
+        "gpt4o | is_followup | few_shot": 0.8095238095238095
+      }
+    }
+  },
+  "claude_cps_behavior": {
+    "metrics": {
+      "precision": 0.5607894736842105,
+      "recall": 0.5460714285714285,
+      "macro_f1": 0.5333302829253412,
+      "accuracy": 0.5604395604395604,
+      "cohen_kappa": 0.4154488517745303,
+      "report": "                          precision    recall  f1-score   support\n\nnegotiation_coordination       0.37      0.73      0.49        30\n                    none       0.50      0.50      0.50         8\n    shared_understanding       0.58      0.39      0.47        56\n         task_delegation       0.73      0.69      0.71        64\n        team_maintenance       0.62      0.42      0.50        24\n\n                accuracy                           0.56       182\n               macro avg       0.56      0.55      0.53       182\n            weighted avg       0.60      0.56      0.56       182\n"
+    },
+    "accuracy_analysis": {
+      "overall_accuracy": 0.5604395604395604,
+      "accuracy_by_model": {
+        "claude": 0.5604395604395604
+      },
+      "accuracy_by_strategy": {
+        "basic": 0.5494505494505495,
+        "few_shot": 0.5714285714285714
+      },
+      "accuracy_by_category": {
+        "cps_behavior": 0.5604395604395604
+      },
+      "pivot_model_strategy": {
+        "basic": {
+          "claude": 0.5494505494505495
+        },
+        "few_shot": {
+          "claude": 0.5714285714285714
+        }
+      },
+      "pivot_model_category": {
+        "cps_behavior": {
+          "claude": 0.5604395604395604
+        }
+      },
+      "pivot_category_strategy": {
+        "basic": {
+          "cps_behavior": 0.5494505494505495
+        },
+        "few_shot": {
+          "cps_behavior": 0.5714285714285714
+        }
+      },
+      "assistant_category": {
+        "ReflektoBot | cps_behavior": 0.4772727272727273,
+        "StandardBot | cps_behavior": 0.6382978723404256
+      },
+      "model_category_strategy": {
+        "claude | cps_behavior | basic": 0.5494505494505495,
+        "claude | cps_behavior | few_shot": 0.5714285714285714
+      }
+    }
+  },
+  "claude_is_followup": {
+    "metrics": {
+      "precision": 0.6442160079467807,
+      "recall": 0.8024621212121212,
+      "macro_f1": 0.6411943272276157,
+      "accuracy": 0.7328042328042328,
+      "cohen_kappa": 0.33420529454849857,
+      "report": "              precision    recall  f1-score   support\n\n       false       0.31      0.90      0.46        48\n        true       0.98      0.71      0.82       330\n\n    accuracy                           0.73       378\n   macro avg       0.64      0.80      0.64       378\nweighted avg       0.89      0.73      0.78       378\n"
+    },
+    "accuracy_analysis": {
+      "overall_accuracy": 0.7328042328042328,
+      "accuracy_by_model": {
+        "claude": 0.7328042328042328
+      },
+      "accuracy_by_strategy": {
+        "basic": 0.7195767195767195,
+        "few_shot": 0.746031746031746
+      },
+      "accuracy_by_category": {
+        "is_followup": 0.7328042328042328
+      },
+      "pivot_model_strategy": {
+        "basic": {
+          "claude": 0.7195767195767195
+        },
+        "few_shot": {
+          "claude": 0.746031746031746
+        }
+      },
+      "pivot_model_category": {
+        "is_followup": {
+          "claude": 0.7328042328042328
+        }
+      },
+      "pivot_category_strategy": {
+        "basic": {
+          "is_followup": 0.7195767195767195
+        },
+        "few_shot": {
+          "is_followup": 0.746031746031746
+        }
+      },
+      "assistant_category": {
+        "ReflektoBot | is_followup": 0.8,
+        "StandardBot | is_followup": 0.6717171717171717
+      },
+      "model_category_strategy": {
+        "claude | is_followup | basic": 0.7195767195767195,
+        "claude | is_followup | few_shot": 0.746031746031746
+      }
+    }
+  },
+  "gpt4o_cps_behavior": {
+    "metrics": {
+      "precision": 0.5090672433817934,
+      "recall": 0.46336309523809527,
+      "macro_f1": 0.4556740889411908,
+      "accuracy": 0.5659340659340659,
+      "cohen_kappa": 0.4089451615555373,
+      "report": "                          precision    recall  f1-score   support\n\nnegotiation_coordination       0.55      0.53      0.54        30\n                    none       0.10      0.25      0.14         8\n    shared_understanding       0.54      0.39      0.45        56\n         task_delegation       0.70      0.89      0.78        64\n        team_maintenance       0.67      0.25      0.36        24\n\n                accuracy                           0.57       182\n               macro avg       0.51      0.46      0.46       182\n            weighted avg       0.59      0.57      0.56       182\n"
+    },
+    "accuracy_analysis": {
+      "overall_accuracy": 0.5659340659340659,
+      "accuracy_by_model": {
+        "gpt4o": 0.5659340659340659
+      },
+      "accuracy_by_strategy": {
+        "basic": 0.5824175824175825,
+        "few_shot": 0.5494505494505495
+      },
+      "accuracy_by_category": {
+        "cps_behavior": 0.5659340659340659
+      },
+      "pivot_model_strategy": {
+        "basic": {
+          "gpt4o": 0.5824175824175825
+        },
+        "few_shot": {
+          "gpt4o": 0.5494505494505495
+        }
+      },
+      "pivot_model_category": {
+        "cps_behavior": {
+          "gpt4o": 0.5659340659340659
+        }
+      },
+      "pivot_category_strategy": {
+        "basic": {
+          "cps_behavior": 0.5824175824175825
+        },
+        "few_shot": {
+          "cps_behavior": 0.5494505494505495
+        }
+      },
+      "assistant_category": {
+        "ReflektoBot | cps_behavior": 0.42045454545454547,
+        "StandardBot | cps_behavior": 0.7021276595744681
+      },
+      "model_category_strategy": {
+        "gpt4o | cps_behavior | basic": 0.5824175824175825,
+        "gpt4o | cps_behavior | few_shot": 0.5494505494505495
+      }
+    }
+  },
+  "gpt4o_is_followup": {
+    "metrics": {
+      "precision": 0.6589670014347202,
+      "recall": 0.8147727272727272,
+      "macro_f1": 0.6712550607287449,
+      "accuracy": 0.7698412698412699,
+      "cohen_kappa": 0.37751277683134576,
+      "report": "              precision    recall  f1-score   support\n\n       false       0.34      0.88      0.49        48\n        true       0.98      0.75      0.85       330\n\n    accuracy                           0.77       378\n   macro avg       0.66      0.81      0.67       378\nweighted avg       0.90      0.77      0.81       378\n"
+    },
+    "accuracy_analysis": {
+      "overall_accuracy": 0.7698412698412699,
+      "accuracy_by_model": {
+        "gpt4o": 0.7698412698412699
+      },
+      "accuracy_by_strategy": {
+        "basic": 0.7301587301587301,
+        "few_shot": 0.8095238095238095
+      },
+      "accuracy_by_category": {
+        "is_followup": 0.7698412698412699
+      },
+      "pivot_model_strategy": {
+        "basic": {
+          "gpt4o": 0.7301587301587301
+        },
+        "few_shot": {
+          "gpt4o": 0.8095238095238095
+        }
+      },
+      "pivot_model_category": {
+        "is_followup": {
+          "gpt4o": 0.7698412698412699
+        }
+      },
+      "pivot_category_strategy": {
+        "basic": {
+          "is_followup": 0.7301587301587301
+        },
+        "few_shot": {
+          "is_followup": 0.8095238095238095
+        }
+      },
+      "assistant_category": {
+        "ReflektoBot | is_followup": 0.8444444444444444,
+        "StandardBot | is_followup": 0.702020202020202
+      },
+      "model_category_strategy": {
+        "gpt4o | is_followup | basic": 0.7301587301587301,
+        "gpt4o | is_followup | few_shot": 0.8095238095238095
+      }
+    }
+  }
+}
