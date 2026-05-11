@@ -143,7 +143,7 @@ class ClassificationPipeline:
                     return None  # No ground truth for this category
                 
                 # LLM classify message based on prompt and the message's content
-                prediction = self.classifier.classify(prompt, msg.text)
+                prediction = self.classifier.classify(prompt)
                 predicted_label = prediction.get("label")
                 
                 # Check if valid
