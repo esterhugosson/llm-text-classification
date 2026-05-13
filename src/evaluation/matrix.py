@@ -210,21 +210,33 @@ def create_confusion_matrix_plot(
     """
 
     # ==================================
+    # NORMALIZE LABELS
+    # ==================================
+
+    df["true_label"] = (
+        df["true_label"]
+        .astype(str)
+        .str.strip()
+        .str.lower()
+    )
+
+    df["predicted_label"] = (
+        df["predicted_label"]
+        .astype(str)
+        .str.strip()
+        .str.lower()
+    )
+
+    # ==================================
     # LABELS
     # ==================================
 
-    # Convert all labels to strings first
-    true_labels = df["true_label"].astype(str)
-    pred_labels = df["predicted_label"].astype(str)
-
-    # Create sorted label list safely
     labels = sorted(
-        list(set(true_labels.unique()) | set(pred_labels.unique()))
+        list(
+            set(df["true_label"].unique())
+            | set(df["predicted_label"].unique())
+        )
     )
-
-    # Update dataframe columns
-    df["true_label"] = true_labels
-    df["predicted_label"] = pred_labels
 
     # ==================================
     # CONFUSION MATRIX
