@@ -155,6 +155,42 @@ experiments = [
         "task": "prompt_type",
         "context": False,
         "path": "src/results/raw/gpt4o_prompt_type.json"
+    },
+
+    # ==================================
+    # REFLEKTOBOT ONLY — INTERACTIONAL MOVE
+    # ==================================
+
+    {
+        "model": "claude_sonnet",
+        "task": "interactional_move",
+        "context": True,
+        "assistant_name": "ReflektoBot",
+        "path": "src/results/raw/claude_interactional_move_with_context.json"
+    },
+
+    {
+        "model": "gpt4o",
+        "task": "interactional_move",
+        "context": True,
+        "assistant_name": "ReflektoBot",
+        "path": "src/results/raw/gpt4o_interactional_move_with_context.json"
+    },
+
+    {
+        "model": "claude_sonnet",
+        "task": "interactional_move",
+        "context": False,
+        "assistant_name": "ReflektoBot",
+        "path": "src/results/raw/claude_interactional_move.json"
+    },
+
+    {
+        "model": "gpt4o",
+        "task": "interactional_move",
+        "context": False,
+        "assistant_name": "ReflektoBot",
+        "path": "src/results/raw/gpt4o_interactional_move.json"
     }
 ]
 
@@ -203,11 +239,28 @@ def wrap_labels(labels, width=18):
 def create_confusion_matrix_plot(
     df: pd.DataFrame,
     title: str,
-    save_path: str
+    save_path: str,
+    assistant_name: str = None
 ):
     """
     Creates and saves a confusion matrix heatmap.
+    
+    Args:
+        df: DataFrame with results
+        title: Title for the plot
+        save_path: Path to save the plot
+        assistant_name: Optional filter for specific assistant (e.g., "reflektobot")
     """
+
+    # ==================================
+    # FILTER BY ASSISTANT NAME IF PROVIDED
+    # ==================================
+
+    if assistant_name:
+        df = df[df["assistant_name"] == assistant_name].copy()
+        if df.empty:
+            print(f"Skipping empty dataset after filtering for {assistant_name}")
+            return
 
     # ==================================
     # NORMALIZE LABELS
@@ -390,6 +443,17 @@ for experiment in experiments:
     )
 
     # ==================================
+    # GET OPTIONAL ASSISTANT NAME FILTER
+    # ==================================
+
+    assistant_name = experiment.get("assistant_name", None)
+    assistant_label = (
+        f"_{assistant_name}"
+        if assistant_name
+        else ""
+    )
+
+    # ==================================
     # GENERATE MATRICES FOR EACH STRATEGY
     # ==================================
 
@@ -411,12 +475,17 @@ for experiment in experiments:
         # TITLE
         # ==================================
 
-        title = (
-            f"{experiment['model']} | "
-            f"{experiment['task']} | "
-            f"{strategy.replace('_', ' ').title()} | "
-            f"{context_label.replace('_', ' ').title()}"
-        )
+        title_parts = [
+            experiment['model'],
+            experiment['task'],
+            strategy.replace('_', ' ').title(),
+            context_label.replace('_', ' ').title()
+        ]
+        
+        if assistant_name:
+            title_parts.append(f"({assistant_name})")
+        
+        title = " | ".join(title_parts)
 
         # ==================================
         # FILE NAME
@@ -426,7 +495,8 @@ for experiment in experiments:
             f"{experiment['model']}_"
             f"{experiment['task']}_"
             f"{strategy}_"
-            f"{context_label}.png"
+            f"{context_label}"
+            f"{assistant_label}.png"
         )
 
         save_path = os.path.join(
@@ -441,7 +511,8 @@ for experiment in experiments:
         create_confusion_matrix_plot(
             df=strategy_df,
             title=title,
-            save_path=save_path
+            save_path=save_path,
+            assistant_name=assistant_name
         )
 
 
