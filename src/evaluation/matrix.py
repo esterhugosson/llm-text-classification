@@ -191,10 +191,77 @@ experiments = [
         "context": False,
         "assistant_name": "ReflektoBot",
         "path": "src/results/raw/gpt4o_interactional_move.json"
+    },
+
+    # ==================================
+    # IS_FOLLOWUP — SEPARATED BY ROLE
+    # ==================================
+
+    {
+        "model": "claude_sonnet",
+        "task": "is_followup",
+        "context": True,
+        "role_filter": 0,
+        "path": "src/results/raw/claude_is_followup_with_context.json"
+    },
+
+    {
+        "model": "claude_sonnet",
+        "task": "is_followup",
+        "context": True,
+        "role_filter": 1,
+        "path": "src/results/raw/claude_is_followup_with_context.json"
+    },
+
+    {
+        "model": "gpt4o",
+        "task": "is_followup",
+        "context": True,
+        "role_filter": 0,
+        "path": "src/results/raw/gpt4o_is_followup_with_context.json"
+    },
+
+    {
+        "model": "gpt4o",
+        "task": "is_followup",
+        "context": True,
+        "role_filter": 1,
+        "path": "src/results/raw/gpt4o_is_followup_with_context.json"
+    },
+
+    {
+        "model": "claude_sonnet",
+        "task": "is_followup",
+        "context": False,
+        "role_filter": 0,
+        "path": "src/results/raw/claude_is_followup.json"
+    },
+
+    {
+        "model": "claude_sonnet",
+        "task": "is_followup",
+        "context": False,
+        "role_filter": 1,
+        "path": "src/results/raw/claude_is_followup.json"
+    },
+
+    {
+        "model": "gpt4o",
+        "task": "is_followup",
+        "context": False,
+        "role_filter": 0,
+        "path": "src/results/raw/gpt4o_is_followup.json"
+    },
+
+    {
+        "model": "gpt4o",
+        "task": "is_followup",
+        "context": False,
+        "role_filter": 1,
+        "path": "src/results/raw/gpt4o_is_followup.json"
     }
+
 ]
-
-
 # ======================================
 # OUTPUT DIRECTORY
 # ======================================
@@ -240,7 +307,8 @@ def create_confusion_matrix_plot(
     df: pd.DataFrame,
     title: str,
     save_path: str,
-    assistant_name: str = None
+    assistant_name: str = None,
+    role_filter: int = None
 ):
     """
     Creates and saves a confusion matrix heatmap.
@@ -249,7 +317,8 @@ def create_confusion_matrix_plot(
         df: DataFrame with results
         title: Title for the plot
         save_path: Path to save the plot
-        assistant_name: Optional filter for specific assistant (e.g., "reflektobot")
+        assistant_name: Optional filter for specific assistant (e.g., "ReflektoBot")
+        role_filter: Optional filter by role (0=teacher, 1=bot)
     """
 
     # ==================================
@@ -260,6 +329,16 @@ def create_confusion_matrix_plot(
         df = df[df["assistant_name"] == assistant_name].copy()
         if df.empty:
             print(f"Skipping empty dataset after filtering for {assistant_name}")
+            return
+
+    # ==================================
+    # FILTER BY ROLE IF PROVIDED
+    # ==================================
+
+    if role_filter is not None:
+        df = df[df["role"] == role_filter].copy()
+        if df.empty:
+            print(f"Skipping empty dataset after filtering for role {role_filter}")
             return
 
     # ==================================
@@ -454,6 +533,18 @@ for experiment in experiments:
     )
 
     # ==================================
+    # GET OPTIONAL ROLE FILTER
+    # ==================================
+
+    role_filter = experiment.get("role_filter", None)
+    role_label_map = {0: "_teacher", 1: "_bot"}
+    role_label = (
+        role_label_map.get(role_filter, "")
+        if role_filter is not None
+        else ""
+    )
+
+    # ==================================
     # GENERATE MATRICES FOR EACH STRATEGY
     # ==================================
 
@@ -485,6 +576,10 @@ for experiment in experiments:
         if assistant_name:
             title_parts.append(f"({assistant_name})")
         
+        if role_filter is not None:
+            role_text = "Teacher" if role_filter == 0 else "Bot"
+            title_parts.append(f"({role_text})")
+        
         title = " | ".join(title_parts)
 
         # ==================================
@@ -496,7 +591,8 @@ for experiment in experiments:
             f"{experiment['task']}_"
             f"{strategy}_"
             f"{context_label}"
-            f"{assistant_label}.png"
+            f"{assistant_label}"
+            f"{role_label}.png"
         )
 
         save_path = os.path.join(
@@ -512,7 +608,8 @@ for experiment in experiments:
             df=strategy_df,
             title=title,
             save_path=save_path,
-            assistant_name=assistant_name
+            assistant_name=assistant_name,
+            role_filter=role_filter
         )
 
 
