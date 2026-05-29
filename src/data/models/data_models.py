@@ -9,7 +9,7 @@ class Message:
     thread_id: str
     message_id: int
     text: str
-    role: int  # 0 = teacher/user, 1 = chatbot/assistant
+    role: int  # 0 = teacher, 1 = chatbot
     
 
 @dataclass
@@ -22,7 +22,6 @@ class GroundTruthLabel:
 
 @dataclass
 class PredictionResult:
-    """Single prediction result"""
     thread_id: str
     message_id: int
     text: str

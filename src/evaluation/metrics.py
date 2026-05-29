@@ -1,5 +1,3 @@
-
-
 from sklearn.metrics import (
     accuracy_score,
     precision_score,
@@ -15,9 +13,6 @@ class Metrics:
     def __init__(self, df):
         self.df = df.copy()
 
-    # -------------------------
-    # FILTER
-    # -------------------------
     def filter(self, **kwargs):
         filtered = self.df.copy()
 
@@ -26,9 +21,6 @@ class Metrics:
 
         return filtered
 
-    # -------------------------
-    # PREP LABELS
-    # -------------------------
     def _labels(self, df):
         y_true = (
             df["true_label"]
@@ -48,9 +40,6 @@ class Metrics:
 
         return y_true, y_pred
 
-    # -------------------------
-    # EVALUATE
-    # -------------------------
     def evaluate(self, df=None):
         df = self.df if df is None else df
 
@@ -95,9 +84,6 @@ class Metrics:
             )
         }
 
-    # -------------------------
-    # GROUP RESULTS
-    # -------------------------
     def evaluate_by(self, column):
         results = {}
 

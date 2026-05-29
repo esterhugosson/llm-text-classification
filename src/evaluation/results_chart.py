@@ -7,11 +7,6 @@ import matplotlib.pyplot as plt
 import json
 import seaborn as sns
 
-
-# ======================================
-# LOAD RESULTS
-# ======================================
-
 with open(
     "src/evaluation/clean_experiment_results.json",
     "r",
@@ -20,10 +15,6 @@ with open(
 
     results = json.load(f)
 
-
-# ======================================
-# CONVERT JSON -> DATAFRAME
-# ======================================
 
 def build_dataframe(results):
 
@@ -64,18 +55,8 @@ def build_dataframe(results):
 
     return pd.DataFrame(rows)
 
-
-# ======================================
-# CREATE OUTPUT FOLDER
-# ======================================
-
 OUTPUT_DIR = Path("src/evaluation/charts")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-
-
-# ======================================
-# SAVE FIGURE HELPER
-# ======================================
 
 def save_plot(filename):
 
@@ -88,11 +69,6 @@ def save_plot(filename):
     print(f"Saved: {path}")
 
     plt.close()
-
-
-# ======================================
-# 1. MODEL COMPARISON
-# ======================================
 
 def plot_model_consistency(df):
 
@@ -111,12 +87,6 @@ def plot_model_consistency(df):
 
     save_plot("10_model_consistency_boxplot.png")
 
-
-
-
-# ======================================
-# MODEL PERFORMANCE BY TASK
-# ======================================
 
 def plot_model_by_task(df):
 
@@ -142,10 +112,6 @@ def plot_model_by_task(df):
 
     save_plot("11_model_by_task.png")
 
-# ======================================
-# CONTEXT IMPACT PER TASK
-# ======================================
-
 def plot_context_by_task(df):
 
     pivot = df.pivot_table(
@@ -169,11 +135,6 @@ def plot_context_by_task(df):
     ax.set_title("Impact of Context Across Tasks")
 
     save_plot("12_context_by_task.png")
-
-
-# ======================================
-# STRATEGY EFFECT PER MODEL
-# ======================================
 
 def plot_strategy_by_model(df):
 
@@ -199,9 +160,6 @@ def plot_strategy_by_model(df):
 
     save_plot("13_strategy_by_model.png")
 
-# ======================================
-# CONFIGURATION HEATMAP
-# ======================================
 
 def plot_configuration_heatmap(df):
 
@@ -236,10 +194,6 @@ def plot_configuration_heatmap(df):
 
     save_plot("14_configuration_heatmap.png")
 
-# ======================================
-# MODEL STABILITY
-# ======================================
-
 def plot_model_stability(df):
 
     stability = (
@@ -257,10 +211,6 @@ def plot_model_stability(df):
     ax.set_title("Model Stability Across Experiments")
 
     save_plot("15_model_stability.png")
-
-# ======================================
-# PRINT SUMMARY TABLES
-# ======================================
 
 def print_summary_tables(df):
 
@@ -297,21 +247,11 @@ def print_summary_tables(df):
         ].mean()
     )
 
-# ======================================
-# MAIN
-# ======================================
-
 def run():
 
     df = build_dataframe(results)
 
     print(df.head())
-
-
-
-    # ------------------------------
-    # GENERATE CHARTS
-    # ------------------------------
 
     plot_model_consistency(df)
 
@@ -326,11 +266,5 @@ def run():
     plot_model_stability(df)
 
     print("\nAll charts generated successfully.")
-
-
-# ======================================
-# START
-# ======================================
-
 
 run()

@@ -4,16 +4,9 @@ from src.evaluation.metrics import Metrics
 import json
 from pathlib import Path
 
-
-# ======================================
-# EXPERIMENT DEFINITIONS
-# ======================================
-
 experiments = [
 
-    # ==================================
-    # CLAUDE — WITH CONTEXT
-    # ==================================
+    # --- Claude - with context ---
 
     {
         "model": "claude_sonnet",
@@ -43,9 +36,7 @@ experiments = [
         "path": "src/results/raw/claude_prompt_type_with_context.json"
     },
 
-    # ==================================
-    # GPT-4o — WITH CONTEXT
-    # ==================================
+    # --- GPT-4o - with context ---
 
     {
         "model": "gpt4o",
@@ -75,9 +66,7 @@ experiments = [
         "path": "src/results/raw/gpt4o_prompt_type_with_context.json"
     },
 
-    # ==================================
-    # CLAUDE — WITHOUT CONTEXT
-    # ==================================
+    # --- Claude - without context ---
 
     {
         "model": "claude_sonnet",
@@ -107,9 +96,7 @@ experiments = [
         "path": "src/results/raw/claude_prompt_type.json"
     },
 
-    # ==================================
-    # GPT-4o — WITHOUT CONTEXT
-    # ==================================
+    # --- GPT-4o - without context ---
 
     {
         "model": "gpt4o",
@@ -140,11 +127,7 @@ experiments = [
     }
 ]
 
-
-# ======================================
-# BUILD CLEAN RESULT STRUCTURE
-# ======================================
-
+# Gatter all results
 def build_results():
 
     all_results = []
@@ -153,17 +136,9 @@ def build_results():
 
         print(f"Processing: {exp['model']} | {exp['task']} | context={exp['context']}")
 
-        # ------------------------------
-        # LOAD DATASET
-        # ------------------------------
-
         df = load_results(exp["path"])
 
         metrics = Metrics(df)
-
-        # ------------------------------
-        # EVALUATE BOTH STRATEGIES
-        # ------------------------------
 
         for strategy in ["basic", "few_shot"]:
 
@@ -171,10 +146,7 @@ def build_results():
 
             result = metrics.evaluate(filtered_df)
 
-            # --------------------------
-            # BUILD CLEAN RESULT OBJECT
-            # --------------------------
-
+            # Build result
             experiment_result = {
 
                 "model": exp["model"],
@@ -205,11 +177,7 @@ def build_results():
 
     return all_results
 
-
-# ======================================
-# SAVE JSON
-# ======================================
-
+# Save as JSON
 def save_results(results):
 
     output_path = (
@@ -228,20 +196,11 @@ def save_results(results):
     print(f"\nSaved JSON to:\n{output_path}")
 
 
-# ======================================
-# MAIN
-# ======================================
-
 def main():
 
     results = build_results()
 
     save_results(results)
-
-
-# ======================================
-# START
-# ======================================
 
 if __name__ == "__main__":
     main()

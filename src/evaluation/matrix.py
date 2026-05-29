@@ -12,26 +12,15 @@ import seaborn as sns
 
 from sklearn.metrics import confusion_matrix
 
-# ======================================
-# LOAD RESULTS FUNCTION
-# ======================================
-
 def load_results(path: str) -> pd.DataFrame:
     with open(path, "r", encoding="utf-8") as f:
         data = json.load(f)
 
     return pd.DataFrame(data)
 
-
-# ======================================
-# EXPERIMENT DEFINITIONS
-# ======================================
-
 experiments = [
 
-    # ==================================
-    # CLAUDE — WITH CONTEXT
-    # ==================================
+    # --- Claude - with context ---
 
     {
         "model": "claude_sonnet",
@@ -61,9 +50,7 @@ experiments = [
         "path": "src/results/raw/claude_prompt_type_with_context.json"
     },
 
-    # ==================================
-    # GPT-4o — WITH CONTEXT
-    # ==================================
+    # --- GPT-4o - with context ---
 
     {
         "model": "gpt4o",
@@ -93,9 +80,7 @@ experiments = [
         "path": "src/results/raw/gpt4o_prompt_type_with_context.json"
     },
 
-    # ==================================
-    # CLAUDE — WITHOUT CONTEXT
-    # ==================================
+    # --- Claude - without context ---
 
     {
         "model": "claude_sonnet",
@@ -125,9 +110,7 @@ experiments = [
         "path": "src/results/raw/claude_prompt_type.json"
     },
 
-    # ==================================
-    # GPT-4o — WITHOUT CONTEXT
-    # ==================================
+    # --- GPT-4o - without context ---
 
     {
         "model": "gpt4o",
@@ -157,9 +140,7 @@ experiments = [
         "path": "src/results/raw/gpt4o_prompt_type.json"
     },
 
-    # ==================================
-    # REFLEKTOBOT ONLY — INTERACTIONAL MOVE
-    # ==================================
+    # --- REFLEKTOBOT ONLY — INTERACTIONAL MOVE ---
 
     {
         "model": "claude_sonnet",
@@ -193,9 +174,7 @@ experiments = [
         "path": "src/results/raw/gpt4o_interactional_move.json"
     },
 
-    # ==================================
-    # IS_FOLLOWUP — SEPARATED BY ROLE
-    # ==================================
+    # --- IS_FOLLOWUP — SEPARATED BY ROLE ---
 
     {
         "model": "claude_sonnet",
@@ -262,27 +241,15 @@ experiments = [
     }
 
 ]
-# ======================================
-# OUTPUT DIRECTORY
-# ======================================
 
 OUTPUT_DIR = "src/evaluation/confusion_matrices"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 
-# ======================================
-# PLOTTING SETTINGS
-# ======================================
-
 sns.set_theme(style="white")
 plt.rcParams["figure.dpi"] = 300
 plt.rcParams["savefig.dpi"] = 300
 plt.rcParams["font.size"] = 11
-
-
-# ======================================
-# HELPER FUNCTIONS
-# ======================================
 
 def prettify_label(label: str) -> str:
     """
@@ -320,30 +287,20 @@ def create_confusion_matrix_plot(
         assistant_name: Optional filter for specific assistant (e.g., "ReflektoBot")
         role_filter: Optional filter by role (0=teacher, 1=bot)
     """
-
-    # ==================================
-    # FILTER BY ASSISTANT NAME IF PROVIDED
-    # ==================================
-
+   
+    # Filter by assistan name
     if assistant_name:
         df = df[df["assistant_name"] == assistant_name].copy()
         if df.empty:
             print(f"Skipping empty dataset after filtering for {assistant_name}")
             return
 
-    # ==================================
-    # FILTER BY ROLE IF PROVIDED
-    # ==================================
-
+    # Filter by role if given
     if role_filter is not None:
         df = df[df["role"] == role_filter].copy()
         if df.empty:
             print(f"Skipping empty dataset after filtering for role {role_filter}")
             return
-
-    # ==================================
-    # NORMALIZE LABELS
-    # ==================================
 
     df["true_label"] = (
         df["true_label"]
@@ -359,10 +316,6 @@ def create_confusion_matrix_plot(
         .str.lower()
     )
 
-    # ==================================
-    # LABELS
-    # ==================================
-
     labels = sorted(
         list(
             set(df["true_label"].unique())
@@ -370,19 +323,11 @@ def create_confusion_matrix_plot(
         )
     )
 
-    # ==================================
-    # CONFUSION MATRIX
-    # ==================================
-
     cm = confusion_matrix(
     df["true_label"],
     df["predicted_label"],
     labels=labels
     )
-
-    # ==================================
-    # PRETTY LABELS
-    # ==================================
 
     pretty_labels = [
         prettify_label(label)
@@ -391,24 +336,11 @@ def create_confusion_matrix_plot(
 
     wrapped_labels = wrap_labels(pretty_labels)
 
-    # ==================================
-    # FIGURE SIZE
-    # Dynamically scale based on number of labels
-    # ==================================
-
     size = max(8, len(labels) * 1.2)
-
-    # ==================================
-    # FIGURE
-    # ==================================
 
     fig, ax = plt.subplots(
         figsize=(size, size + 1.5)
     )
-
-    # ==================================
-    # HEATMAP
-    # ==================================
 
     sns.heatmap(
         cm,
@@ -429,10 +361,6 @@ def create_confusion_matrix_plot(
         ax=ax
     )
 
-    # ==================================
-    # AXIS LABELS
-    # ==================================
-
     ax.set_xlabel(
         "Predicted Label",
         fontsize=14,
@@ -447,20 +375,12 @@ def create_confusion_matrix_plot(
         labelpad=20
     )
 
-    # ==================================
-    # TITLE
-    # ==================================
-
     ax.set_title(
         title,
         fontsize=18,
         fontweight="bold",
         pad=40
     )
-
-    # ==================================
-    # TICKS
-    # ==================================
 
     plt.xticks(
         rotation=45,
@@ -473,20 +393,12 @@ def create_confusion_matrix_plot(
         fontsize=10
     )
 
-    # ==================================
-    # SPACING
-    # ==================================
-
     fig.subplots_adjust(
         top=0.88,
         right=0.92,
         left=0.22,
         bottom=0.22
     )
-
-    # ==================================
-    # SAVE
-    # ==================================
 
     plt.savefig(
         save_path,
@@ -499,31 +411,16 @@ def create_confusion_matrix_plot(
     print(f"Saved: {save_path}")
 
 
-# ======================================
-# GENERATE MATRICES
-# ======================================
 
 for experiment in experiments:
 
-    # ==================================
-    # LOAD DATA
-    # ==================================
-
     df = load_results(experiment["path"])
-
-    # ==================================
-    # CREATE CONTEXT LABEL
-    # ==================================
 
     context_label = (
         "with_context"
         if experiment["context"]
         else "without_context"
     )
-
-    # ==================================
-    # GET OPTIONAL ASSISTANT NAME FILTER
-    # ==================================
 
     assistant_name = experiment.get("assistant_name", None)
     assistant_label = (
@@ -532,10 +429,6 @@ for experiment in experiments:
         else ""
     )
 
-    # ==================================
-    # GET OPTIONAL ROLE FILTER
-    # ==================================
-
     role_filter = experiment.get("role_filter", None)
     role_label_map = {0: "_teacher", 1: "_bot"}
     role_label = (
@@ -543,10 +436,6 @@ for experiment in experiments:
         if role_filter is not None
         else ""
     )
-
-    # ==================================
-    # GENERATE MATRICES FOR EACH STRATEGY
-    # ==================================
 
     for strategy in ["basic", "few_shot"]:
 
@@ -561,10 +450,6 @@ for experiment in experiments:
                 f"{experiment['task']} - {strategy}"
             )
             continue
-
-        # ==================================
-        # TITLE
-        # ==================================
 
         title_parts = [
             experiment['model'],
@@ -582,10 +467,6 @@ for experiment in experiments:
         
         title = " | ".join(title_parts)
 
-        # ==================================
-        # FILE NAME
-        # ==================================
-
         filename = (
             f"{experiment['model']}_"
             f"{experiment['task']}_"
@@ -599,10 +480,6 @@ for experiment in experiments:
             OUTPUT_DIR,
             filename
         )
-
-        # ==================================
-        # CREATE MATRIX
-        # ==================================
 
         create_confusion_matrix_plot(
             df=strategy_df,

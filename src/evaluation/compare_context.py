@@ -1,7 +1,3 @@
-# ======================================
-# COMPARE IS_FOLLOWUP WITH VS WITHOUT CONTEXT
-# ======================================
-
 import json
 import pandas as pd
 from sklearn.metrics import (
@@ -13,10 +9,6 @@ from sklearn.metrics import (
     cohen_kappa_score
 )
 
-# ======================================
-# LOAD AND COMBINE RESULTS
-# ======================================
-
 def load_and_combine_results(paths: list) -> pd.DataFrame:
     """Load multiple result files and combine them"""
     dfs = []
@@ -25,11 +17,6 @@ def load_and_combine_results(paths: list) -> pd.DataFrame:
             data = json.load(f)
         dfs.append(pd.DataFrame(data))
     return pd.concat(dfs, ignore_index=True)
-
-
-# ======================================
-# NORMALIZE LABELS
-# ======================================
 
 def normalize_labels(df):
     """Normalize label columns"""
@@ -47,11 +34,6 @@ def normalize_labels(df):
         .str.lower()
     )
     return df
-
-
-# ======================================
-# CALCULATE METRICS
-# ======================================
 
 def calculate_metrics(df):
     """Calculate metrics for the results"""
@@ -77,11 +59,6 @@ def calculate_metrics(df):
     }
     
     return metrics
-
-
-# ======================================
-# MAIN COMPARISON
-# ======================================
 
 print("\n" + "="*70)
 print("IS_FOLLOWUP: WITH CONTEXT vs WITHOUT CONTEXT COMPARISON")
@@ -110,10 +87,8 @@ print("\nCalculating metrics...")
 metrics_with = calculate_metrics(df_with_context)
 metrics_without = calculate_metrics(df_without_context)
 
-# ======================================
-# PRINT RESULTS
-# ======================================
 
+# Print results
 print("\n" + "-"*70)
 print(f"{'Metric':<20} {'WITH CONTEXT':>20} {'WITHOUT CONTEXT':>20} {'Difference':>15}")
 print("-"*70)
@@ -130,10 +105,6 @@ if metrics_with and metrics_without:
         print(f"{metric_display:<20} {with_val:>19.4f} {without_val:>19.4f} {diff:>14.4f}")
 
 print("-"*70)
-
-# ======================================
-# BREAKDOWN BY MODEL AND STRATEGY
-# ======================================
 
 print("\n" + "="*70)
 print("BREAKDOWN BY MODEL AND STRATEGY")
